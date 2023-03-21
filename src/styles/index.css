@@ -1,0 +1,231 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*REMOVE AS SETINHAS DO TYPE NUMBER*/
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+input[type=number] { 
+   -moz-appearance: textfield;
+   appearance: textfield;
+
+}
+
+
+
+body{
+    background-color: #BD1522;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+
+input:focus{
+    outline: none;
+}
+textarea:focus{
+    outline: none;
+}
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.box-login{
+    background-color: #D3D3D3;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+
+    padding: 10px;
+
+    width: 368px;
+    height: 541px;
+}
+
+.input-login{
+    background: #D9D9D9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  
+    width: 252px;
+    height: 7.8%;
+    align-self: center;
+    margin: 5px;
+
+    border: none;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+
+    color: rgba(0, 0, 0, 0.31);
+}
+#btLogin{
+    margin-top: 35px;
+}
+.btRed{
+    background: #BD1522;
+    width: 252px;
+    height: 7.8%;
+    align-self: center;
+    margin: 5px;
+  
+
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.btGrey{
+    background: #C1C1C1;
+    width: 252px;
+    height: 7.8%;
+    align-self: center;
+    margin: 5px;
+
+
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+
+    color: #BD1522;
+}
+
+.btGrey2{
+    background: #C1C1C1;
+    border-radius: 50px;
+    border: none;
+
+    width: 210px;
+    height: 33px;
+    
+    margin: 5px;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+
+    color: #000000;
+
+    text-transform: uppercase;
+}
+.btSuccess{
+    background-color: #38AE00;
+    border-radius: 50px;
+    border: none;
+
+    width: 210px;
+    height: 33px;
+    
+    margin: 5px;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+
+    color: #FFFFFF;
+
+    text-transform: uppercase;
+
+}
+
+.logoRed{
+    width: 60%;
+    justify-content: center;
+    align-self: center;
+    margin-bottom: -30px;
+}
+img{
+    margin-bottom: -30px;
+}
+
+.btGrey:hover{
+    cursor: pointer;
+    box-shadow: 0 0 1px 0 black;
+}
+
+.btRed:hover{
+    cursor: pointer;
+    box-shadow: 0 0 1px 0 black;
+}
+.btGrey2:hover{
+    cursor: pointer;
+    box-shadow: 0 0 2px 0 black;
+    background-color: rgb(111, 111, 111);
+    color: white;
+}
+.btSuccess:hover{
+    cursor: pointer;
+    box-shadow: 0 0 2px 0 black;
+    color: rgb(255, 255, 255);
+    background-color: #309302;
+}
+
+.hr-divisoria{
+    width: 80%;
+    background-color: rgba(128, 128, 128, 0.396);
+    border: 0.5px solid;
+    opacity: 0.3;
+    margin: 20px;
+    align-self: center;
+}
+
+/*responsividade*/
+
+@media screen and (max-width: 640px) {
+    .container{
+        width: auto;
+        height: 70vh;
+    }
+}
+
+@media screen and (max-width: 1007px) {
+    .container{
+        width: auto;
+        height: 100vh;
+    }
+}
+
+@media screen and (max-width: 1920px){
+    .container{
+        width: auto;
+        height: 100vh;
+    }   
+}

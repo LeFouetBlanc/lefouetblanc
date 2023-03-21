@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/fila-pedidos.css">
+    <link rel="stylesheet" href="../styles/todos-pedidos.css">
+    <title>Todos os pedidos</title>
+</head>
+<body>
+    <!--FIREBASE-->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth-compat.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore-compat.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
+
+    <!--FIREBASE FIM-->
+
+    <!--EXPORT TO EXCEL-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <!--EXCEL-->
+
+    
+
+    <!--JQUERY-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+    <script src="../scripts/jquery.mask.js"></script>
+    <!--JQUERY FIM-->
+
+
+
+    <header>
+        <div id="logotipo">
+            <img src="../../assets/3.png" alt="Le Fouet Logotipo" id="logotipo">
+        </div><!--LOGOTIPO-->
+        <div id="menu-header">
+            <button class="btRed" id="goToFila">Fila de Pedidos</button>
+        </div><!--MENU HEADER-->
+    </header>
+
+    <div class="container-tp">
+        <div id="cima-Tabela">
+            <div id="cima2">
+            <input type="text" id="input-filtro" placeholder="Pesquisar Número">
+            <select id="select-filtro">
+                <option value="pedidosTodos">Todos Pedidos</option>
+                <option value="pedidosHoje">Hoje</option>
+                <option value="pedidosSemana">Semana Atual</option>
+                <option value="pedidosMes">Mês Atual</option>
+            </select><!--Dia, Semana, Mes-->
+            <button id="btExportar" class="btSuccess">EXPORTAR</button>
+            </div>
+        </div><!--cima-tabela-->
+
+        <table id="tabela-pedidos">
+            <thead>
+                <tr>
+                    <th>Contato</th>
+                    <th>Nome</th>
+                    <th>Pedido</th>
+                    <th>Valor</th>
+                    <th>Data Entregue</th>
+                    <th>Aniversário</th>
+                    <th>Status Pgto</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+
+    </div><!--CONTAINER-->
+
+
+
+    <script type="module" src="../../firebaseConfig.js"></script>
+    <script type="module" src="../scripts/auth.js"></script>
+    <script type="module" src="../scripts/todos-pedidos.js"></script>
+    
+</body>
+</html>

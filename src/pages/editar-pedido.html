@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/sobre-pedido.css">
+    <link rel="stylesheet" href="../styles/editar-pedidos.css">
+    <title>Le Fouet Blanc</title>
+</head>
+<body>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth-compat.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore-compat.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
+
+    <!--JQUERY-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+    <script src="../scripts/jquery.mask.js"></script>
+    <!--JQUERY FIM-->
+
+    <header>
+        <img src="../../assets/3.png" alt="Le Fouet Logotipo" id="logotipo">
+    </header>
+
+    <div id="box-detalhes">
+        <!-- <img class="img-pedido" src="../../assets/imagem-pedido-exemplo.jpg">
+            IMAGEM DE REFERENCIA DO PEDIDO
+        <h2>{nome do pedido}</h2>
+        <h3>{data de entrega}</h3>
+        <p>{descriçao}</p>
+        <h4>{personalizaçao}</h4>
+        <h3>{VALOR}</h3>
+            Repetir quantos pedidos forem necessario antes das info do cliente-->
+        <!-- <hr class="hr-divisoria">
+        <h2>Informações do Cliente</h2>
+        <h3>{informaçoes}</h3>
+        <div id="opcoes">
+            <button class="btGrey2">Editar</button>
+            <button class="btGrey2">Voltar</button>
+        </div> BOTOES-->
+    </div><!--BOX DETALHES-->
+    
+
+    <script type="module" src="../../firebaseConfig.js"></script>
+    <script type="module" src="../scripts/auth.js"></script>
+    <script src="../scripts/redirects.js"></script>
+    <script src="../scripts/jquery.mask.js"></script>
+    <script src="../scripts/editar-pedido.js"></script>
+</body>
+</html>

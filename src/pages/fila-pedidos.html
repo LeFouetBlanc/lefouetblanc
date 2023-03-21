@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/fila-pedidos.css">
+    
+
+    <title>Fila de Pedidos</title>
+
+</head>
+<body>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth-compat.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore-compat.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
+    
+    <header>
+        <div id="logotipo">
+            <img src="../../assets/3.png" alt="Le Fouet Logotipo" id="logotipo">
+        </div><!--LOGOTIPO-->
+        <div id="menu-header">
+            <button class="btGrey" id="btLogout">Sair</button>
+            <button class="btRed" id="goToTodosPedidos">Todos os Pedidos</button>
+            <button class="btRed" onclick="goToFormulario()">Novo Pedido</button>
+        </div><!--MENU HEADER-->
+
+    </header>
+
+    <div class="clear"></div><!--CLEAR-->
+
+
+    <div id="fila">
+        <!--BOX PEDIDO
+
+        <div class="box-pedido">
+            <h2>Pedido 1</h2>
+            <h4>Data de entrega</h4>
+            <p>Descrição Simples</p>
+            <button class="btGrey2">Sobre</button>
+            <button class="btSuccess">Concluido</button> 
+        </div>
+        
+        BOX PEDIDO-->
+    
+      
+
+    </div><!--FILA-->
+
+    <script type="module" src="../../firebaseConfig.js"></script>
+    <script type="module" src="../scripts/auth.js"></script>
+    <script src="../scripts/redirects.js"></script>
+    <script type="module" src="../scripts/fila-pedidos.js"></script>
+    
+</body>
+</html>

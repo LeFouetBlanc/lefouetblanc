@@ -1,0 +1,125 @@
+.container-tp{
+    width: 90%;
+    height: 30%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+
+
+#cima-tabela{
+    display: flex;
+    flex-direction: column;
+}
+
+#btExportar{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#input-filtro{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+    border: none;
+    text-align: center;
+    width: 210px;
+    height: 33px;
+    font-size: 18px;
+
+    color: rgba(0, 0, 0, 0.5);
+    
+}
+
+#select-filtro{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+    border: none;
+    text-align: center;
+    width: 210px;
+    height: 33px;
+    font-size: 19px;
+
+    color: rgba(0, 0, 0, 0.5);
+    
+    
+}
+
+select:focus{
+    outline: none;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-top: 10px;
+    
+}
+th, td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-family: sans-serif;
+}
+th {
+    background-color: #BD1522;
+    color: black;
+    font-size: 18px;
+    font-family: sans-serif;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+
+@media screen and (max-width: 640px) {
+    table{
+        width: 50%;
+    }
+    #cima2{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #cima2 button, #cima2 input, #cima2 select{
+        margin: 10px;
+    }
+    #cima-tabela{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+}
+
+@media screen and (max-width: 1007px) {
+    table{
+        width: 1000px;
+    }
+  
+    #cima-tabela{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 1920px){
+    table{
+        width: 90%;
+    }
+    #cima-tabela{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    } 
+}
