@@ -1,3 +1,4 @@
+//CHAVES FIREBASE
 export const env = {
     api_key: "AIzaSyAEauVJFTnBHX8hhfmYtBoWF-MbK3uh1XQ",
     authDomain: "le-fouet.firebaseapp.com",
