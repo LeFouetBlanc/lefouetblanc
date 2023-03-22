@@ -77,6 +77,8 @@ function calcValorTotal(){
     let aux_auxPedidos;
     let somaPedidos = 0;
 
+   
+
     for(let v = 0; v <= j; v++){
         auxPedidos = document.querySelectorAll('#pedidoValor')[v].value
         aux_auxPedidos = auxPedidos.replace(/R\$\s?|,/g, "");
@@ -105,8 +107,13 @@ function calcValorTotal(){
     }
 
 
+    let taxaEntrega = document.getElementById('taxaEntrega').value
+
+    let taxaEntregaTratada = taxaEntrega.replace(/R\$\s?|,/g, "")
+    console.log(taxaEntregaTratada)
+
     //Calculo total
-    somaTotal = somaPersonalizacao + somaPedidos
+    somaTotal = parseFloat(taxaEntregaTratada) + somaPersonalizacao + somaPedidos
     let somaTotalTratada = somaTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
     //Mostrar valor no final
@@ -117,6 +124,6 @@ function calcValorTotal(){
 
 document.querySelector('.pedidoValor').addEventListener('keyup', calcValorTotal)
 document.querySelector('.valorPersonalizacao').addEventListener('keyup', calcValorTotal)
-
+document.querySelector('#taxaEntrega').addEventListener('keyup', calcValorTotal)
 
 

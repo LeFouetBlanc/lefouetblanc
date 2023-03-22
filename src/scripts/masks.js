@@ -8,6 +8,13 @@ $('.dataAniversario').mask('99/99/9999');
 
 //PEDIDO
 $(function(){
+    $('#taxaEntrega').maskMoney({
+        prefix:'R$ ',
+        allowNegative: true,
+        thousands:',', decimal:'.',
+        affixesStay: true
+    });
+
     $('.pedidoValor').maskMoney({
         prefix:'R$ ',
         allowNegative: true,

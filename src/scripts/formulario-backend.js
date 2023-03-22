@@ -52,6 +52,7 @@ export function sendOrder(){
     let dataEntrega = document.getElementById('dataEntrega').value
     let enderecoEntrega = document.getElementById('enderecoEntrega').value
 
+    let taxaEntrega = document.getElementById('taxaEntrega').value
 
     //PEDIDO
     let pedidos = [];
@@ -125,6 +126,7 @@ export function sendOrder(){
                 ValorExtra: valoresExtra,
                 DataEntrega: dataEntrega,
                 EnderecoEntrega: enderecoEntrega,
+                TaxaEntrega: taxaEntrega,
                 ValorTotal: valorTotal,
                 StatusPagamento: statusPgto,
                 Concluido: false,
