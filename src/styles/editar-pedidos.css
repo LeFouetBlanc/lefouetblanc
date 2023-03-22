@@ -1,0 +1,55 @@
+header{
+    overflow-y: hidden;
+}
+.img-pedido{
+    width: 25%;
+    border: 2px solid white;
+}
+
+input{
+    background: #D9D9D9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: none;
+    height: 30px;
+    text-align: center;
+ 
+    margin: 5px;
+    margin-bottom: 20px;
+   
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 12px;
+    line-height: 24px;
+    text-align: center;
+
+    color: rgba(0, 0, 0);
+    text-transform: capitalize;
+    border-radius: 10px;
+}
+
+textarea{
+    background: #D9D9D9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: none;
+    text-align: center;
+    margin-bottom: 20px;
+   
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 14px;
+    text-align: center;
+
+    color: rgba(0, 0, 0);
+    text-transform: capitalize;
+    resize: none;
+    width: 90%;
+    padding: 5px;
+}
+
+.inputCliente{
+    width: 50%;
+}
