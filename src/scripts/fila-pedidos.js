@@ -26,8 +26,8 @@ function lerPedidos(){
                 <h4>${pedido.DataEntrega}</h4>
                 <p>${pedido.Descricao[0].slice(0, 38)}...</p>
               </div>
-              <button class="btGrey2" id="btSobre" data-pedido-id="${childSnapshot.key}">Sobre</button>
-              <button class="btSuccess" id="btConcluido" data-pedido-id="${childSnapshot.key}">Concluído</button>
+              <button class="btGrey2 btSobre" id="btSobre" data-pedido-id="${childSnapshot.key}">Sobre</button>
+              <button class="btGrey2 btSobre" id="btConcluido" data-pedido-id="${childSnapshot.key}">Concluir</button>
             </div>
           `     
         }
