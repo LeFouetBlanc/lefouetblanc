@@ -5,7 +5,15 @@ let j = 0; //Variavel de apoio
 function addPersonalizacao(i){
     //btAddPersonalizacao
     document.getElementsByClassName('box-personalizacao')[i].style.display = "flex"
+    document.getElementsByClassName('btAddPersonalizacao')[i].style.display = "none"
 }
+
+function changeImg(i){
+    document.getElementById(`labelInputImg${i}`).style.background = "#38AE00"
+    document.getElementById(`labelInputImg${i}`).style.color = "white"
+}
+
+
 
 function addNewProduct(){
     //btAddProduto
@@ -16,6 +24,7 @@ function addNewProduct(){
 
     divBaseNewProduto.innerHTML += `
     <hr class="hr-divisoria"><div class="form-pedido"><!--FORM PEDIDO-->
+    <h2>Pedido ${j + 1}</h2>
     <input type="text" id="pedidoProduto" placeholder="Produto">
     <input type="number" id="pedidoQuantidade" class="pedidoDescricao" placeholder="Quantidade">
     <textarea rows="7" cols="40" placeholder="
@@ -24,18 +33,21 @@ function addNewProduct(){
 Descrição"></textarea>
 
     <input type="text" id="pedidoValor" class="pedidoValor" placeholder="Valor do pedido"><br>
-    <button id="btAddPersonalizacao" class="btGrey2" onclick="addPersonalizacao(${j})">
+    <button id="btAddPersonalizacao" class="btGrey2 btAddPersonalizacao" onclick="addPersonalizacao(${j})">
         Adicionar Personalização
     </button><br>
 
     <!--PERSONALIZAÇAO-->
     <div class="box-personalizacao" id="box-personalizacao">
+        <h2>Personalizacao ${j+1}</h2>
         <div id="personalizacaoCol1">
-            <div id="boxInputImg">
-                <label for="inputImg" id="labelInputImg">IMAGEM
-                </label>
-            <input type="file" placeholder="Imagem" class="inputImg" name="inputImg" id="inputImg" accept="image/png, imagem/jpg, image/jpeg">
-            </div><!--boxInputIMG-->
+
+        <div id="boxInputImg">
+            <label for="inputImg" class="labelInputImg" id="labelInputImg${j}">Imagem
+            </label>
+            <input type="file" class="inputImg" name="imagem${j}" id="inputImg" accept="image/png, imagem/jpg, image/jpeg" onchange="changeImg(${j})">
+    
+        </div><!--boxInputIMG-->
 
             <textarea rows="7" cols="40" class="pedidoPersonalizacao" placeholder="
         
@@ -104,5 +116,6 @@ function calcValorTotal(){
 }
 
 document.querySelector('#pedidoStatusPagamento').addEventListener('change', calcValorTotal)
+
 
 

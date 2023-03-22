@@ -25,13 +25,14 @@
         <img src="../../assets/3.png" alt="Le Fouet Logotipo" id="logotipo">
     </header>
 
-    <div id="box-form">
+    <div id="box-form" method="post">
        <div id="header-form">
             <h2>Novo Pedido</h2>
             <h3 id="icone" onclick="closeFormulario()">X</h3>
         </div><!--HEADER FORM-->
 
         <div id="form-cliente">
+            <h2>Cliente</h2>
             <input type="text" id="nomeCliente" placeholder="Cliente">
             <input type="text" id="contatoCliente" class="contatoCliente" placeholder="Contato">
             <input type="text" id="dataEntrega" class="dataEntrega" placeholder="Data de Entrega">
@@ -43,6 +44,7 @@
         <hr class="hr-divisoria">
 
         <div class="form-pedido"><!--FORM PEDIDO-->
+            <h2>Pedido 1</h2>
             <input type="text" id="pedidoProduto" placeholder="Produto">
             <input type="number" id="pedidoQuantidade" placeholder="Quantidade">
             <textarea rows="7" cols="40" id="pedidoDescricao" class="pedidoDescricao" placeholder="
@@ -51,18 +53,23 @@
 Descrição" ></textarea>
 
             <input type="text" id="pedidoValor" class="pedidoValor" name="valores-soma" placeholder="Valor do pedido"><br>
-            <button id="btAddPersonalizacao" class="btGrey2" onclick="addPersonalizacao(0)">
+            <button id="btAddPersonalizacao" class="btGrey2 btAddPersonalizacao" onclick="addPersonalizacao(0)">
                 Adicionar Personalização
             </button><br>
 
             <!--PERSONALIZAÇAO-->
             <div class="box-personalizacao" id="box-personalizacao">
+                <h2>Personalizacao 1</h2>
                 <div id="personalizacaoCol1">
+
                     <div id="boxInputImg">
-                        <label for="inputImg" id="labelInputImg">IMAGEM
+                        <label for="inputImg" class="labelInputImg" id="labelInputImg0">Imagem
                         </label>
-                    <input type="file" placeholder="Imagem" class="inputImg" name="inputImg" id="inputImg" accept="image/png, imagem/jpg, image/jpeg">
+                    <input type="file" class="inputImg" id="inputImg" name="imagem0" accept="image/png, imagem/jpg, image/jpeg" onchange="changeImg(0)">
+                    
                     </div><!--boxInputIMG-->
+
+               
 
                     <textarea rows="7" class="pedidoPersonalizacao" cols="40" placeholder="
                 
@@ -82,8 +89,9 @@ Descrição" ></textarea>
         </div><!--FORM PEDIDO-->
         
         <div id="divBaseNewProduto"></div><!--DIV BASE-->
-
-        <button class="btGrey2" id="btAddProduto" onclick="addNewProduct()">+</button>
+        <div id="divAddProduto">
+        <button class="btSuccess" id="btAddProduto" onclick="addNewProduct()">+</button>
+        </div><!--divAddProduto-->
      
         <hr class="hr-divisoria">
 
@@ -98,7 +106,7 @@ Descrição" ></textarea>
 
             <input type="text" id="pedidoValorTotal" placeholder="Valor total" disabled>
 
-            <button class="btSuccess" id="btEnviarPedido" >ENVIAR</button>
+            <button class="btSuccess" id="btEnviarPedido">Enviar</button>
         </div><!--VALOR TOTAL-->
     </div><!--BOX FORM-->
    

@@ -36,8 +36,9 @@ header img{
 #box-form{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    
     align-self: center;
+    
 
     background-color: #BD1522;
     height: auto;
@@ -68,7 +69,7 @@ header img{
     width: 40%;
 }
 
-#box-form input{
+#box-form input:not([type="file"]){
     background: #D9D9D9;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border: none;
@@ -88,6 +89,7 @@ header img{
 
     color: rgba(0, 0, 0, 0.31);
     text-transform: uppercase;
+    border-radius: 10px;
 }
 
 
@@ -140,7 +142,7 @@ header img{
 
 
 #btAddPersonalizacao{
-    background: #C1C1C1;
+    background: #ffbb00;
     border-radius: 50px;
     border: none;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -148,6 +150,7 @@ header img{
     height: 35px;
     font-size: 12px;
     line-height: 1;
+    font-weight: bold;
 }
 #btAddPersonalizacao:hover{
     cursor: pointer;
@@ -155,8 +158,20 @@ header img{
     background-color: rgb(111, 111, 111);
 }
 
+#divAddProduto{
+    display: flex;
+    width: 100%;
+    align-items: right;
+    align-self: right;
+    justify-content: right;
+}
+
 #btAddProduto{
-    width: 8%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    text-align: center;
+    align-items: center;
 }
 
 #form-valorTotal{
@@ -203,6 +218,10 @@ header img{
 #btEnviarPedido{
     border-radius: 0;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-transform: capitalize;
+}
+#btEnviarPedido:hover{
+    color: rgb(74, 74, 74);
 }
 
 
@@ -230,10 +249,8 @@ header img{
     width: 100%;
 }
 
-.box-personalizacao input[type="file"]{
-    border: none;
-    display: none;
-}
+
+
 #boxInputImg{
     width: 50%;
     justify-content: center;
@@ -242,10 +259,16 @@ header img{
     margin-bottom: 15px;
 }
 
-#labelInputImg{
+.box-personalizacao input[type="file"]{
+    /**/
+    display: none;
+}
+
+
+.labelInputImg{
     background: #D9D9D9;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border: none;
+    
     text-align: center;
 
     font-family: 'Inter', sans-serif;
@@ -262,9 +285,14 @@ header img{
     margin-top: -5px;
     margin-bottom: 30px;
 }
-#labelInputImg:hover{
+.labelInputImg:hover{
     cursor: pointer;
 }
+
+  /* Estilo quando o input não estiver vazio */
+
+
+
 
 #icone:hover{
     cursor: pointer;
