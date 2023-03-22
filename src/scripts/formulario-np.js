@@ -32,7 +32,7 @@ function addNewProduct(){
     
 Descrição"></textarea>
 
-    <input type="text" id="pedidoValor" class="pedidoValor" placeholder="Valor do pedido"><br>
+    <input type="text" id="pedidoValor" class="pedidoValor" onkeyup="calcValorTotal()" placeholder="Valor do pedido"><br>
     <button id="btAddPersonalizacao" class="btGrey2 btAddPersonalizacao" onclick="addPersonalizacao(${j})">
         Adicionar Personalização
     </button><br>
@@ -58,7 +58,7 @@ Personalização"></textarea>
 
             <div id="personalizacalCol2">
                 <div id="boxValorPersonaliacao">
-                    <input type="text" id="valorPersonalizacao" class="valorPersonalizacao" placeholder="valor extra">
+                    <input type="text" id="valorPersonalizacao" class="valorPersonalizacao" onkeyup="calcValorTotal()" placeholder="valor extra">
                 </div><!--BOX VALOR PERSONALIZACAO-->
             </div><!--COL 2-->
         </div><!--BOX PERSONALIZACAO-->
@@ -115,7 +115,8 @@ function calcValorTotal(){
     return somaTotalTratada
 }
 
-document.querySelector('#pedidoStatusPagamento').addEventListener('change', calcValorTotal)
+document.querySelector('.pedidoValor').addEventListener('keyup', calcValorTotal)
+document.querySelector('.valorPersonalizacao').addEventListener('keyup', calcValorTotal)
 
 
 
