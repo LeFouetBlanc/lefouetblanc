@@ -12,13 +12,13 @@ function addPersonalizacao(i){
     //btAddPersonalizacao
     document.getElementsByClassName('box-personalizacao')[i].style.display = "flex"
     document.querySelectorAll('#btRemovePersonalizacao')[i].style.display = "inline-block"
-    document.getElementsByClassName('btAddPersonalizacao')[i].style.display = "none"
+    document.querySelectorAll('#btAddPersonalizacao')[i].style.display = "none"
 }
 
 function removePersonalizacao(i){
     document.getElementsByClassName('box-personalizacao')[i].style.display = "none"
     document.querySelectorAll('#btRemovePersonalizacao')[i].style.display = "none"
-    document.getElementsByClassName('btAddPersonalizacao')[i].style.display = "inline-block"
+    document.querySelectorAll('#btAddPersonalizacao')[i].style.display = "inline-block"
 
     //definir values = 0
     document.querySelectorAll('#inputImg')[i].value = "";document.querySelectorAll('.pedidoPersonalizacao')[i].value = "";
@@ -35,8 +35,6 @@ function addNewProduct(){
     //btAddProduto
 
     j++
-
-    
 
     divBaseNewProduto.innerHTML += `
     <hr class="hr-divisoria"><div class="form-pedido"><!--FORM PEDIDO-->
