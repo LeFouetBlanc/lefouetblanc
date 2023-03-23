@@ -1,6 +1,7 @@
 
 
 let j = 0; //Variavel de apoio
+let divBaseNewProduto = document.getElementById('divBaseNewProduto')
 
 function addPersonalizacao(i){
     //btAddPersonalizacao
@@ -20,7 +21,7 @@ function addNewProduct(){
 
     j++
 
-    let divBaseNewProduto = document.getElementById('divBaseNewProduto')
+    
 
     divBaseNewProduto.innerHTML += `
     <hr class="hr-divisoria"><div class="form-pedido"><!--FORM PEDIDO-->
