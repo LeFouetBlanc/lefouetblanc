@@ -41,6 +41,9 @@ function filtroHoje(){
                 <td>${pedido.DataEntrega}</td>
                 <td>${pedido.DataAniversario}</td>
                 <td>${pedido.StatusPagamento}</td>
+                <td><span class="material-symbols-outlined">
+                arrow_back
+                </span></td>
             `;
             tbody.appendChild(tr);
             

@@ -66,6 +66,8 @@ export function sendOrder(){
     let valorTotal = calcValorTotal();
     let statusPgto = document.getElementById('pedidoStatusPagamento').value;
 
+    let file;
+
     for(let i = 0; i < document.querySelectorAll('#pedidoProduto').length; i++){
         pedidos.push(document.querySelectorAll(`#pedidoProduto`)[i].value)
 
@@ -81,7 +83,7 @@ export function sendOrder(){
 
         valorPedidos.push(document.querySelectorAll(`#pedidoValor`)[i].value)
 
-        let file = document.querySelectorAll(`#inputImg`)[i].files[0];
+        file = document.querySelectorAll(`#inputImg`)[i].files[0];
         if(file) {
             imgs.push(uploadImg(file))
         } else {
@@ -135,7 +137,7 @@ export function sendOrder(){
 
                 formDataRef.push(formPedido)
                 alert("Pedido enviado com sucesso!")
-                window.location.href = '../pages/fila-pedidos.html';
+               // window.location.href = '../pages/fila-pedidos.html';
                 }).catch((err) => {
                 console.log('Erro ao enviar pedido: ', err);
             })

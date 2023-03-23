@@ -110,7 +110,7 @@ function calcValorTotal(){
     let taxaEntrega = document.getElementById('taxaEntrega').value
 
     let taxaEntregaTratada = taxaEntrega.replace(/R\$\s?|,/g, "")
-    console.log(taxaEntregaTratada)
+    
 
     //Calculo total
     somaTotal = parseFloat(taxaEntregaTratada) + somaPersonalizacao + somaPedidos
