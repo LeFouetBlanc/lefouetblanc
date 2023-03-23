@@ -47,6 +47,10 @@ header img{
     font-weight: bold;
 }
 
+.box-pedido:hover{
+    cursor: pointer;
+}
+
 .box-pedido{
     background-color: #BD1522;
     width: 250px;

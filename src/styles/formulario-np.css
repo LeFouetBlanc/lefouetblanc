@@ -140,9 +140,15 @@ header img{
     padding: 5px;
 }
 
+#btRemovePersonalizacao{
+    background-color: red;
+    color: white;
+}
+#btRemovePersonalizacao:hover{
+    color: black;
+}
 
-
-#btAddPersonalizacao{
+.btAddPersonalizacao{
     background: #ffbb00;
     border-radius: 50px;
     border: none;
@@ -153,7 +159,7 @@ header img{
     line-height: 1;
     font-weight: bold;
 }
-#btAddPersonalizacao:hover{
+.btAddPersonalizacao:hover{
     cursor: pointer;
     box-shadow: 0 0 1px 0 black;
     background-color: rgb(111, 111, 111);

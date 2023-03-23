@@ -53,9 +53,13 @@
 Descrição" ></textarea>
 
             <input type="text" id="pedidoValor" class="pedidoValor" name="valores-soma" placeholder="Valor do pedido"><br>
-            <button id="btAddPersonalizacao" class="btGrey2 btAddPersonalizacao" onclick="addPersonalizacao(0)">
+            <button class="btGrey2 btAddPersonalizacao" id="btAddPersonalizacao" onclick="addPersonalizacao(0)">
                 Adicionar Personalização
-            </button><br>
+            </button>
+            <button id="btRemovePersonalizacao" class="btGrey2 btAddPersonalizacao" style="display: none;" onclick="removePersonalizacao(0)">
+                Remover Personalização
+            </button>
+            <br>
 
             <!--PERSONALIZAÇAO-->
             <div class="box-personalizacao" id="box-personalizacao">

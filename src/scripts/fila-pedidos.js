@@ -20,30 +20,32 @@ function lerPedidos(){
         var pedido = childSnapshot.val()
         if (pedido.Concluido == false) {
           fila.innerHTML += `
-            <div class="box-pedido">
+            <div class="box-pedido"id="boxPedido" data-pedido-id="${childSnapshot.key}">
               <h2>${pedido.Pedido[0].slice(0, 30)}</h2>
               <div id="box-infos">
                 <h4>${pedido.DataEntrega}</h4>
                 <p>${pedido.Descricao[0].slice(0, 38)}...</p>
               </div>
-              <button class="btGrey2 btSobre" id="btSobre" data-pedido-id="${childSnapshot.key}">Sobre</button>
+              
               <button class="btGrey2 btSobre" id="btConcluido" data-pedido-id="${childSnapshot.key}">Concluir</button>
             </div>
           `     
         }
       })
-            // adiciona evento de clique para o botão "btConcluido"
+            
+                // adiciona evento de clique para o botão "btConcluido"
                 const btConcluido = document.querySelectorAll("#btConcluido");
                 btConcluido.forEach((button) => {
                 button.addEventListener("click", function() {
-                const pedidoId = this.getAttribute("data-pedido-id");
-               
-                concluirPedido(pedidoId);
+                    const pedidoId = this.getAttribute("data-pedido-id");
+                    concluirPedido(pedidoId);
+                    
+                })
             })
-        })
+
       
-                const btSobre = document.querySelectorAll("#btSobre");
-                btSobre.forEach((button) => {
+                const boxPedido = document.querySelectorAll("#boxPedido");
+                boxPedido.forEach((button) => {
                 button.addEventListener("click", function() {
                 const pedidoId = this.getAttribute("data-pedido-id");
                 sobrePedido(pedidoId)
@@ -55,23 +57,28 @@ function lerPedidos(){
   function concluirPedido(pedidoId) {
     let userId = localStorage.getItem('UserId')
     let pedidosRef = firebase.database().ref('formulario-np/' + userId + '/' + pedidoId)
-  
+
+
     // atualiza o valor de "Concluido" para true
     pedidosRef.update({Concluido: true}).then(() => {
       console.log("Pedido concluído com sucesso.")
     }).catch((error) => {
       console.log("Erro ao concluir pedido: ", error)
     });
+
   }
   
 
   function sobrePedido(pedidoId) {
+    if (event.target.id == "btConcluido") {
+      // se foi, não executa a função
+      return;
+    }
     // armazena o pedidoId no localStorage para ser acessado pela página sobre.html
     localStorage.setItem('pedidoId', pedidoId);
     console.log(localStorage.getItem('pedidoId'))
     // redireciona para a página sobre.html
     window.location.href = "../pages/sobre-pedido.html";
-
     //
   }
 
