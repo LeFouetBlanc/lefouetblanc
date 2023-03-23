@@ -7,6 +7,9 @@ const storageRef = firebase.storage().ref();
 const databaseRef = firebase.database().ref('formulario-np/' + userId);
 
 
+let imgs = []
+let listaImgs = []
+
 
 var data = new Date();
 var dia = String(data.getDate()).padStart(2, '0');
@@ -14,10 +17,6 @@ var mes = String(data.getMonth() + 1).padStart(2, '0');
 var ano = data.getFullYear();
 let dataAtual = dia + '/' + mes + '/' + ano;
 console.log(dataAtual)
-
-
-
-
 
 function uploadImg(file) {
     return new Promise((resolve, reject) => {
@@ -40,7 +39,34 @@ function uploadImg(file) {
     });
 }
 
+export function savingImgs(){
+
+    for (let i = 0; i < document.querySelectorAll('#pedidoProduto').length; i++){
+    let file = document.querySelectorAll(`.inputImg`)[i].files[0];
+            if(file) {
+                imgs.push(uploadImg(file))
+            }     
+    }
+        Promise.all(imgs).then((urlImgs) => { 
+            listaImgs.push(urlImgs)
+                
+        }).catch((err) => {
+            console.log('Erro ao salvar imagens: ', err);
+        })
+
+}
+
+
+
+document.querySelector('.inputImg').addEventListener('change', savingImgs)
+
+
+
 export function sendOrder(){
+    for(let x = 0; x < listaImgs.length; x++){
+         console.log("Imagens: ", listaImgs[x])
+     }
+    
     //endereço do banco de dados
     let formDataRef = firebase.database().ref('formulario-np/' + userId)
 
@@ -59,15 +85,13 @@ export function sendOrder(){
     let quantidades = []
     let descricoes = []
     let valorPedidos = []
-    let imgs = []
+    
     let personalizacoes = []
     let valoresExtra = []
 
     let valorTotal = calcValorTotal();
     let statusPgto = document.getElementById('pedidoStatusPagamento').value;
-
-    let file;
-
+  
     for(let i = 0; i < document.querySelectorAll('#pedidoProduto').length; i++){
         pedidos.push(document.querySelectorAll(`#pedidoProduto`)[i].value)
 
@@ -82,15 +106,7 @@ export function sendOrder(){
         }
 
         valorPedidos.push(document.querySelectorAll(`#pedidoValor`)[i].value)
-
-        file = document.querySelectorAll(`#inputImg`)[i].files[0];
-        if(file) {
-            imgs.push(uploadImg(file))
-        } else {
-            imgs.push("");
-        }
-
-       
+          
         personalizacoes.push(document.getElementsByClassName("pedidoPersonalizacao")[i].value);
         
         
@@ -103,7 +119,7 @@ export function sendOrder(){
 
     }
 
-    //console.log("IMAGENS: ", imgs)
+   
 
     //fazer verificações
     if(!(nomeCliente != "" && contatoCliente != "" && dataEntrega != "" && enderecoEntrega != "")){
@@ -114,7 +130,6 @@ export function sendOrder(){
         alert("Selecione uma opção para o status do pedido.")
     } else {
         //caso as verificações sejam validadas
-        Promise.all(imgs).then((urlImgs) => {
             let formPedido = {
                 NomeCliente: nomeCliente,
                 ContatoCliente: contatoCliente,
@@ -123,8 +138,8 @@ export function sendOrder(){
                 Quantidades: quantidades,
                 Descricao: descricoes,
                 ValorPedido: valorPedidos,
-                Imagens: urlImgs,
                 Personalizacoes: personalizacoes,
+                Imagens: listaImgs,
                 ValorExtra: valoresExtra,
                 DataEntrega: dataEntrega,
                 EnderecoEntrega: enderecoEntrega,
@@ -138,9 +153,8 @@ export function sendOrder(){
                 formDataRef.push(formPedido)
                 alert("Pedido enviado com sucesso!")
                // window.location.href = '../pages/fila-pedidos.html';
-                }).catch((err) => {
-                console.log('Erro ao enviar pedido: ', err);
-            })
+               
+            
         }
     }
 

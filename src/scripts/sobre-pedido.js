@@ -15,7 +15,7 @@ function carregarPedido() {
             if(pedido.Personalizacoes[i] != "" && pedido.Imagens[i] != ""){
                 //Com personalizacao e Com Imagem
                 boxDetalhes.innerHTML += `
-                    <img class="img-pedido" id="img-pedido" src=${pedido.Imagens[i]}>
+                    <img class="img-pedido" id="img-pedido" src=${pedido.Imagens[pedido.Imagens.length - 1][i]}>
                     <h2>${pedido.Pedido[i]}</h2>
                     <h3>${pedido.DataEntrega}</h3>
                     <br>
@@ -27,7 +27,7 @@ function carregarPedido() {
 
                     <h2>Personalização</h2>
                     <br>
-                    <p>${pedido.Personalizacoes}</p>
+                    <p>${pedido.Personalizacoes[i]}</p>
                     <br>
                     <h3>${pedido.ValorExtra[i]}</h3>
                     <!--Repetir quantos pedidos forem necessario antes das info do cliente-->
@@ -38,7 +38,7 @@ function carregarPedido() {
             }else if (pedido.Personalizacoes[i] == "" && pedido.Imagens[i] != "") {
                 //Sem personalizacao e Com imagem
                 boxDetalhes.innerHTML += `
-                    <img class="img-pedido" id="img-pedido" src=${pedido.Imagens[i]}>
+                    <img class="img-pedido" id="img-pedido" src=${pedido.Imagens[pedido.Imagens.length - 1][i]}}>
                     <h2>${pedido.Pedido[i]}</h2>
                     <h3>${pedido.DataEntrega}</h3>
                     <br>
@@ -65,7 +65,7 @@ function carregarPedido() {
 
                     <h2>Personalização</h2>
                     <br>
-                    <p>${pedido.Personalizacoes}</p>
+                    <p>${pedido.Personalizacoes[i]}</p>
                     <br>
                     <h3>${pedido.ValorExtra[i]}</h3>
                     <!--Repetir quantos pedidos forem necessario antes das info do cliente-->
