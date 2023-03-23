@@ -62,8 +62,9 @@ function carregarPedido() {
 
 
             <div id="opcoes">
-                <button class="btGrey2">Salvar</button>
+                
                 <button class="btGrey2" onclick="btVoltar()">Voltar</button>
+                <button class="btGrey2">Salvar</button>
             </div> 
         
         `;
