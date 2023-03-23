@@ -181,6 +181,20 @@ header img{
     align-items: center;
 }
 
+#btRemoveProduto{
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    text-align: center;
+    align-items: center;
+    background-color: rgb(255, 0, 0);
+    box-shadow: 1px 1px 1px 0 black;
+}
+
+#btRemoveProduto:hover{
+    background-color: rgb(223, 1, 1);
+}
+
 #form-valorTotal{
     width: 100%;
     display: flex;
