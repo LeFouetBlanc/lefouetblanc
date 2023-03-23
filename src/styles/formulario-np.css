@@ -8,6 +8,7 @@ body{
     flex-direction: column;
     width: 100%;
     overflow-x: hidden;
+    color: black;
 }
 
 header{
@@ -82,12 +83,12 @@ header img{
 
     font-family: 'Inter', sans-serif;
     font-style: normal;
-    font-weight: 100;
+    font-weight: 300;
     font-size: 12px;
     line-height: 24px;
     text-align: center;
 
-    color: rgba(0, 0, 0, 0.31);
+    color: black;
     text-transform: uppercase;
     border-radius: 10px;
 }
@@ -132,7 +133,7 @@ header img{
     font-size: 14px;
     text-align: center;
 
-    color: rgba(0, 0, 0, 0.31);
+    color: rgba(0, 0, 0);
     text-transform: uppercase;
     resize: none;
     width: 90%;
@@ -310,7 +311,9 @@ header img{
     justify-content: center;
 }
 
-
 /*RESPONSIVIDADE*/
 
 
+input::placeholder, textarea::placeholder{
+    color:black;
+}

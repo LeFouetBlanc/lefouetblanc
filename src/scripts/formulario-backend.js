@@ -152,7 +152,7 @@ export function sendOrder(){
 
                 formDataRef.push(formPedido)
                 alert("Pedido enviado com sucesso!")
-               // window.location.href = '../pages/fila-pedidos.html';
+               window.location.href = '../pages/fila-pedidos.html';
                
             
         }
