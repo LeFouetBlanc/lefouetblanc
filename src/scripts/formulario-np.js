@@ -37,57 +37,47 @@ function removePersonalizacao(i){
 
 
 function addNewProduct(){
-    //btAddProduto
-    j++
-
-    divBaseNewProduto.innerHTML += `
-    <hr class="hr-divisoria"><div class="form-pedido"><!--FORM PEDIDO-->
-    <h2>Pedido ${j + 1}</h2>
-    <input type="text" id="pedidoProduto" placeholder="Produto">
-    <input type="number" id="pedidoQuantidade" class="pedidoDescricao" placeholder="Quantidade">
-    <textarea rows="7" cols="40" placeholder="
-    
-    
-Descrição"></textarea>
-
-    <input type="text" id="pedidoValor" class="pedidoValor" onkeyup="calcValorTotal()" placeholder="Valor do pedido"><br>
-    <button class="btGrey2 btAddPersonalizacao" id="btAddPersonalizacao" onclick="addPersonalizacao(${j})">
-                Adicionar Personalização
-            </button>
-    <button id="btRemovePersonalizacao" class="btGrey2 btAddPersonalizacao" style="display: none;" onclick="removePersonalizacao(${j})">
-    Remover Personalização
-</button><br>
-
-    <!--PERSONALIZAÇAO-->
-    <div class="box-personalizacao" id="box-personalizacao">
-        <h2>Personalizacao ${j+1}</h2>
-        <div id="personalizacaoCol1">
-
-        <div id="boxInputImg">
-            <label for="inputImg" class="labelInputImg" id="labelInputImg${j}">Imagem
-            </label>
-            <input type="file" class="inputImg" name="imagem${j}" id="inputImg" accept="image/png, imagem/jpg, image/jpeg" onchange="changeImg(${j})">
-    
-        </div><!--boxInputIMG-->
-
-            <textarea rows="7" cols="40" class="pedidoPersonalizacao" placeholder="
-        
-        
-Personalização"></textarea>
-
-        </div><!--COL 1-->
-
-            <div id="personalizacalCol2">
-                <div id="boxValorPersonaliacao">
-                    <input type="text" id="valorPersonalizacao" class="valorPersonalizacao" onkeyup="calcValorTotal()" placeholder="valor extra">
-                </div><!--BOX VALOR PERSONALIZACAO-->
-            </div><!--COL 2-->
-        </div><!--BOX PERSONALIZACAO-->
-    <!--FIM PERSONALIZAÇAO-->
-
-</div><!--FORM PEDIDO-->
-    `;
+  j++
+  
+  // criar novo elemento div
+  var newProductDiv = document.createElement('div');
+  newProductDiv.classList.add('form-pedido');
+  
+  // definir conteúdo do novo elemento div
+  newProductDiv.innerHTML = `
+      <hr class="hr-divisoria">
+      <h2>Pedido ${j + 1}</h2>
+      <input type="text" id="pedidoProduto" placeholder="Produto">
+      <input type="number" id="pedidoQuantidade" class="pedidoDescricao" placeholder="Quantidade">
+      <textarea rows="7" cols="40" placeholder="Descrição"></textarea>
+      <input type="text" id="pedidoValor" class="pedidoValor" onkeyup="calcValorTotal()" placeholder="Valor do pedido"><br>
+      <button class="btGrey2 btAddPersonalizacao" id="btAddPersonalizacao" onclick="addPersonalizacao(${j})">
+          Adicionar Personalização
+      </button>
+      <button id="btRemovePersonalizacao" class="btGrey2 btAddPersonalizacao" style="display: none;" onclick="removePersonalizacao(${j})">
+          Remover Personalização
+      </button><br>
+      <div class="box-personalizacao" id="box-personalizacao">
+          <h2>Personalizacao ${j+1}</h2>
+          <div id="personalizacaoCol1">
+              <div id="boxInputImg">
+                  <label for="inputImg" class="labelInputImg" id="labelInputImg${j}">Imagem</label>
+                  <input type="file" class="inputImg" name="imagem${j}" id="inputImg" accept="image/png, imagem/jpg, image/jpeg" onchange="changeImg(${j})">
+              </div><!--boxInputIMG-->
+              <textarea rows="7" cols="40" class="pedidoPersonalizacao" placeholder="Personalização"></textarea>
+          </div><!--COL 1-->
+          <div id="personalizacalCol2">
+              <div id="boxValorPersonaliacao">
+                  <input type="text" id="valorPersonalizacao" class="valorPersonalizacao" onkeyup="calcValorTotal()" placeholder="valor extra">
+              </div><!--BOX VALOR PERSONALIZACAO-->
+          </div><!--COL 2-->
+      </div><!--BOX PERSONALIZACAO-->
+  `;
+  
+  // adicionar novo elemento div ao elemento pai
+  divBaseNewProduto.appendChild(newProductDiv);
 }
+
 
 
 function removeLastProduct() {
