@@ -35,7 +35,7 @@ function carregarPedido() {
                     <hr class="hr-divisoria">
                     
                  `
-            }else if (pedido.Personalizacoes[i] == "" && pedido.Imagens[i] != "") {
+            }else if (pedido.Personalizacoes[i] == "" && pedido.Imagens[i] == "") { //TO COM ERRO AQUI
                 //Sem personalizacao e Com imagem
                 boxDetalhes.innerHTML += `
                     <img class="img-pedido" id="img-pedido" src=${pedido.Imagens[pedido.Imagens.length - 1][i]}}>
@@ -50,7 +50,7 @@ function carregarPedido() {
                     <!--Repetir quantos pedidos forem necessario antes das info do cliente-->
                     
                  `
-            } else if(pedido.Personalizacoes[i] != "" && pedido.Imagens[i] == "" ){
+            } else if(pedido.Personalizacoes[i] != "" && pedido.Imagens == "" ){
                 //Com personalizacao e sem imagem
                 boxDetalhes.innerHTML += `
                 
@@ -73,7 +73,7 @@ function carregarPedido() {
                     <hr class="hr-divisoria">
                  `
 
-            } else if(pedido.Personalizacoes[i] == "" && pedido.Imagens[i] == ""){
+            } else if(pedido.Personalizacoes == "" && pedido.Imagens == ""){
                 //Sem personalizacao e sem imagem
                 boxDetalhes.innerHTML += `
                 

@@ -4,9 +4,14 @@ let j = 0; //Variavel de apoio
 let divBaseNewProduto = document.getElementById('divBaseNewProduto')
 
 function changeImg(i){
+    console.log(i);
     document.getElementById(`labelInputImg${i}`).style.background = "#38AE00"
     document.getElementById(`labelInputImg${i}`).style.color = "white"
 }
+
+document.querySelectorAll(`.inputImg`)[j].addEventListener('change', () => {
+  changeImg(j)
+})
 
 function addPersonalizacao(i){
     //btAddPersonalizacao
@@ -33,7 +38,6 @@ function removePersonalizacao(i){
 
 function addNewProduct(){
     //btAddProduto
-
     j++
 
     divBaseNewProduto.innerHTML += `
