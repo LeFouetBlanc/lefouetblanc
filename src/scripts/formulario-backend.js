@@ -119,6 +119,9 @@ export function sendOrder(){
 
     }
 
+    let partes = dataEntrega.split('/')
+
+    let dataEntregaInversa = partes[2] + "/" + partes[1] + "/" + partes[0];
    
 
     //fazer verificações
@@ -142,6 +145,7 @@ export function sendOrder(){
                 Imagens: listaImgs,
                 ValorExtra: valoresExtra,
                 DataEntrega: dataEntrega,
+                DataEntregaInversa: dataEntregaInversa,
                 EnderecoEntrega: enderecoEntrega,
                 TaxaEntrega: taxaEntrega,
                 ValorTotal: valorTotal,

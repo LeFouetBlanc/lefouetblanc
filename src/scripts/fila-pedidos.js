@@ -11,7 +11,7 @@ function lerPedidos(){
     let userId = localStorage.getItem('UserId')
     let pedidosRef = firebase.database().ref('formulario-np/' + userId)
   
-    pedidosRef.orderByChild("DataEntrega").on("value", (snapshot) => {
+    pedidosRef.orderByChild("DataEntregaInversa").on("value", (snapshot) => {
       console.log("Dados lidos com sucesso.")
         
       fila.innerHTML = ""
@@ -24,7 +24,7 @@ function lerPedidos(){
               <h2>${pedido.Pedido[0].slice(0, 30)}</h2>
               <div id="box-infos">
                 <h4>${pedido.DataEntrega}</h4>
-                <p>${pedido.Descricao[0].slice(0, 38)}...</p>
+                <p>${pedido.Descricao[0].slice(0, 60)}...</p>
               </div>
               
               <button class="btGrey2 btSobre" id="btConcluido" data-pedido-id="${childSnapshot.key}">Concluir</button>
