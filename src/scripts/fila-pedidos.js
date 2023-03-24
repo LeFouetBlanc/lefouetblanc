@@ -19,17 +19,27 @@ function lerPedidos(){
       snapshot.forEach((childSnapshot) => {
         var pedido = childSnapshot.val()
         if (pedido.Concluido == false) {
+          // Definir o tamanho máximo de caracteres permitidos para a descrição
+          const maxDescricaoLength = 250;
+        
+          // Obter o tamanho disponível para a descrição com base no tamanho do título
+          const tituloLength = pedido.Pedido[0].length;
+          const maxDescricaoSize = 110 - tituloLength;
+        
+          // Limitar o número de caracteres da descrição com base no espaço disponível
+          let descricao = pedido.Descricao[0].substring(0, maxDescricaoSize);
+          if (pedido.Descricao[0].length > maxDescricaoSize) {
+            descricao += '...';
+          }
+        
           fila.innerHTML += `
-            <div class="box-pedido"id="boxPedido" data-pedido-id="${childSnapshot.key}">
+            <div class="box-pedido" id="boxPedido" data-pedido-id="${childSnapshot.key}">
               <h2>${pedido.Pedido[0].slice(0, 30)}</h2>
-              <div id="box-infos">
-                <h4>${pedido.DataEntrega}</h4>
-                <p>${pedido.Descricao[0].slice(0, 60)}...</p>
-              </div>
-              
+              <h4 style="margin-bottom: 10px;">${pedido.DataEntrega}</h4>
+              <p class="descricao">${descricao}</p>
               <button class="btGrey2 btSobre" id="btConcluido" data-pedido-id="${childSnapshot.key}">Concluir</button>
             </div>
-          `     
+          `;
         }
       })
             
