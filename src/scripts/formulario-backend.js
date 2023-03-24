@@ -80,6 +80,10 @@ export function sendOrder(){
 
     let taxaEntrega = document.getElementById('taxaEntrega').value
 
+    let StatusAndamento = "Novo Pedido";
+    //Novo pedido, Preparando, Aguardando Envio, Concluido
+    //Laranja, Amarelo, Verde, Preto
+
     //PEDIDO
     let pedidos = [];
     let quantidades = []
@@ -150,6 +154,7 @@ export function sendOrder(){
                 TaxaEntrega: taxaEntrega,
                 ValorTotal: valorTotal,
                 StatusPagamento: statusPgto,
+                StatusAndamento: StatusAndamento,
                 Concluido: false,
                 DataPedido: dataAtual
                 }

@@ -31,7 +31,7 @@ function filtroHoje(){
         for (let key in pedidos) {
             const pedido = pedidos[key];
 
-            if(pedido.Concluido == true && pedido.DataPedido == dataAtual){
+            if(pedido.DataPedido == dataAtual){
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${pedido.ContatoCliente}</td>
@@ -41,9 +41,14 @@ function filtroHoje(){
                 <td>${pedido.DataEntrega}</td>
                 <td>${pedido.DataAniversario}</td>
                 <td>${pedido.StatusPagamento}</td>
-                <td><span class="material-symbols-outlined">
-                arrow_back
-                </span></td>
+                <td>
+                  <select id="changeAndamento">
+                      <option value="novoPedido" id="novoPedido" selected></option>
+                      <option value="preparando" id="preparando"></option>
+                      <option value="aguardandoEnvio" id="aguardandoEnvio"></option>
+                      <option value="concluido" id="concluido"></option>
+                  </select>
+                </td>
             `;
             tbody.appendChild(tr);
             
@@ -81,7 +86,7 @@ function parseData(dataString) {
             const pedido = pedidos[key];
 
             const dataPedido = parseData(pedido.DataPedido);
-            if(pedido.Concluido == true && dataPedido >= dataAnterior && dataPedido <= dataAtual){
+            if(dataPedido >= dataAnterior && dataPedido <= dataAtual){
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${pedido.ContatoCliente}</td>
@@ -122,7 +127,6 @@ function filtroMes() {
         const anoAtual = new Date().getFullYear();
   
         if (
-          pedido.Concluido &&
           dataPedido.getMonth() + 1 === mesAtual &&
           dataPedido.getFullYear() === anoAtual &&
           dataPedido.getDate() >= 1 &&
@@ -169,6 +173,15 @@ function filtroTodos(){
                 <td>${pedido.DataEntrega}</td>
                 <td>${pedido.DataAniversario}</td>
                 <td>${pedido.StatusPagamento}</td>
+                <td>
+                <input type="color" list="presetColors" value="#ffa500">
+                <datalist id="presetColors" disabled>
+                    <option id="novoPedido">#ffa500</option>
+                    <option id="preparando">#ffff00</option>
+                    <option id="aguardandoEnvio">#008000</option>
+                    <option id="concluido">#000000</option>
+                </datalist>
+                </td>
             `;
             tbody.appendChild(tr);
         }
@@ -257,3 +270,13 @@ function exportarParaExcel() {
   
 
 document.getElementById('btExportar').addEventListener('click', exportarParaExcel)
+
+
+//Select da tabela
+
+
+function changeAndamentoPedido(){
+
+}
+
+
