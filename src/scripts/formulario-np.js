@@ -95,9 +95,13 @@ function removeLastProduct() {
     if (j > 0) {
       // remove o último elemento adicionado em divBaseNewProduto
       divBaseNewProduto.removeChild(divBaseNewProduto.lastElementChild);
+      divBaseNewProduto.removeChild(document.querySelectorAll('.hr-divisoria')[j])
       j--;
-  
+      
+
+
       // recalcular o valor total
+      document.querySelectorAll('#pedidoValor')[i].value = 0;
       calcValorTotal();
     }
   }
