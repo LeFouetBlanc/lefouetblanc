@@ -11,7 +11,7 @@ console.log(dataAtual)
 
 let userId = localStorage.getItem('UserId')
 let pedidosRef = firebase.database().ref('formulario-np/' + userId + '/')
-
+let listaStatusAndamento = ["Novo Pedido", "Preparando", "Aguardando Envio", "Concluido"];
 
 
 
@@ -75,45 +75,34 @@ function filtroHoje(){
                 const inputColor = tr.querySelector('#inputColor');
                 const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
       
-                let concluido;
-                let statusAndamento;
-      
+               
                 
       
-                inputColor.addEventListener('input', function () {
-                  const selectedColor = inputColor.value;
-        
-                  if (selectedColor == '#ffa500') {
-                    console.log('Novo Pedido: ' + pedido.Pedido);
-                    concluido = false;
-                    statusAndamento = "Novo Pedido"
-      
-                  } else if (selectedColor == '#ffff00') {
-                    console.log('Preparando: ' + pedido.Pedido);
-                    concluido = false;
-                    statusAndamento = "Preparando"
-      
-                  } else if (selectedColor == '#008000') {
-                    console.log('Aguardando envio: ' + + pedido.Pedido);
-                    concluido = false;
-                    statusAndamento = "Aguardando envio"
-      
-                  } else if (selectedColor == '#000000') {
-                    console.log('Concluido: ' + pedido.Pedido);
-                    concluido = true;
-                    statusAndamento = "Concluido"
-      
-                  }
-                  console.log("Chegou ate aqui")
-                  pedidosRefIn.update({ Concluido: concluido, StatusAndamento: statusAndamento })
-                  .then(() => {
-                    console.log('Pedido concluído com sucesso.');
-                    console.log(pedido.StatusAndamento);
-                  })
-                  .catch((error) => {
-                    console.log('Erro ao concluir pedido: ', error);
-                  });                
-                });
+                const selectedColor = inputColor;
+
+          inputColor.addEventListener('change', function () {
+            
+             
+            if(selectedColor.value == '#000000'){
+              pedidosRefIn.update({Concluido: true, StatusAndamento: listaStatusAndamento[3]})
+              console.log(listaStatusAndamento[3])
+
+            } else if(selectedColor.value == '#008000'){
+              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[2]})
+              console.log(listaStatusAndamento[2])
+
+            } else if(selectedColor.value == '#ffff00'){
+              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[1]})
+              console.log(listaStatusAndamento[1])
+            } else if(selectedColor.value == '#ffa500'){
+              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[0]})
+              console.log(listaStatusAndamento[0])
+            }
+
+            
+            
+                         
+          });
         
                 tbody.appendChild(tr);
               }
@@ -191,45 +180,32 @@ function parseData(dataString) {
                 const inputColor = tr.querySelector('#inputColor');
                 const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
       
-                let concluido;
-                let statusAndamento;
-      
-                
-      
-                inputColor.addEventListener('input', function () {
-                  const selectedColor = inputColor.value;
-        
-                  if (selectedColor == '#ffa500') {
-                    console.log('Novo Pedido: ' + pedido.Pedido);
-                    concluido = false;
-                    statusAndamento = "Novo Pedido"
-      
-                  } else if (selectedColor == '#ffff00') {
-                    console.log('Preparando: ' + pedido.Pedido);
-                    concluido = false;
-                    statusAndamento = "Preparando"
-      
-                  } else if (selectedColor == '#008000') {
-                    console.log('Aguardando envio: ' + + pedido.Pedido);
-                    concluido = false;
-                    statusAndamento = "Aguardando envio"
-      
-                  } else if (selectedColor == '#000000') {
-                    console.log('Concluido: ' + pedido.Pedido);
-                    concluido = true;
-                    statusAndamento = "Concluido"
-      
-                  }
-                  console.log("Chegou ate aqui")
-                  pedidosRefIn.update({ Concluido: concluido, StatusAndamento: statusAndamento })
-                  .then(() => {
-                    console.log('Pedido concluído com sucesso.');
-                    console.log(pedido.StatusAndamento);
-                  })
-                  .catch((error) => {
-                    console.log('Erro ao concluir pedido: ', error);
-                  });                
-                });
+                const selectedColor = inputColor;
+
+          inputColor.addEventListener('change', function () {
+            
+             
+            if(selectedColor.value == '#000000'){
+              pedidosRefIn.update({Concluido: true, StatusAndamento: listaStatusAndamento[3]})
+              console.log(listaStatusAndamento[3])
+
+            } else if(selectedColor.value == '#008000'){
+              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[2]})
+              console.log(listaStatusAndamento[2])
+
+            } else if(selectedColor.value == '#ffff00'){
+              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[1]})
+              console.log(listaStatusAndamento[1])
+            } else if(selectedColor.value == '#ffa500'){
+              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[0]})
+              console.log(listaStatusAndamento[0])
+            }
+
+            
+            
+                         
+          });            
+              
         
                 tbody.appendChild(tr);
               }
@@ -306,44 +282,27 @@ function filtroMes() {
           const inputColor = tr.querySelector('#inputColor');
           const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
 
-          let concluido;
-          let statusAndamento;
+          const selectedColor = inputColor;
 
-          
-
-          inputColor.addEventListener('input', function () {
-            const selectedColor = inputColor.value;
-  
-            if (selectedColor == '#ffa500') {
-              console.log('Novo Pedido: ' + pedido.Pedido);
-              concluido = false;
-              statusAndamento = "Novo Pedido"
-
-            } else if (selectedColor == '#ffff00') {
-              console.log('Preparando: ' + pedido.Pedido);
-              concluido = false;
-              statusAndamento = "Preparando"
-
-            } else if (selectedColor == '#008000') {
-              console.log('Aguardando envio: ' + + pedido.Pedido);
-              concluido = false;
-              statusAndamento = "Aguardando envio"
-
-            } else if (selectedColor == '#000000') {
-              console.log('Concluido: ' + pedido.Pedido);
-              concluido = true;
-              statusAndamento = "Concluido"
-
-            }
+          inputColor.addEventListener('change', function () {
             
-            pedidosRefIn.update({ Concluido: concluido, StatusAndamento: statusAndamento })
-            .then(() => {
-              console.log('Pedido concluído com sucesso.');
-              console.log(pedido.StatusAndamento);
-            })
-            .catch((error) => {
-              console.log('Erro ao concluir pedido: ', error);
-            });                
+             
+            if(selectedColor.value == '#000000'){
+              pedidosRefIn.update({Concluido: true, StatusAndamento: listaStatusAndamento[3]})
+              console.log(listaStatusAndamento[3])
+
+            } else if(selectedColor.value == '#008000'){
+              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[2]})
+              console.log(listaStatusAndamento[2])
+
+            } else if(selectedColor.value == '#ffff00'){
+              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[1]})
+              console.log(listaStatusAndamento[1])
+            } else if(selectedColor.value == '#ffa500'){
+              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[0]})
+              console.log(listaStatusAndamento[0])
+            }
+             
           });
   
           tbody.appendChild(tr);
@@ -369,14 +328,17 @@ function filtroTodos() {
         const pedido = pedidos[key];
   
         const andamentoPedido = pedido.StatusAndamento;
-        let aux_andamentoPedido = '#000000';
+        let aux_andamentoPedido = '#aaaaaa';
+    
   
         if (andamentoPedido == 'Novo Pedido') {
           aux_andamentoPedido = '#ffa500';
         } else if (andamentoPedido == 'Preparando') {
           aux_andamentoPedido = '#ffff00';
+
         } else if (andamentoPedido == 'Aguardando Envio') {
           aux_andamentoPedido = '#008000';
+     
         } else if (andamentoPedido == 'Concluido') {
           aux_andamentoPedido = '#000000';
         }
@@ -410,56 +372,55 @@ function filtroTodos() {
           const inputColor = tr.querySelector('#inputColor');
           const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
 
-          let concluido;
-          let statusAndamento;
+          
+          
 
           btApagar.addEventListener('click', function(){
-                pedidosRefIn.remove()
+            let resultado;
+
+            resultado = window.confirm("Deseja apagar esse pedido?")
+
+            if(resultado == true){
+              pedidosRefIn.remove()
                             .then(() => {
                         console.log('Pedido: ' + pedido.Pedido + ' removido com sucesso.');
                     })
                             .catch((error) => {
                         console.log('Erro ao remover pedido: ', error);
                   });
+            }
+
+                
           })
 
           
+          const selectedColor = inputColor;
 
-          inputColor.addEventListener('input', function () {
-            const selectedColor = inputColor.value;
-  
-            if (selectedColor == '#ffa500') {
-              console.log('Novo Pedido: ' + pedido.Pedido);
-              concluido = false;
-              statusAndamento = "Novo Pedido"
+          inputColor.addEventListener('change', function () {
+            
+             
+            if(selectedColor.value == '#000000'){
+              pedidosRefIn.update({Concluido: true, StatusAndamento: listaStatusAndamento[3]})
+              console.log(listaStatusAndamento[3])
 
-            } else if (selectedColor == '#ffff00') {
-              console.log('Preparando: ' + pedido.Pedido);
-              concluido = false;
-              statusAndamento = "Preparando"
+            } else if(selectedColor.value == '#008000'){
+              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[2]})
+              console.log(listaStatusAndamento[2])
 
-            } else if (selectedColor == '#008000') {
-              console.log('Aguardando envio: ' + + pedido.Pedido);
-              concluido = false;
-              statusAndamento = "Aguardando envio"
-
-            } else if (selectedColor == '#000000') {
-              console.log('Concluido: ' + pedido.Pedido);
-              concluido = true;
-              statusAndamento = "Concluido"
-
+            } else if(selectedColor.value == '#ffff00'){
+              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[1]})
+              console.log(listaStatusAndamento[1])
+            } else if(selectedColor.value == '#ffa500'){
+              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[0]})
+              console.log(listaStatusAndamento[0])
             }
-           
-            pedidosRefIn.update({ Concluido: concluido, StatusAndamento: statusAndamento })
-            .then(() => {
-              console.log('Pedido concluído com sucesso.');
-              console.log(pedido.StatusAndamento);
-            })
-            .catch((error) => {
-              console.log('Erro ao concluir pedido: ', error);
-            });                
+
+            
+            
+                         
           });
-  
+          
+
           tbody.appendChild(tr);
         }
       }

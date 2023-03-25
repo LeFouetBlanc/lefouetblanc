@@ -4,6 +4,8 @@ let fila = document.getElementById('fila')
 
 lerPedidos()
 
+
+
 document.getElementById('btLogout').addEventListener('click', logOut)
  
 //Lendo pedidos na tela de fila
