@@ -70,7 +70,7 @@ function lerPedidos(){
 
 
     // atualiza o valor de "Concluido" para true
-    pedidosRef.update({Concluido: true}).then(() => {
+    pedidosRef.update({Concluido: true, StatusAndamento: "Concluido"}).then(() => {
       console.log("Pedido concluído com sucesso.")
     }).catch((error) => {
       console.log("Erro ao concluir pedido: ", error)

@@ -162,5 +162,12 @@ input[type=color] {
 
 #btApagar{
     background-color: #BD1522;
-    
+
+}
+
+#btApagarPedido{
+    font-weight: bold;
+}
+#btApagarPedido:hover{
+    cursor: pointer;
 }

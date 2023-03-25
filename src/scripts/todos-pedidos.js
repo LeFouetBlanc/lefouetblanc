@@ -32,31 +32,96 @@ function filtroHoje(){
             const pedido = pedidos[key];
 
             if(pedido.DataPedido == dataAtual){
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${pedido.ContatoCliente}</td>
-                <td>${pedido.NomeCliente}</td>
-                <td>${pedido.Pedido}</td>
-                <td>${pedido.ValorTotal}</td>
-                <td>${pedido.DataEntrega}</td>
-                <td>${pedido.DataAniversario}</td>
-                <td>${pedido.StatusPagamento}</td>
-                <td>
-                  <select id="changeAndamento">
-                      <option value="novoPedido" id="novoPedido" selected></option>
-                      <option value="preparando" id="preparando"></option>
-                      <option value="aguardandoEnvio" id="aguardandoEnvio"></option>
-                      <option value="concluido" id="concluido"></option>
-                  </select>
-                </td>
-            `;
-            tbody.appendChild(tr);
-            
-            }
-        }
+              const andamentoPedido = pedido.StatusAndamento;
+              let aux_andamentoPedido = '';
         
-    });
-}
+              if (andamentoPedido == 'Novo Pedido') {
+                aux_andamentoPedido = '#ffa500';
+              } else if (andamentoPedido == 'Preparando') {
+                aux_andamentoPedido = '#ffff00';
+              } else if (andamentoPedido == 'Aguardando Envio') {
+                aux_andamentoPedido = '#008000';
+              } else if (andamentoPedido == 'Concluido') {
+                aux_andamentoPedido = '#000000';
+              }
+        
+              if (key < pedido) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td>${pedido.ContatoCliente}</td>
+                  <td>${pedido.NomeCliente}</td>
+                  <td>${pedido.Pedido}</td>
+                  <td>${pedido.ValorTotal}</td>
+                  <td>${pedido.DataEntrega}</td>
+                  <td>${pedido.DataAniversario}</td>
+                  <td>${pedido.StatusPagamento}</td>
+                  <td>
+                    <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
+                    <datalist id="presetColors" disabled>
+                      <option id="novoPedido">#ffa500</option>
+                      <option id="preparando">#ffff00</option>
+                      <option id="aguardandoEnvio">#008000</option>
+                      <option id="concluido">#000000</option>
+                    </datalist>
+                  </td>
+                  <td><span id="btApagarPedido">X</span></td>
+                `; 
+      
+               
+               // document.querySelectorAll('#btApagarPedido')[key].addEventListener('click', ()=>{
+                 // apagarPedido(key)
+               // })
+      
+                const inputColor = tr.querySelector('#inputColor');
+                const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
+      
+                let concluido;
+                let statusAndamento;
+      
+                
+      
+                inputColor.addEventListener('input', function () {
+                  const selectedColor = inputColor.value;
+        
+                  if (selectedColor == '#ffa500') {
+                    console.log('Novo Pedido: ' + pedido.Pedido);
+                    concluido = false;
+                    statusAndamento = "Novo Pedido"
+      
+                  } else if (selectedColor == '#ffff00') {
+                    console.log('Preparando: ' + pedido.Pedido);
+                    concluido = false;
+                    statusAndamento = "Preparando"
+      
+                  } else if (selectedColor == '#008000') {
+                    console.log('Aguardando envio: ' + + pedido.Pedido);
+                    concluido = false;
+                    statusAndamento = "Aguardando envio"
+      
+                  } else if (selectedColor == '#000000') {
+                    console.log('Concluido: ' + pedido.Pedido);
+                    concluido = true;
+                    statusAndamento = "Concluido"
+      
+                  }
+                  console.log("Chegou ate aqui")
+                  pedidosRefIn.update({ Concluido: concluido, StatusAndamento: statusAndamento })
+                  .then(() => {
+                    console.log('Pedido concluído com sucesso.');
+                    console.log(pedido.StatusAndamento);
+                  })
+                  .catch((error) => {
+                    console.log('Erro ao concluir pedido: ', error);
+                  });                
+                });
+        
+                tbody.appendChild(tr);
+              }
+            }
+          }
+      });
+    }
+        
 
 function parseData(dataString) {
     if (!dataString) {
@@ -87,23 +152,92 @@ function parseData(dataString) {
 
             const dataPedido = parseData(pedido.DataPedido);
             if(dataPedido >= dataAnterior && dataPedido <= dataAtual){
+              const andamentoPedido = pedido.StatusAndamento;
+              let aux_andamentoPedido = '';
+        
+              if (andamentoPedido == 'Novo Pedido') {
+                aux_andamentoPedido = '#ffa500';
+              } else if (andamentoPedido == 'Preparando') {
+                aux_andamentoPedido = '#ffff00';
+              } else if (andamentoPedido == 'Aguardando Envio') {
+                aux_andamentoPedido = '#008000';
+              } else if (andamentoPedido == 'Concluido') {
+                aux_andamentoPedido = '#000000';
+              }
+        
+              if (key < pedido) {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td>${pedido.ContatoCliente}</td>
-                    <td>${pedido.NomeCliente}</td>
-                    <td>${pedido.Pedido}</td>
-                    <td>${pedido.ValorTotal}</td>
-                    <td>${pedido.DataEntrega}</td>
-                    <td>${pedido.DataAniversario}</td>
-                    <td>${pedido.StatusPagamento}</td>
-                `;
+                  <td>${pedido.ContatoCliente}</td>
+                  <td>${pedido.NomeCliente}</td>
+                  <td>${pedido.Pedido}</td>
+                  <td>${pedido.ValorTotal}</td>
+                  <td>${pedido.DataEntrega}</td>
+                  <td>${pedido.DataAniversario}</td>
+                  <td>${pedido.StatusPagamento}</td>
+                  <td>
+                    <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
+                    <datalist id="presetColors" disabled>
+                      <option id="novoPedido">#ffa500</option>
+                      <option id="preparando">#ffff00</option>
+                      <option id="aguardandoEnvio">#008000</option>
+                      <option id="concluido">#000000</option>
+                    </datalist>
+                  </td>
+                  <td><span id="btApagarPedido">X</span></td>
+                `; 
+      
+      
+                const inputColor = tr.querySelector('#inputColor');
+                const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
+      
+                let concluido;
+                let statusAndamento;
+      
+                
+      
+                inputColor.addEventListener('input', function () {
+                  const selectedColor = inputColor.value;
+        
+                  if (selectedColor == '#ffa500') {
+                    console.log('Novo Pedido: ' + pedido.Pedido);
+                    concluido = false;
+                    statusAndamento = "Novo Pedido"
+      
+                  } else if (selectedColor == '#ffff00') {
+                    console.log('Preparando: ' + pedido.Pedido);
+                    concluido = false;
+                    statusAndamento = "Preparando"
+      
+                  } else if (selectedColor == '#008000') {
+                    console.log('Aguardando envio: ' + + pedido.Pedido);
+                    concluido = false;
+                    statusAndamento = "Aguardando envio"
+      
+                  } else if (selectedColor == '#000000') {
+                    console.log('Concluido: ' + pedido.Pedido);
+                    concluido = true;
+                    statusAndamento = "Concluido"
+      
+                  }
+                  console.log("Chegou ate aqui")
+                  pedidosRefIn.update({ Concluido: concluido, StatusAndamento: statusAndamento })
+                  .then(() => {
+                    console.log('Pedido concluído com sucesso.');
+                    console.log(pedido.StatusAndamento);
+                  })
+                  .catch((error) => {
+                    console.log('Erro ao concluir pedido: ', error);
+                  });                
+                });
+        
                 tbody.appendChild(tr);
+              }
             }
-        }
-    });
-}
-    
-  
+          }
+      });
+  }
+        
 
 function filtroMes() {
     //select pedidosHoje
@@ -132,37 +266,7 @@ function filtroMes() {
           dataPedido.getDate() >= 1 &&
           dataPedido.getDate() <= 30
         ) {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${pedido.ContatoCliente}</td>
-            <td>${pedido.NomeCliente}</td>
-            <td>${pedido.Pedido}</td>
-            <td>${pedido.ValorTotal}</td>
-            <td>${pedido.DataEntrega}</td>
-            <td>${pedido.DataAniversario}</td>
-            <td>${pedido.StatusPagamento}</td>
-          `;
-          tbody.appendChild(tr);
-        }
-      }
-    });
-  }
-
-  function filtroTodos() {
-    //select pedidosTodos
-    pedidosRef.on('value', (snapshot) => {
-      const pedidos = snapshot.val();
-  
-      const tbody = document.querySelector('#tabela-pedidos tbody');
-  
-      // Limpando o corpo da tabela antes de preencher com novos dados
-      tbody.innerHTML = '';
-  
-      // Iterando sobre os pedidos e adicionando na tabela
-      for (let key in pedidos) {
-        const pedido = pedidos[key];
-  
-        const andamentoPedido = pedido.StatusAndamento;
+          const andamentoPedido = pedido.StatusAndamento;
         let aux_andamentoPedido = '';
   
         if (andamentoPedido == 'Novo Pedido') {
@@ -194,8 +298,11 @@ function filtroMes() {
                 <option id="concluido">#000000</option>
               </datalist>
             </td>
-          `;
-  
+            <td><span id="btApagarPedido">X</span></td>
+          `; 
+
+        
+
           const inputColor = tr.querySelector('#inputColor');
           const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
 
@@ -228,7 +335,121 @@ function filtroMes() {
               statusAndamento = "Concluido"
 
             }
-            console.log("Chegou ate aqui")
+            
+            pedidosRefIn.update({ Concluido: concluido, StatusAndamento: statusAndamento })
+            .then(() => {
+              console.log('Pedido concluído com sucesso.');
+              console.log(pedido.StatusAndamento);
+            })
+            .catch((error) => {
+              console.log('Erro ao concluir pedido: ', error);
+            });                
+          });
+  
+          tbody.appendChild(tr);
+        }
+      }
+    }    
+  });
+  }
+
+
+function filtroTodos() {
+    //select pedidosTodos
+    pedidosRef.on('value', (snapshot) => {
+      const pedidos = snapshot.val();
+  
+      const tbody = document.querySelector('#tabela-pedidos tbody');
+  
+      // Limpando o corpo da tabela antes de preencher com novos dados
+      tbody.innerHTML = '';
+  
+      // Iterando sobre os pedidos e adicionando na tabela
+      for (let key in pedidos) {
+        const pedido = pedidos[key];
+  
+        const andamentoPedido = pedido.StatusAndamento;
+        let aux_andamentoPedido = '';
+  
+        if (andamentoPedido == 'Novo Pedido') {
+          aux_andamentoPedido = '#ffa500';
+        } else if (andamentoPedido == 'Preparando') {
+          aux_andamentoPedido = '#ffff00';
+        } else if (andamentoPedido == 'Aguardando Envio') {
+          aux_andamentoPedido = '#008000';
+        } else if (andamentoPedido == 'Concluido') {
+          aux_andamentoPedido = '#000000';
+        }
+        
+        
+
+        if (key < pedido) { 
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${pedido.ContatoCliente}</td>
+            <td>${pedido.NomeCliente}</td>
+            <td>${pedido.Pedido}</td>
+            <td>${pedido.ValorTotal}</td>
+            <td>${pedido.DataEntrega}</td>
+            <td>${pedido.DataAniversario}</td>
+            <td>${pedido.StatusPagamento}</td>
+            <td>
+              <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
+              <datalist id="presetColors" disabled>
+                <option id="novoPedido">#ffa500</option>
+                <option id="preparando">#ffff00</option>
+                <option id="aguardandoEnvio">#008000</option>
+                <option id="concluido">#000000</option>
+              </datalist>
+            </td>
+            <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
+          `; 
+
+          const btApagar = tr.querySelector('#btApagarPedido')
+
+          const inputColor = tr.querySelector('#inputColor');
+          const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
+
+          let concluido;
+          let statusAndamento;
+
+          btApagar.addEventListener('click', function(){
+                pedidosRefIn.remove()
+                            .then(() => {
+                        console.log('Pedido: ' + pedido.Pedido + ' removido com sucesso.');
+                    })
+                            .catch((error) => {
+                        console.log('Erro ao remover pedido: ', error);
+                  });
+          })
+
+          
+
+          inputColor.addEventListener('input', function () {
+            const selectedColor = inputColor.value;
+  
+            if (selectedColor == '#ffa500') {
+              console.log('Novo Pedido: ' + pedido.Pedido);
+              concluido = false;
+              statusAndamento = "Novo Pedido"
+
+            } else if (selectedColor == '#ffff00') {
+              console.log('Preparando: ' + pedido.Pedido);
+              concluido = false;
+              statusAndamento = "Preparando"
+
+            } else if (selectedColor == '#008000') {
+              console.log('Aguardando envio: ' + + pedido.Pedido);
+              concluido = false;
+              statusAndamento = "Aguardando envio"
+
+            } else if (selectedColor == '#000000') {
+              console.log('Concluido: ' + pedido.Pedido);
+              concluido = true;
+              statusAndamento = "Concluido"
+
+            }
+           
             pedidosRefIn.update({ Concluido: concluido, StatusAndamento: statusAndamento })
             .then(() => {
               console.log('Pedido concluído com sucesso.');
@@ -257,6 +478,19 @@ document.getElementById('select-filtro').addEventListener('change', ()=>{
         filtroTodos()
     }
 })
+
+
+//Apagar pedido unico
+function apagarPedido(key) {
+  const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
+  pedidosRefIn.remove()
+    .then(() => {
+      console.log('Pedido: ' + pedido.Pedido + 'removido com sucesso.');
+    })
+    .catch((error) => {
+      console.log('Erro ao remover pedido: ', error);
+    });
+} 
 
 
 
