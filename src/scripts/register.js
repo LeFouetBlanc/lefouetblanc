@@ -40,5 +40,9 @@ function getErrorMessage(error){
         return "A senha deve conter 6 ou mais caracteres."
     }
 
+    if(error.code == "auth/invalid-email"){
+        return "Email formatado de forma incorreta. Verifique por favor."
+    }
+
     return error.message
 }
