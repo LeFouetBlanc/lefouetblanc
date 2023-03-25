@@ -2,7 +2,6 @@ window.onload = () => {
     filtroTodos()
 }
 
-
 var data = new Date();
 var dia = String(data.getDate()).padStart(2, '0');
 var mes = String(data.getMonth() + 1).padStart(2, '0');
@@ -10,12 +9,13 @@ var ano = data.getFullYear();
 let dataAtual = dia + '/' + mes + '/' + ano;
 console.log(dataAtual)
 
-
-
-
-
 let userId = localStorage.getItem('UserId')
-let pedidosRef = firebase.database().ref('formulario-np/' + userId)
+let pedidosRef = firebase.database().ref('formulario-np/' + userId + '/')
+
+
+
+
+
 
 function filtroHoje(){
     //select pedidosHoje
@@ -148,50 +148,103 @@ function filtroMes() {
     });
   }
 
-function filtroTodos(){
+  function filtroTodos() {
     //select pedidosTodos
     pedidosRef.on('value', (snapshot) => {
-        const pedidos = snapshot.val();
-        const tbody = document.querySelector('#tabela-pedidos tbody');
-    
-        // Limpando o corpo da tabela antes de preencher com novos dados
-        tbody.innerHTML = '';
-    
-        // Iterando sobre os pedidos e adicionando na tabela
-        
+      const pedidos = snapshot.val();
+  
+      const tbody = document.querySelector('#tabela-pedidos tbody');
+  
+      // Limpando o corpo da tabela antes de preencher com novos dados
+      tbody.innerHTML = '';
+  
+      // Iterando sobre os pedidos e adicionando na tabela
+      for (let key in pedidos) {
+        const pedido = pedidos[key];
+  
+        const andamentoPedido = pedido.StatusAndamento;
+        let aux_andamentoPedido = '';
+  
+        if (andamentoPedido == 'Novo Pedido') {
+          aux_andamentoPedido = '#ffa500';
+        } else if (andamentoPedido == 'Preparando') {
+          aux_andamentoPedido = '#ffff00';
+        } else if (andamentoPedido == 'Aguardando Envio') {
+          aux_andamentoPedido = '#008000';
+        } else if (andamentoPedido == 'Concluido') {
+          aux_andamentoPedido = '#000000';
+        }
+  
+        if (key < pedido) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${pedido.ContatoCliente}</td>
+            <td>${pedido.NomeCliente}</td>
+            <td>${pedido.Pedido}</td>
+            <td>${pedido.ValorTotal}</td>
+            <td>${pedido.DataEntrega}</td>
+            <td>${pedido.DataAniversario}</td>
+            <td>${pedido.StatusPagamento}</td>
+            <td>
+              <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
+              <datalist id="presetColors" disabled>
+                <option id="novoPedido">#ffa500</option>
+                <option id="preparando">#ffff00</option>
+                <option id="aguardandoEnvio">#008000</option>
+                <option id="concluido">#000000</option>
+              </datalist>
+            </td>
+          `;
+  
+          const inputColor = tr.querySelector('#inputColor');
+          const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
 
-        
-        for (let key in pedidos) {
-            const pedido = pedidos[key];
-            if(pedido.Concluido == true){
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${pedido.ContatoCliente}</td>
-                <td>${pedido.NomeCliente}</td>
-                <td>${pedido.Pedido}</td>
-                <td>${pedido.ValorTotal}</td>
-                <td>${pedido.DataEntrega}</td>
-                <td>${pedido.DataAniversario}</td>
-                <td>${pedido.StatusPagamento}</td>
-                <td>
-                <input type="color" list="presetColors" value="#ffa500">
-                <datalist id="presetColors" disabled>
-                    <option id="novoPedido">#ffa500</option>
-                    <option id="preparando">#ffff00</option>
-                    <option id="aguardandoEnvio">#008000</option>
-                    <option id="concluido">#000000</option>
-                </datalist>
-                </td>
-            `;
-            tbody.appendChild(tr);
+          let concluido;
+          let statusAndamento;
+
+          
+
+          inputColor.addEventListener('input', function () {
+            const selectedColor = inputColor.value;
+  
+            if (selectedColor == '#ffa500') {
+              console.log('Novo Pedido: ' + pedido.Pedido);
+              concluido = false;
+              statusAndamento = "Novo Pedido"
+
+            } else if (selectedColor == '#ffff00') {
+              console.log('Preparando: ' + pedido.Pedido);
+              concluido = false;
+              statusAndamento = "Preparando"
+
+            } else if (selectedColor == '#008000') {
+              console.log('Aguardando envio: ' + + pedido.Pedido);
+              concluido = false;
+              statusAndamento = "Aguardando envio"
+
+            } else if (selectedColor == '#000000') {
+              console.log('Concluido: ' + pedido.Pedido);
+              concluido = true;
+              statusAndamento = "Concluido"
+
+            }
+            console.log("Chegou ate aqui")
+            pedidosRefIn.update({ Concluido: concluido, StatusAndamento: statusAndamento })
+            .then(() => {
+              console.log('Pedido concluído com sucesso.');
+              console.log(pedido.StatusAndamento);
+            })
+            .catch((error) => {
+              console.log('Erro ao concluir pedido: ', error);
+            });                
+          });
+  
+          tbody.appendChild(tr);
         }
-        }
+      }
     });
-}
-
-//Carregar pedidos do firebase
-
-
+  }
+  
 
 document.getElementById('select-filtro').addEventListener('change', ()=>{
     if(document.getElementById('select-filtro').value == 'pedidosHoje'){
@@ -270,13 +323,5 @@ function exportarParaExcel() {
   
 
 document.getElementById('btExportar').addEventListener('click', exportarParaExcel)
-
-
-//Select da tabela
-
-
-function changeAndamentoPedido(){
-
-}
 
 

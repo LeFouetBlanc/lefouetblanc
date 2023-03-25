@@ -1,3 +1,4 @@
+
 let password = document.getElementById('inputPassword')
 let confirmPassword = document.getElementById('confirmPassword')
 
@@ -16,7 +17,15 @@ function verifyPassword(){
 
 function register(){    
     firebase.auth().createUserWithEmailAndPassword(email.value, password.value).then(() => {
+        const usuario = firebase.auth().onAuthStateChanged((user) => {
+            // const usuario = firebase.auth().currentUser;
+            var uid = user.uid
+            localStorage.setItem("UserId", uid)
+            
+        });
+        
         window.location.href = "/src/pages/fila-pedidos.html"
+        
     }).catch(error => {
         alert(getErrorMessage(error))
     })
