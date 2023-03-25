@@ -369,7 +369,7 @@ function filtroTodos() {
         const pedido = pedidos[key];
   
         const andamentoPedido = pedido.StatusAndamento;
-        let aux_andamentoPedido = '';
+        let aux_andamentoPedido = '#000000';
   
         if (andamentoPedido == 'Novo Pedido') {
           aux_andamentoPedido = '#ffa500';
