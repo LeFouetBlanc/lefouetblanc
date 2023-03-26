@@ -176,3 +176,5 @@ function editarPedido() {
     // redireciona para a página editar-pedido.html
     window.location.href = "../pages/editar-pedido.html";
   }
+
+  
