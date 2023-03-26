@@ -123,6 +123,8 @@ function carregarPedido() {
 
             </div><!--INFORMACOES DO PEDIDO-->
         </div><!--BOX PEDIDO-->
+
+        <hr class='hr-divisoria'>
         `;
             }
         }

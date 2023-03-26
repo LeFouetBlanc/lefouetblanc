@@ -63,7 +63,8 @@ header a{
     margin: 15px;
     flex: 0 0 auto;
     width: 40%;    
-    align-items: flex-end;  
+    
+    
     
     overflow-y: hidden;
 }
@@ -73,8 +74,8 @@ header a{
     height: 350px;
     align-self: center;
     align-items: center;
-    justify-content: center;
-    object-fit:contain;     
+    justify-content:center;
+    object-fit: contain;     
 }
 
 #boxInfos{
@@ -83,8 +84,12 @@ header a{
     flex-direction: column;
     float: left;
     margin: 15px;
-    
+
+    justify-content: center;
+
     flex: 1;
+
+    overflow-y: hidden;
 }
 
 #tituloPedido{
@@ -198,3 +203,150 @@ header a{
     font-weight: bold;
 }
 
+
+/*RESPONSIVIDADE*/
+@media screen and (max-width: 480px) {
+    .boxPedido{
+        display: flex;
+        flex-direction: column;
+    }
+    #boxImg{
+        display: flex;
+        flex-direction: column;
+        max-width: 90%;
+        width: 90%;
+        margin: 15px;
+        margin-top: 5px;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+    }
+
+    #boxInfos{
+        max-width: 90%;
+     
+        width: 90%;
+        justify-content: center;
+        align-self: center;
+        margin-top: 0;
+    }
+
+    #dataEntregaPedido{
+        font-size: 24px;
+    }
+
+    #descricaoPedido{
+        font-size: 20px;
+    }
+
+
+    .boxCliente{
+        display: flex;
+        flex-direction: column;
+        
+        justify-content: center;
+        align-self: center;
+        align-content: center;
+        width: 80%;
+    }
+
+    .col{
+        width: 100%;
+        justify-content: center;
+        text-align: left;
+    }
+
+    #boxValorTotal{
+        width: 50%;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    #opcoes{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    } 
+
+    #btEditar{
+        align-self: center;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .boxPedido{
+        display: flex;
+        flex-direction: column;
+    }
+    #boxImg{
+        display: flex;
+        flex-direction: column;
+        max-width: 80%;
+        width: 80%;
+        margin: 15px;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+    }
+
+    #boxInfos{
+        max-width: 80%;
+     
+        width: 80%;
+        justify-content: center;
+        align-self: center;
+    }
+
+    #dataEntregaPedido{
+        font-size: 24px;
+    }
+
+    #descricaoPedido{
+        font-size: 20px;
+    }
+
+
+    .boxCliente{
+        display: flex;
+        flex-direction: column;
+        
+        justify-content: center;
+        align-self: center;
+        align-content: center;
+        width: 80%;
+    }
+
+    .col{
+        width: 100%;
+        justify-content: center;
+        text-align: left;
+    }
+
+    #boxValorTotal{
+        width: 50%;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        align-self: center;
+    }
+
+    #opcoes{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    } 
+
+    #btEditar{
+        align-self: center;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+}
