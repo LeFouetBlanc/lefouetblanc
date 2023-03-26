@@ -27,9 +27,7 @@ function carregarPedido() {
     <input type="text" id="editarDataEntrega" value="${pedido.DataEntrega}">
                     <br>
     <h5>Descrição</h5>
-    <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">
-        ${pedido.Descricao[i]}
-    </textarea>
+    <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">${pedido.Descricao[i]}</textarea>
                     <br>
     <h5>Valor do pedido</h5>
     <input type="text" id="editarValorPedido" value="${pedido.ValorPedido[i]}">
@@ -50,9 +48,7 @@ function carregarPedido() {
     <input type="text" id="editarDataEntrega" value="${pedido.DataEntrega}">
                     <br>
     <h5>Descrição</h5>
-    <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">
-        ${pedido.Descricao[i]}
-    </textarea>
+    <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">${pedido.Descricao[i]}</textarea>
                     <br>
     <h5>Valor do pedido</h5>
     <input type="text" id="editarValorPedido" value="${pedido.ValorPedido[i]}">
@@ -61,9 +57,7 @@ function carregarPedido() {
 
                     <h3>Personalização ${[i+1]}</h3>
                     <br>
-    <textarea id="editarPersonalizacao" value="${pedido.Personalizacoes[i]}" rows="7">
-        ${pedido.Personalizacoes[i]}
-                    </textarea>
+    <textarea id="editarPersonalizacao" value="${pedido.Personalizacoes[i]}" rows="7">${pedido.Personalizacoes[i]}</textarea>
     <input type="text" id="editarValorExtra" value="${pedido.ValorExtra[i]}">
                 
                     <hr class="hr-divisoria"> 
@@ -83,9 +77,7 @@ function carregarPedido() {
     <input type="text" id="editarDataEntrega" value="${pedido.DataEntrega}">
                     <br>
     <h5>Descrição</h5>
-    <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">
-        ${pedido.Descricao[i]}
-    </textarea>
+    <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">${pedido.Descricao[i]}</textarea>
                     <br>
     <h5>Valor do pedido</h5>
     <input type="text" id="editarValorPedido" value="${pedido.ValorPedido[i]}">
@@ -108,9 +100,7 @@ function carregarPedido() {
     <input type="text" id="editarDataEntrega" value="${pedido.DataEntrega}">
                     <br>
     <h5>Descrição</h5>
-    <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">
-        ${pedido.Descricao[i]}
-    </textarea>
+    <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">${pedido.Descricao[i]}</textarea>
                     <br>
     <h5>Valor do pedido</h5>
     <input type="text" id="editarValorPedido" value="${pedido.ValorPedido[i]}">
@@ -119,9 +109,7 @@ function carregarPedido() {
 
                     <h3>Personalização ${[i+1]}</h3>
                     <br>
-    <textarea id="editarPersonalizacao" value="${pedido.Personalizacoes[i]}" rows="7">
-        ${pedido.Personalizacoes[i]}
-                    </textarea>
+    <textarea id="editarPersonalizacao" value="${pedido.Personalizacoes[i]}" rows="7">${pedido.Personalizacoes[i]}</textarea>
     <input type="text" id="editarValorExtra" value="${pedido.ValorExtra[i]}">
                 
                     <hr class="hr-divisoria"> 
@@ -155,7 +143,7 @@ function carregarPedido() {
                 <button class="btGrey2" id="btSalvar">Salvar</button>
             </div> 
         `;
-        
+
         $(function(){
             $('#EditarValorTotal').maskMoney({
                 prefix:'R$ ',
