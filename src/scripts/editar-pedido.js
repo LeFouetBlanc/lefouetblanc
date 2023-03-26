@@ -155,6 +155,7 @@ function carregarPedido() {
                 <button class="btGrey2" id="btSalvar">Salvar</button>
             </div> 
         `;
+        
         $(function(){
             $('#EditarValorTotal').maskMoney({
                 prefix:'R$ ',
