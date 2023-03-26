@@ -1,4 +1,4 @@
-let boxDetalhes = document.getElementById('box-detalhes')
+let boxMaior = document.getElementById('boxMaior')
 
 function carregarPedido() {
     let userId = localStorage.getItem('UserId');
@@ -8,126 +8,158 @@ function carregarPedido() {
     
     pedidoRef.on("value", (snapshot) => {
         let pedido = snapshot.val();
-        
+        console.log(pedido)
+
+        //Sem personalizacao e sem imagem
+            //pedido.Pedido[i]
+            //pedido.DataEntrega
+            //pedido.Descricao[i]
+
+        //Com personalizacao e sem imagem
+            //pedido.Pedido[i]
+            //pedido.DataEntrega
+            //pedido.Descricao[i]
+            //pedido.Personalizacoes[i]
+
+        //sem personalizacao e com imagem
+            //pedido.Imagens[pedido.Imagens.length - 1][i]]
+            //pedido.Pedido[i]
+            //pedido.DataEntrega
+            //pedido.Descricao[i]
+
+        //Com personalizacao e com imagem
+            
+
         for(let i = 0; i < pedido.Pedido.length; i++){
-            
-            //console.log(i)
-            if(pedido.Personalizacoes[i] != "" && pedido.Imagens[i] != ""){
-                //Com personalizacao e Com Imagem
-                boxDetalhes.innerHTML += `
-                    <img class="img-pedido" id="img-pedido" src=${pedido.Imagens[pedido.Imagens.length - 1][i]}>
-                    <h2>${pedido.Pedido[i]}</h2>
-                    <h3>${pedido.DataEntrega}</h3>
-                    <br>
-                    <p>${pedido.Descricao[i]}</p>
-                    <br>
-                    <h3>${pedido.ValorPedido[i]}</h3>
 
-                    <hr class="hr-divisoria"> 
+        if(pedido.Personalizacoes[i] == "" && !(pedido.Imagens)){
+            //Sem personalizacao e sem imagem
 
-                    <h2>Personalização</h2>
-                    <br>
-                    <p>${pedido.Personalizacoes[i]}</p>
-                    <br>
-                    <h3>${pedido.ValorExtra[i]}</h3>
-                    <!--Repetir quantos pedidos forem necessario antes das info do cliente-->
-
-                    <hr class="hr-divisoria">
-                    
-                 `
-            }else if (pedido.Personalizacoes[i] == "" && pedido.Imagens[i] == "") { //TO COM ERRO AQUI
-                //Sem personalizacao e Com imagem
-                boxDetalhes.innerHTML += `
-                    <img class="img-pedido" id="img-pedido" src=${pedido.Imagens[pedido.Imagens.length - 1][i]}}>
-                    <h2>${pedido.Pedido[i]}</h2>
-                    <h3>${pedido.DataEntrega}</h3>
-                    <br>
-                    <p>${pedido.Descricao[i]}</p>
-                    <br>
-                    <h3>${pedido.ValorPedido[i]}</h3>
-
-                    <hr class="hr-divisoria"> 
-                    <!--Repetir quantos pedidos forem necessario antes das info do cliente-->
-                    
-                 `
-            } else if(pedido.Personalizacoes[i] != "" && pedido.Imagens == "" ){
-                //Com personalizacao e sem imagem
-                boxDetalhes.innerHTML += `
-                
-                    <h2>${pedido.Pedido[i]}</h2>
-                    <h3>${pedido.DataEntrega}</h3>
-                    <br>
-                    <p>${pedido.Descricao[i]}</p>
-                    <br>
-                    <h3>${pedido.ValorPedido[i]}</h3>
-
-                    <hr class="hr-divisoria"> 
-
-                    <h2>Personalização</h2>
-                    <br>
-                    <p>${pedido.Personalizacoes[i]}</p>
-                    <br>
-                    <h3>${pedido.ValorExtra[i]}</h3>
-                    <!--Repetir quantos pedidos forem necessario antes das info do cliente-->
-
-                    <hr class="hr-divisoria">
-                 `
-
-            } else if(pedido.Personalizacoes == "" && pedido.Imagens == ""){
-                //Sem personalizacao e sem imagem
-                boxDetalhes.innerHTML += `
-                
-                    <h2>${pedido.Pedido[i]}</h2>
-                    <h3>${pedido.DataEntrega}</h3>
-                    <br>
-                    <p>${pedido.Descricao[i]}</p>
-                    <br>
-                    <h3>${pedido.ValorPedido[i]}</h3>
-
-                    <hr class="hr-divisoria"> 
-                    
-                    <!--Repetir quantos pedidos forem necessario antes das info do cliente-->
-                 `
-            }
-            
-        }
-        boxDetalhes.innerHTML += `
+            boxMaior.innerHTML += `
+            <div class="boxPedido">
            
-            <h3>Valor Total: </h3>
-            <h2 id="ValorTotal">${pedido.ValorTotal}</h2>
-            <hr class="hr-divisoria">
-            <h2>Informações do Cliente</h2>
-            <br>
-            <h5>Nome: </h5>
-            <h3>${pedido.NomeCliente}</h3>
-            <br>
-            <h5>Contato: </h5>
-            <h3>${pedido.ContatoCliente}</h3>
-            <br>
-            <h5>Endereço de Entrega: </h5>
-            <p>${pedido.EnderecoEntrega}</p>
+            <div class="col2" id="boxInfos">
+                <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
+                <h4 id="dataEntregaPedido">Entrega em ${pedido.DataEntrega}</h4>
+                <br>
+                
+                <p id="descricaoPedido">
+                    ${pedido.Descricao[i]}
+                </p>
+                <br>
+                
+            </div><!--INFORMACOES DO PEDIDO-->
+        </div><!--BOX PEDIDO-->
+                
+            `;
+        } else if(pedido.Personalizacoes[i] != "" && !(pedido.Imagens)){
+            //Com personalizacao e sem imagem
+            boxMaior.innerHTML += `
+            <div class="boxPedido">
 
+            <div class="col2" id="boxInfos">
+                <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
+                <h4 id="dataEntregaPedido">Entrega em ${pedido.DataEntrega}</h4>
+                <br>
+                
+                <p id="descricaoPedido">
+                    ${pedido.Descricao[i]}
+                </p>
+                <br>
+                
+                <p id="personalizacaoPedido">
+                    ${pedido.Personalizacoes[i]}
+                </p>
 
-            <div id="opcoes">
-                <button class="btGrey2" id="btEditar">Editar</button>
-                <button class="btGrey2" onclick="btVoltar()">Voltar</button>
-            </div> 
-        
-        `
-        //console.log(userId)
-        //console.log(pedidoId)
-        //console.log(pedido)
-        // atualiza o conteúdo da página com as informações do pedido
-        console.log("Data do pedido: " + pedido.DataPedido)
-        const btEditar = document.querySelectorAll("#btEditar");
-                btEditar.forEach((button) => {
-                button.addEventListener("click", function() {
-                editarPedido(pedidoId)
-            })
-        })
-    })       
-}      
+            </div><!--INFORMACOES DO PEDIDO-->
+        </div><!--BOX PEDIDO--></div>
+            `;
+        } else if(pedido.Personalizacoes[i] == "" && pedido.Imagens){
+            //Sem personalizacao e com imagem
+            boxMaior.innerHTML += `
 
+            <div class="boxPedido">
+            <div class="col1" id="boxImg">
+                    <img src="${pedido.Imagens[pedido.Imagens.length - 1][i]}" class="imgPedido">
+
+            </div>
+
+            <div class="col2" id="boxInfos">
+                <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
+                <h4 id="dataEntregaPedido">Entrega em ${pedido.DataEntrega}</h4>
+                <br>
+                
+                <p id="descricaoPedido">
+                    ${pedido.Descricao[i]}
+                </p>
+                <br>
+                
+            </div><!--INFORMACOES DO PEDIDO-->
+        </div><!--BOX PEDIDO-->
+            
+            `;
+        } else {
+            //Completo
+            boxMaior.innerHTML += `
+        <div class="boxPedido">
+            <div class="col1" id="boxImg">
+                    <img src="${pedido.Imagens[pedido.Imagens.length - 1][i]}" class="imgPedido">
+
+            </div>
+
+            <div class="col2" id="boxInfos">
+                <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
+                <h4 id="dataEntregaPedido">Entrega em ${pedido.DataEntrega}</h4>
+                <br>
+                
+                <p id="descricaoPedido">
+                    ${pedido.Descricao[i]}
+                </p>
+                <br>
+                
+                <p id="personalizacaoPedido">
+                    ${pedido.Personalizacoes[i]}
+                </p>
+
+            </div><!--INFORMACOES DO PEDIDO-->
+        </div><!--BOX PEDIDO-->
+        `;
+            }
+        }
+
+        boxMaior.innerHTML += `
+        <div class="boxCliente">
+        <div class="col">
+            <h3>Cliente</h3>
+            <h2 id="clienteNome">${pedido.NomeCliente}</h2>
+            
+            <h3>Contato</h3>
+            <h2 id="clienteContato">${pedido.ContatoCliente}</h2>
+        </div>
+
+        <div class="col">
+            <h3>Endereço de Entrega</h3>
+            <p id="enderecoEntrega">
+                ${pedido.EnderecoEntrega}
+            </p>
+        </div>
+
+        <div class="col" id="boxValorTotal">
+            <h3>Valor Total</h3>
+            <h2 id="valorTotal">${pedido.ValorTotal}</h2>
+        </div>
+
+    </div><!--INFORMAÇOES DO CLIENTE-->
+    
+    <div id="opcoes">
+        <button class="btGrey2" id="btEditar">Editar</button>
+        <button class="btGrey2" id="btVoltar" onclick="btVoltar()">Voltar</button>
+    </div> 
+
+        `;
+    })
+
+}
 function btVoltar(){
     window.location.href = "../pages/fila-pedidos.html"
 }
