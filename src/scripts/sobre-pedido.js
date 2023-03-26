@@ -154,13 +154,12 @@ function carregarPedido() {
     </div><!--INFORMAÇOES DO CLIENTE-->
     
     <div id="opcoes">
-        <button class="btGrey2" id="btEditar">Editar</button>
+        <button class="btGrey2" id="btEditar" onclick="editarPedido()">Editar</button>
         <button class="btGrey2" id="btVoltar" onclick="btVoltar()">Voltar</button>
     </div> 
 
         `;
     })
-
 }
 function btVoltar(){
     window.location.href = "../pages/fila-pedidos.html"
@@ -173,10 +172,7 @@ window.onload = () => {
 
 
   
-function editarPedido(pedidoId) {
-    // armazena o pedidoId no localStorage para ser acessado pela página editar-pedido.html
-    localStorage.setItem('pedidoId', pedidoId);
-    
+function editarPedido() { 
     // redireciona para a página editar-pedido.html
     window.location.href = "../pages/editar-pedido.html";
   }

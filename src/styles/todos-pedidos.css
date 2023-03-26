@@ -59,7 +59,7 @@ table {
     border-collapse: collapse;
     width: 80%;
     margin-top: 10px;
-    
+    text-transform: capitalize;
 }
 th, td {
     text-align: center;
