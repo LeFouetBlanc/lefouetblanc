@@ -20,6 +20,7 @@ body{
 }
 
 
+
 .clear{
     clear: both;
 }
@@ -68,6 +69,23 @@ header img{
 
     box-shadow: 0 1px 0 0 grey;
 }
+
+#boxPreview{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 30%;
+}
+
+#boxStatusAndamento {
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    border: solid 1px white;
+    margin-top: 5px;
+  }
+
 .box-pedido #btConcluido{
     position: absolute;
     margin-top: 235px;

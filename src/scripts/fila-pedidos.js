@@ -12,7 +12,9 @@ document.getElementById('btLogout').addEventListener('click', logOut)
 function lerPedidos(){
     let userId = localStorage.getItem('UserId')
     let pedidosRef = firebase.database().ref('formulario-np/' + userId)
-  
+
+    let pedidos = []
+
     pedidosRef.orderByChild("DataEntregaInversa").on("value", (snapshot) => {
       console.log("Dados lidos com sucesso.")
         
@@ -20,30 +22,80 @@ function lerPedidos(){
   
       snapshot.forEach((childSnapshot) => {
         var pedido = childSnapshot.val()
+        pedidos.push(pedido)
+        
         if (pedido.Concluido == false) {
           // Definir o tamanho máximo de caracteres permitidos para a descrição
-          const maxDescricaoLength = 250;
+          const maxDescricaoLength = 200;
         
           // Obter o tamanho disponível para a descrição com base no tamanho do título
           const tituloLength = pedido.Pedido[0].length;
-          const maxDescricaoSize = 110 - tituloLength;
+          const maxDescricaoSize = 80 - tituloLength;
         
           // Limitar o número de caracteres da descrição com base no espaço disponível
           let descricao = pedido.Descricao[0].substring(0, maxDescricaoSize);
           if (pedido.Descricao[0].length > maxDescricaoSize) {
             descricao += '...';
           }
-        
+
+       
+            
+
+            if(document.querySelector(`.boxStatusAndamento`)){
+              if(document.getElementById(`boxStatusAndamento`).value == "Novo Pedido"){
+                document.querySelector('.boxStatusAndamento').style.backgroundColor = '#ffa500'
+              }
+            }
+          
+            
+          
+            
+
+         
+          
+
           fila.innerHTML += `
             <div class="box-pedido" id="boxPedido" data-pedido-id="${childSnapshot.key}">
+            
               <h2>${pedido.Pedido[0].slice(0, 30)}</h2>
+              <div id="boxPreview">
               <h4 style="margin-bottom: 10px;">${pedido.DataEntrega}</h4>
               <p class="descricao">${descricao}</p>
+              
+             
+            </div>
+              <div id="boxStatusAndamento" class="boxStatusAndamento" value='${pedido.StatusAndamento}'></div>
               <button class="btGrey2 btSobre" id="btConcluido" data-pedido-id="${childSnapshot.key}">Concluir</button>
+              
             </div>
           `;
+          
+          
+
+          
         }
       })
+      console.log(pedidos)
+
+      
+
+
+
+      for(let i = 0; i < pedidos.length; i++){
+        if(document.querySelectorAll('.boxStatusAndamento')[i]){
+          if(pedidos[i].StatusAndamento == "Novo Pedido"){
+            document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#ffa500'
+          }else if(pedidos[i].StatusAndamento == "Preparando"){
+            document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#ffff00'
+          }else if(pedidos[i].StatusAndamento == "Aguardando Envio"){
+            document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#008000'
+          }else if(pedidos[i].StatusAndamento == "Concluido"){
+            document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#000000'
+        }
+        }
+      }
+       
+      
             
                 // adiciona evento de clique para o botão "btConcluido"
                 const btConcluido = document.querySelectorAll("#btConcluido");
