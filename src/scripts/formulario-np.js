@@ -48,13 +48,13 @@ function addNewProduct(){
       <hr class="hr-divisoria">
       <h2>Pedido ${j + 1}</h2>
       <input type="text" id="pedidoProduto" placeholder="Produto">
-      <input type="number" id="pedidoQuantidade" class="pedidoDescricao" placeholder="Quantidade">
-      <textarea rows="7" cols="40" placeholder="Descrição"></textarea>
+      <input type="number" id="pedidoQuantidade"  placeholder="Quantidade">
+      <textarea rows="7" cols="40" class="pedidoDescricao" placeholder="Descrição"></textarea>
       <input type="text" id="pedidoValor" class="pedidoValor" onkeyup="calcValorTotal()" placeholder="Valor do pedido"><br>
       <button class="btGrey2 btAddPersonalizacao" id="btAddPersonalizacao" onclick="addPersonalizacao(${j})">
           Adicionar Personalização
       </button>
-      <button id="btRemovePersonalizacao" class="btGrey2 btAddPersonalizacao" style="display: none;" onclick="removePersonalizacao(${j})">
+      <button id="btRemovePersonalizacao" class="btGrey2 btAddPersonalizacao" style="display: none;" onclick="removePersonalizacao(${j})"> 
           Remover Personalização
       </button><br>
       <div class="box-personalizacao" id="box-personalizacao">

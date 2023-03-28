@@ -26,6 +26,7 @@ function carregarPedido() {
             <div class="col2" id="boxInfos">
                 <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
                 <h4 id="dataEntregaPedido">Entrega em ${pedido.DataEntrega}</h4>
+                <h4 id="quantidadePedido">Quantidade: ${pedido.Quantidades[i]}</h4>
                 <br>
                 
                 <p id="descricaoPedido">
@@ -51,6 +52,7 @@ function carregarPedido() {
             <div class="col2" id="boxInfos">
                 <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
                 <h4 id="dataEntregaPedido">Entrega em ${pedido.DataEntrega}</h4>
+                <h4 id="quantidadePedido">Quantidade: ${pedido.Quantidades[i]}</h4>
                 <br>
                 
                 <p id="descricaoPedido">
@@ -78,6 +80,7 @@ function carregarPedido() {
             <div class="col2" id="boxInfos">
                 <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
                 <h4 id="dataEntregaPedido">Entrega em ${pedido.DataEntrega}</h4>
+                <h4 id="quantidadePedido">Quantidade: ${pedido.Quantidades[i]}</h4>
                 <br>
                 
                 <p id="descricaoPedido">
@@ -101,6 +104,7 @@ function carregarPedido() {
             <div class="col2" id="boxInfos">
                 <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
                 <h4 id="dataEntregaPedido">Entrega em ${pedido.DataEntrega}</h4>
+                <h4 id="quantidadePedido">Quantidade: ${pedido.Quantidades[i]}</h4>
                 <br>
                 
                 <p id="descricaoPedido">
@@ -128,6 +132,7 @@ function carregarPedido() {
             <div class="col2" id="boxInfos">
                 <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
                 <h4 id="dataEntregaPedido">Entrega em ${pedido.DataEntrega}</h4>
+                <h4 id="quantidadePedido">Quantidade: ${pedido.Quantidades[i]}</h4>
                 <br>
                 
                 <p id="descricaoPedido">
@@ -151,6 +156,7 @@ function carregarPedido() {
             <div class="col2" id="boxInfos">
                 <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
                 <h4 id="dataEntregaPedido">Entrega em ${pedido.DataEntrega}</h4>
+                <h4 id="quantidadePedido">Quantidade: ${pedido.Quantidades[i]}</h4>
                 <br>
                 
                 <p id="descricaoPedido">
