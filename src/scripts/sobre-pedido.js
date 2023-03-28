@@ -12,7 +12,58 @@ function carregarPedido() {
 
         for(let i = 0; i < pedido.Pedido.length; i++){
 
-        if(pedido.Personalizacoes[i] == "" && pedido.Imagens[pedido.Imagens.length - 1][i] == ""){
+            if(pedido.Personalizacoes[i] == "" && !(pedido.Imagens)){
+
+                boxMaior.innerHTML += `
+            <div class="boxPedido">
+            <div class="boxPedido">
+            <div class="col1" id="boxImg">
+            <img src="../../assets/2.png" class="imgPedido">
+
+            </div>
+
+           
+            <div class="col2" id="boxInfos">
+                <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
+                <h4 id="dataEntregaPedido">Entrega em ${pedido.DataEntrega}</h4>
+                <br>
+                
+                <p id="descricaoPedido">
+                    ${pedido.Descricao[i]}
+                </p>
+                <br>
+                
+            </div><!--INFORMACOES DO PEDIDO-->
+        </div><!--BOX PEDIDO-->
+                
+            `;
+        
+        } else if(pedido.Personalizacoes[i] != "" && !(pedido.Imagens)){
+            boxMaior.innerHTML += `
+            <div class="boxPedido">
+            <div class="boxPedido">
+            <div class="col1" id="boxImg">
+            <img src="../../assets/2.png" class="imgPedido">
+
+            </div>
+
+           
+            <div class="col2" id="boxInfos">
+                <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
+                <h4 id="dataEntregaPedido">Entrega em ${pedido.DataEntrega}</h4>
+                <br>
+                
+                <p id="descricaoPedido">
+                    ${pedido.Descricao[i]}
+                </p>
+                <br>
+                
+            </div><!--INFORMACOES DO PEDIDO-->
+        </div><!--BOX PEDIDO-->
+                
+            `;
+
+        }else if(pedido.Personalizacoes[i] == "" && (pedido.Imagens[pedido.Imagens.length - 1][i] == "")){
             //Sem personalizacao e sem imagem
 
             boxMaior.innerHTML += `
