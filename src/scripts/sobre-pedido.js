@@ -10,38 +10,19 @@ function carregarPedido() {
         let pedido = snapshot.val();
         console.log(pedido)
 
-        //Sem personalizacao e sem imagem
-            //pedido.Pedido[i]
-            //pedido.DataEntrega
-            //pedido.Descricao[i]
-
-        //Com personalizacao e sem imagem
-            //pedido.Pedido[i]
-            //pedido.DataEntrega
-            //pedido.Descricao[i]
-            //pedido.Personalizacoes[i]
-
-        //sem personalizacao e com imagem
-            //pedido.Imagens[pedido.Imagens.length - 1][i]]
-            //pedido.Pedido[i]
-            //pedido.DataEntrega
-            //pedido.Descricao[i]
-
-        //Com personalizacao e com imagem
-            
-
         for(let i = 0; i < pedido.Pedido.length; i++){
 
-        if(pedido.Personalizacoes[i] == "" && !(pedido.Imagens)){
+        if(pedido.Personalizacoes[i] == "" && pedido.Imagens[pedido.Imagens.length - 1][i] == ""){
             //Sem personalizacao e sem imagem
 
             boxMaior.innerHTML += `
             <div class="boxPedido">
-
+            <div class="boxPedido">
             <div class="col1" id="boxImg">
             <img src="../../assets/2.png" class="imgPedido">
 
             </div>
+
            
             <div class="col2" id="boxInfos">
                 <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
@@ -57,13 +38,12 @@ function carregarPedido() {
         </div><!--BOX PEDIDO-->
                 
             `;
-        } else if(pedido.Personalizacoes[i] != "" && !(pedido.Imagens[pedido.Imagens.length - 1][i])){
+        } else if(pedido.Personalizacoes[i] != "" && pedido.Imagens[pedido.Imagens.length - 1][i] == ""){
             //Com personalizacao e sem imagem
             boxMaior.innerHTML += `
             <div class="boxPedido">
-
             <div class="col1" id="boxImg">
-                <img src="../../assets/2.png" class="imgPedido">
+            <img src="../../assets/2.png" class="imgPedido">
 
             </div>
 
@@ -84,7 +64,7 @@ function carregarPedido() {
             </div><!--INFORMACOES DO PEDIDO-->
         </div><!--BOX PEDIDO--></div>
             `;
-        } else if(pedido.Personalizacoes[i] == "" && pedido.Imagens){
+        } else if(pedido.Personalizacoes[i] == "" && pedido.Imagens[pedido.Imagens.length - 1][i] != ""){
             //Sem personalizacao e com imagem
             boxMaior.innerHTML += `
 
@@ -140,7 +120,7 @@ function carregarPedido() {
         }
 
         boxMaior.innerHTML += `
-        <hr class="hr-divisoria">
+    
         <div class="boxCliente">
         <div class="col">
             <h3>Cliente</h3>

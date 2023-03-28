@@ -47,9 +47,7 @@ export function savingImgs(){
     let file = document.querySelectorAll(`.inputImg`)[i].files[0];
             if(file) {
                 imgs.push(uploadImg(file))
-            } else {
-                imgs.push(uploadImg('../../assets/3'))
-            }   
+            }
     }
         Promise.all(imgs).then((urlImgs) => { 
             listaImgs.push(urlImgs)
@@ -60,8 +58,25 @@ export function savingImgs(){
 
 }
 
+let cont = 0;
 
-document.querySelector('#btAddProduto').addEventListener('click', savingImgs)
+document.querySelector('#btAddProduto').addEventListener('click', ()=>{
+    if(document.querySelectorAll(`.inputImg`)[cont].value != ""){
+        console.log("Já foi adicionada uma imagem.")
+    } else {
+        imgs.push("")
+
+        Promise.all(imgs).then((urlImgs) => { 
+            listaImgs.push(urlImgs)
+                
+        }).catch((err) => {
+            console.log('Erro ao salvar imagem default: ', err);
+        })
+
+    }
+    cont++
+    
+})
 document.querySelector('.inputImg').addEventListener('change', savingImgs)
 
 
