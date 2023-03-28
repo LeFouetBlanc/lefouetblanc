@@ -39,13 +39,17 @@ function uploadImg(file) {
     });
 }
 
+
+
 export function savingImgs(){
 
     for (let i = 0; i < document.querySelectorAll('#pedidoProduto').length; i++){
     let file = document.querySelectorAll(`.inputImg`)[i].files[0];
             if(file) {
                 imgs.push(uploadImg(file))
-            }     
+            } else {
+                imgs.push(uploadImg('../../assets/3'))
+            }   
     }
         Promise.all(imgs).then((urlImgs) => { 
             listaImgs.push(urlImgs)
@@ -57,7 +61,7 @@ export function savingImgs(){
 }
 
 
-
+document.querySelector('#btAddProduto').addEventListener('click', savingImgs)
 document.querySelector('.inputImg').addEventListener('change', savingImgs)
 
 

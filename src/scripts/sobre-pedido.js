@@ -37,6 +37,11 @@ function carregarPedido() {
 
             boxMaior.innerHTML += `
             <div class="boxPedido">
+
+            <div class="col1" id="boxImg">
+            <img src="../../assets/2.png" class="imgPedido">
+
+            </div>
            
             <div class="col2" id="boxInfos">
                 <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
@@ -52,10 +57,15 @@ function carregarPedido() {
         </div><!--BOX PEDIDO-->
                 
             `;
-        } else if(pedido.Personalizacoes[i] != "" && !(pedido.Imagens)){
+        } else if(pedido.Personalizacoes[i] != "" && !(pedido.Imagens[pedido.Imagens.length - 1][i])){
             //Com personalizacao e sem imagem
             boxMaior.innerHTML += `
             <div class="boxPedido">
+
+            <div class="col1" id="boxImg">
+                <img src="../../assets/2.png" class="imgPedido">
+
+            </div>
 
             <div class="col2" id="boxInfos">
                 <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
@@ -130,6 +140,7 @@ function carregarPedido() {
         }
 
         boxMaior.innerHTML += `
+        <hr class="hr-divisoria">
         <div class="boxCliente">
         <div class="col">
             <h3>Cliente</h3>
