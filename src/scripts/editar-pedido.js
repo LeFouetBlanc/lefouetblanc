@@ -5,6 +5,7 @@ console.log(localStorage.getItem('pedidoId'))
 
 
 
+
 function carregarPedido() {
     let userId = localStorage.getItem('UserId');
     let pedidoId = localStorage.getItem('pedidoId');
@@ -13,6 +14,8 @@ function carregarPedido() {
     
     pedidoRef.on("value", (snapshot) => {
         let pedido = snapshot.val();
+
+        
         
         for(let i = 0; i < pedido.Pedido.length; i++){
 
@@ -158,9 +161,11 @@ function carregarPedido() {
                 thousands:',', decimal:'.',
                 affixesStay: true
             });
+            
         })
         
         $("#editarDataEntrega").mask("99/99/9999");
+        $('#EditarContatoCliente').mask('(99) 99999-9999')
 
 
         let nomeCliente = document.querySelector(`#EditarNomeCliente`)

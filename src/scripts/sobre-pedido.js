@@ -165,7 +165,7 @@ function carregarPedido() {
             </div><!--INFORMACOES DO PEDIDO-->
         </div><!--BOX PEDIDO-->
 
-        <hr class='hr-divisoria'>
+        <hr class="hr-divisoria">
         `;
             }
         }
@@ -173,7 +173,7 @@ function carregarPedido() {
         boxMaior.innerHTML += `
     
         <div class="boxCliente">
-        <div class="col">
+        <div class="col ind">
             <h3>Cliente</h3>
             <h2 id="clienteNome">${pedido.NomeCliente}</h2>
             
@@ -181,7 +181,7 @@ function carregarPedido() {
             <h2 id="clienteContato">${pedido.ContatoCliente}</h2>
         </div>
 
-        <div class="col">
+        <div class="col ind">
             <h4 id="dataEntregaPedido">Entrega em ${pedido.DataEntrega}</h4>
             <br>
             <h3>Endereço de Entrega</h3>
@@ -191,7 +191,7 @@ function carregarPedido() {
             
         </div>
 
-        <div class="col" id="boxValorTotal">
+        <div class="col ind" id="boxValorTotal">
             <h3>Valor Total</h3>
             <h2 id="valorTotal">${pedido.ValorTotal}</h2>
         </div>
