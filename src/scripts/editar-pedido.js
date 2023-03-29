@@ -23,8 +23,6 @@ function carregarPedido() {
     <h3>Pedido ${i+1}</h3>
     <input type="text" id="editarPedido" value="${pedido.Pedido[i]}">
 
-    <h5>Data de entrega</h5>
-    <input type="text" id="editarDataEntrega" value="${pedido.DataEntrega}">
                     <br>
     <h5>Descrição</h5>
     <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">${pedido.Descricao[i]}</textarea>
@@ -43,9 +41,6 @@ function carregarPedido() {
             <br>
     <h3>Pedido ${i+1}</h3>
     <input type="text" id="editarPedido" value="${pedido.Pedido[i]}">
-
-    <h5>Data de entrega</h5>
-    <input type="text" id="editarDataEntrega" value="${pedido.DataEntrega}">
                     <br>
     <h5>Descrição</h5>
     <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">${pedido.Descricao[i]}</textarea>
@@ -72,9 +67,6 @@ function carregarPedido() {
             <br>
     <h3>Pedido ${i+1}</h3>
     <input type="text" id="editarPedido" value="${pedido.Pedido[i]}">
-
-    <h5>Data de entrega</h5>
-    <input type="text" id="editarDataEntrega" value="${pedido.DataEntrega}">
                     <br>
     <h5>Descrição</h5>
     <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">${pedido.Descricao[i]}</textarea>
@@ -96,8 +88,7 @@ function carregarPedido() {
     <h3>Pedido ${i+1}</h3>
     <input type="text" id="editarPedido" value="${pedido.Pedido[i]}">
 
-    <h5>Data de entrega</h5>
-    <input type="text" id="editarDataEntrega" value="${pedido.DataEntrega}">
+    
                     <br>
     <h5>Descrição</h5>
     <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">${pedido.Descricao[i]}</textarea>
@@ -131,6 +122,10 @@ function carregarPedido() {
             <h5>Contato: </h5>
             <input type="text"  class="inputCliente" id="EditarContatoCliente" value="${pedido.ContatoCliente}">
       
+            <br>
+            <h5>Data de entrega</h5>
+            <input type="text" id="editarDataEntrega" value="${pedido.DataEntrega}">
+
             <br>
             <h5>Endereço de Entrega: </h5>
             <input type="text" id="EditarEnderecoEntrega" class="inputCliente" value="${pedido.EnderecoEntrega}">
@@ -201,9 +196,14 @@ function carregarPedido() {
 
                 valorPedidos.push(pedidoValor[j].value)
 
-                personalizacoes.push(personalizacaoPedido[j].value)
+                if(document.querySelectorAll(`#editarPersonalizacao`)[j]){                 
+                    personalizacoes.push(personalizacaoPedido[j].value)
+                }
 
-                valorExtras.push(valorPersonalizacao[j].value)
+                if(document.querySelectorAll(`#editarValorExtra`)[j]){
+                    valorExtras.push(valorPersonalizacao[j].value)
+                }
+
             }
 
             pedidoRef.update({

@@ -113,7 +113,17 @@ header a{
     font-family: 'Inter', sans-serif;
     font-style: light;
     font-weight: 100;
-    font-size: 26px;
+    font-size: 22px;
+    line-height: 29px;
+    
+    color: #FFFFFF;
+}
+
+#quantidadePedido{
+    font-family: 'Inter', sans-serif;
+    font-style: light;
+    font-weight: 100;
+    font-size: 22px;
     line-height: 29px;
     
     color: #FFFFFF;
@@ -244,7 +254,7 @@ header a{
     }
 
     #dataEntregaPedido{
-        font-size: 24px;
+        font-size: 20px;
     }
 
     #descricaoPedido{
@@ -320,7 +330,7 @@ header a{
     }
 
     #dataEntregaPedido{
-        font-size: 24px;
+        font-size: 20px;
     }
 
     #descricaoPedido{
