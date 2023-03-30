@@ -95,6 +95,8 @@ function removeLastProduct() {
       calcValorTotal();
     }
   }
+
+  let taxaEntrega;
   
   function calcValorTotal() {
     let somaTotal = 0;
@@ -128,8 +130,17 @@ function removeLastProduct() {
   
       somaPersonalizacao = somaPersonalizacao + parseFloat(aux_auxPersonalizacao);
     }
-  
-    let taxaEntrega = document.getElementById("taxaEntrega").value;
+
+   
+
+    if(document.getElementById('taxaEntrega').value){
+      taxaEntrega = document.getElementById('taxaEntrega').value
+    
+    } else {
+      taxaEntrega = "0"
+    
+    }
+     
   
     let taxaEntregaTratada = taxaEntrega.replace(/R\$\s?|,/g, "");
   

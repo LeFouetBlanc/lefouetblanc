@@ -97,7 +97,9 @@ export function sendOrder(){
     let dataEntrega = document.getElementById('dataEntrega').value
     let enderecoEntrega = document.getElementById('enderecoEntrega').value
 
+  
     let taxaEntrega = document.getElementById('taxaEntrega').value
+    
 
     let StatusAndamento = "Novo Pedido";
     //Novo pedido, Preparando, Aguardando Envio, Concluido

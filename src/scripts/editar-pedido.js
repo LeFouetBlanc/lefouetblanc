@@ -19,7 +19,7 @@ function carregarPedido() {
         
         for(let i = 0; i < pedido.Pedido.length; i++){
 
-            if(pedido.Personalizacoes[i] == "" && !(pedido.Imagens)){
+            if(!(pedido.Personalizacoes) && !(pedido.Imagens)){
                 //sem personalizacao e sem imagem
                 boxDetalhes.innerHTML += `
             <br>
