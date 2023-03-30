@@ -63,7 +63,7 @@ function carregarPedido() {
                 
             `;
 
-        }else if(pedido.Personalizacoes[i] == "" && (pedido.Imagens[pedido.Imagens.length - 1][i] == "")){
+        }else if(pedido.Personalizacoes[i] == "" && !(pedido.Imagens)){
             //Sem personalizacao e sem imagem
 
             boxMaior.innerHTML += `

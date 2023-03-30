@@ -37,22 +37,11 @@ function lerPedidos(){
           if (pedido.Descricao[0].length > maxDescricaoSize) {
             descricao += '...';
           }
-
-       
-            
-
             if(document.querySelector(`.boxStatusAndamento`)){
               if(document.getElementById(`boxStatusAndamento`).value == "Novo Pedido"){
                 document.querySelector('.boxStatusAndamento').style.backgroundColor = '#ffa500'
-              }
+              } 
             }
-          
-            
-          
-            
-
-         
-          
 
           fila.innerHTML += `
             <div class="box-pedido" id="boxPedido" data-pedido-id="${childSnapshot.key}">
@@ -124,7 +113,7 @@ function lerPedidos(){
 
 
     // atualiza o valor de "Concluido" para true
-    pedidosRef.update({Concluido: true, StatusAndamento: "Concluido"}).then(() => {
+    pedidosRef.update({Concluido: true}).then(() => {
       console.log("Pedido concluído com sucesso.")
     }).catch((error) => {
       console.log("Erro ao concluir pedido: ", error)
