@@ -345,6 +345,8 @@ function filtroTodos() {
         
 
         if (key < pedido) { 
+          
+
           const tr = document.createElement('tr');
           tr.innerHTML = `
             <td>${pedido.ContatoCliente}</td>
@@ -365,6 +367,11 @@ function filtroTodos() {
             </td>
             <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
           `; 
+
+          if(pedido.Concluido == true){
+            document.getElementById('concluido') //to aqui
+            
+          }
 
           const btApagar = tr.querySelector('#btApagarPedido')
 
