@@ -172,3 +172,40 @@ header img{
 
 
 
+#legenda{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+  }
+  
+  .legenda1{
+      height: 20px;
+      margin: 10px;
+      
+  }
+  
+  #l-novoPedido{
+      background-color: #ffa500;
+      padding: 5px;
+  }
+  
+  #l-preparando{
+      background-color: #ffff00;
+      padding: 5px;
+  }
+  
+  #l-aguardandoEnvio{
+      background-color: #008000;
+      padding: 5px;
+  }
+  
+  #l-concluido{
+      background-color: #000000;
+      color: white;
+      padding: 5px;
+  }
+  
