@@ -94,7 +94,32 @@ function removeLastProduct() {
       document.querySelectorAll('#pedidoValor')[i].value = 0;
       calcValorTotal();
     }
+    
   }
+
+  function removeLastProduct2() {
+    // verifica se há algum produto a ser removido
+    if (j > 0) {
+      // obtém o último filho do nó pai
+      var lastChild = divBaseNewProduto.lastElementChild;
+  
+      console.log("lastChild", lastChild);
+  
+      // verifica se o último filho é o nó que deseja remover
+      if (divBaseNewProduto.contains(lastChild)) {
+        // remove o último elemento adicionado em divBaseNewProduto
+        divBaseNewProduto.removeChild(lastChild);
+        divBaseNewProduto.removeChild(document.querySelectorAll('.hr-divisoria')[j]);
+        j--;
+  
+        // recalcular o valor total
+        document.querySelectorAll('#pedidoValor')[i].value = 0;
+        calcValorTotal();
+      }
+    }
+  }
+
+
 
   let taxaEntrega;
   

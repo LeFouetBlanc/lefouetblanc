@@ -317,7 +317,6 @@ function filtroTodos() {
     //select pedidosTodos
     pedidosRef.on('value', (snapshot) => {
       const pedidos = snapshot.val();
-  
       const tbody = document.querySelector('#tabela-pedidos tbody');
   
       // Limpando o corpo da tabela antes de preencher com novos dados
@@ -400,18 +399,18 @@ function filtroTodos() {
             
              
             if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({Concluido: true, StatusAndamento: listaStatusAndamento[3]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3]})
               console.log(listaStatusAndamento[3])
 
             } else if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[2]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2]})
               console.log(listaStatusAndamento[2])
 
             } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[1]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1]})
               console.log(listaStatusAndamento[1])
             } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[0]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0]})
               console.log(listaStatusAndamento[0])
             }
 
