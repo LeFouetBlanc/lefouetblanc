@@ -199,12 +199,13 @@ header img{
   }
   
   #l-aguardandoEnvio{
-      background-color: #008000;
+      background-color: #000000;
+      color: white;
       padding: 5px;
   }
   
   #l-concluido{
-      background-color: #000000;
+      background-color: #008000;
       color: white;
       padding: 5px;
   }

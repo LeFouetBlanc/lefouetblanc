@@ -40,9 +40,9 @@ function filtroHoje(){
               } else if (andamentoPedido == 'Preparando') {
                 aux_andamentoPedido = '#ffff00';
               } else if (andamentoPedido == 'Aguardando Envio') {
-                aux_andamentoPedido = '#008000';
-              } else if (andamentoPedido == 'Concluido') {
                 aux_andamentoPedido = '#000000';
+              } else if (andamentoPedido == 'Concluido') {
+                aux_andamentoPedido = '#008000';
               }
         
               if (key < pedido) {
@@ -60,8 +60,8 @@ function filtroHoje(){
                     <datalist id="presetColors" disabled>
                       <option id="novoPedido">#ffa500</option>
                       <option id="preparando">#ffff00</option>
-                      <option id="aguardandoEnvio">#008000</option>
-                      <option id="concluido">#000000</option>
+                      <option id="aguardandoEnvio">#000000</option>
+                      <option id="concluido">#008000</option>
                     </datalist>
                   </td>
                   <td><span id="btApagarPedido">X</span></td>
@@ -83,11 +83,11 @@ function filtroHoje(){
           inputColor.addEventListener('change', function () {
             
              
-            if(selectedColor.value == '#000000'){
+            if(selectedColor.value == '#008000'){
               pedidosRefIn.update({Concluido: true, StatusAndamento: listaStatusAndamento[3]})
               console.log(listaStatusAndamento[3])
 
-            } else if(selectedColor.value == '#008000'){
+            } else if(selectedColor.value == '#000000'){
               pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[2]})
               console.log(listaStatusAndamento[2])
 
@@ -149,9 +149,9 @@ function parseData(dataString) {
               } else if (andamentoPedido == 'Preparando') {
                 aux_andamentoPedido = '#ffff00';
               } else if (andamentoPedido == 'Aguardando Envio') {
-                aux_andamentoPedido = '#008000';
-              } else if (andamentoPedido == 'Concluido') {
                 aux_andamentoPedido = '#000000';
+              } else if (andamentoPedido == 'Concluido') {
+                aux_andamentoPedido = '#008000';
               }
         
               if (key < pedido) {
@@ -169,8 +169,8 @@ function parseData(dataString) {
                     <datalist id="presetColors" disabled>
                       <option id="novoPedido">#ffa500</option>
                       <option id="preparando">#ffff00</option>
-                      <option id="aguardandoEnvio">#008000</option>
-                      <option id="concluido">#000000</option>
+                      <option id="aguardandoEnvio">#000000</option>
+                      <option id="concluido">#008000</option>
                     </datalist>
                   </td>
                   <td><span id="btApagarPedido">X</span></td>
@@ -185,11 +185,11 @@ function parseData(dataString) {
           inputColor.addEventListener('change', function () {
             
              
-            if(selectedColor.value == '#000000'){
+            if(selectedColor.value == '#008000'){
               pedidosRefIn.update({Concluido: true, StatusAndamento: listaStatusAndamento[3]})
               console.log(listaStatusAndamento[3])
 
-            } else if(selectedColor.value == '#008000'){
+            } else if(selectedColor.value == '#000000'){
               pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[2]})
               console.log(listaStatusAndamento[2])
 
@@ -250,9 +250,9 @@ function filtroMes() {
         } else if (andamentoPedido == 'Preparando') {
           aux_andamentoPedido = '#ffff00';
         } else if (andamentoPedido == 'Aguardando Envio') {
-          aux_andamentoPedido = '#008000';
-        } else if (andamentoPedido == 'Concluido') {
           aux_andamentoPedido = '#000000';
+        } else if (andamentoPedido == 'Concluido') {
+          aux_andamentoPedido = '#008000';
         }
   
         if (key < pedido) {
@@ -270,8 +270,8 @@ function filtroMes() {
               <datalist id="presetColors" disabled>
                 <option id="novoPedido">#ffa500</option>
                 <option id="preparando">#ffff00</option>
-                <option id="aguardandoEnvio">#008000</option>
-                <option id="concluido">#000000</option>
+                <option id="aguardandoEnvio">#000000</option>
+                <option id="concluido">#008000</option>
               </datalist>
             </td>
             <td><span id="btApagarPedido">X</span></td>
@@ -287,11 +287,11 @@ function filtroMes() {
           inputColor.addEventListener('change', function () {
             
              
-            if(selectedColor.value == '#000000'){
+            if(selectedColor.value == '#008000'){
               pedidosRefIn.update({Concluido: true, StatusAndamento: listaStatusAndamento[3]})
               console.log(listaStatusAndamento[3])
 
-            } else if(selectedColor.value == '#008000'){
+            } else if(selectedColor.value == '#000000'){
               pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[2]})
               console.log(listaStatusAndamento[2])
 
@@ -336,10 +336,10 @@ function filtroTodos() {
           aux_andamentoPedido = '#ffff00';
 
         } else if (andamentoPedido == 'Aguardando Envio') {
-          aux_andamentoPedido = '#008000';
+          aux_andamentoPedido = '#000000';
      
         } else if (andamentoPedido == 'Concluido') {
-          aux_andamentoPedido = '#000000';
+          aux_andamentoPedido = '#008000';
         }
         
         
@@ -361,8 +361,8 @@ function filtroTodos() {
               <datalist id="presetColors" disabled>
                 <option id="novoPedido">#ffa500</option>
                 <option id="preparando">#ffff00</option>
-                <option id="aguardandoEnvio">#008000</option>
-                <option id="concluido">#000000</option>
+                <option id="aguardandoEnvio">#000000</option>
+                <option id="concluido">#008000</option>
               </datalist>
             </td>
             <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
@@ -405,11 +405,11 @@ function filtroTodos() {
           inputColor.addEventListener('change', function () {
             
              
-            if(selectedColor.value == '#000000'){
+            if(selectedColor.value == '#008000'){
               pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3]})
               console.log(listaStatusAndamento[3])
 
-            } else if(selectedColor.value == '#008000'){
+            } else if(selectedColor.value == '#000000'){
               pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2]})
               console.log(listaStatusAndamento[2])
 

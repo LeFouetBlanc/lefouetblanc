@@ -77,9 +77,9 @@ function lerPedidos(){
           }else if(pedidos[i].StatusAndamento == "Preparando"){
             document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#ffff00'
           }else if(pedidos[i].StatusAndamento == "Aguardando Envio"){
-            document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#008000'
-          }else if(pedidos[i].StatusAndamento == "Concluido"){
             document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#000000'
+          }else if(pedidos[i].StatusAndamento == "Concluido"){
+            document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#008000'
         }
         }
       }
@@ -90,10 +90,13 @@ function lerPedidos(){
                 const btConcluido = document.querySelectorAll("#btConcluido");
                 btConcluido.forEach((button) => {
                 button.addEventListener("click", function() {
-                    const pedidoId = this.getAttribute("data-pedido-id");
-                    concluirPedido(pedidoId);
-                    
-                })
+                  let confirmar  = confirm("Deseja concluir esse pedido?")
+
+                if(confirmar == true){
+                  const pedidoId = this.getAttribute("data-pedido-id");
+                  concluirPedido(pedidoId);
+                }
+              })
             })
 
       

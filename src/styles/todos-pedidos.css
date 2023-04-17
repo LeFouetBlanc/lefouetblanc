@@ -199,14 +199,14 @@ input[type=color] {
 }
 
 #l-aguardandoEnvio{
-    background-color: #008000;
-    padding: 5px;
-}
-
-#l-concluido{
     background-color: #000000;
     color: white;
     padding: 5px;
 }
 
+#l-concluido{
+    background-color: #008000;
+    color: white;
+    padding: 5px;
+}
 

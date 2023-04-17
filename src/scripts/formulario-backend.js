@@ -7,6 +7,8 @@ const storageRef = firebase.storage().ref();
 const databaseRef = firebase.database().ref('formulario-np/' + userId);
 
 
+
+
 let imgs = []
 let listaImgs = []
 
@@ -88,6 +90,7 @@ export function sendOrder(){
     
     //endereço do banco de dados
     let formDataRef = firebase.database().ref('formulario-np/' + userId)
+    
 
     //Cliente
     let nomeCliente = document.getElementById('nomeCliente').value
@@ -113,6 +116,8 @@ export function sendOrder(){
     
     let personalizacoes = []
     let valoresExtra = []
+
+    
 
     let valorTotal = calcValorTotal();
     let statusPgto = document.getElementById('pedidoStatusPagamento').value;
@@ -177,7 +182,8 @@ export function sendOrder(){
                 StatusPagamento: statusPgto,
                 StatusAndamento: StatusAndamento,
                 Concluido: false,
-                DataPedido: dataAtual
+                DataPedido: dataAtual,
+                
                 }
 
                 formDataRef.push(formPedido)
