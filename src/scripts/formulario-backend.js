@@ -7,8 +7,6 @@ const storageRef = firebase.storage().ref();
 const databaseRef = firebase.database().ref('formulario-np/' + userId);
 
 
-
-
 let imgs = []
 let listaImgs = []
 
@@ -19,6 +17,24 @@ var mes = String(data.getMonth() + 1).padStart(2, '0');
 var ano = data.getFullYear();
 let dataAtual = dia + '/' + mes + '/' + ano;
 console.log(dataAtual)
+
+let numPedidos = 0;
+
+function obterNumeroDePedidos(userId){
+    databaseRef.once("value").then(snapshot => {
+        numPedidos = snapshot.numChildren();
+        
+        return numPedidos;
+    }).catch(error => {
+        onsole.error(`Erro ao obter pedidos do usuário ${userId}: ${error}`);
+    })
+}
+
+obterNumeroDePedidos(userId)
+
+setTimeout(() => {
+    console.log("NUM PEDIDOS: ", numPedidos)
+}, 2500)
 
 function uploadImg(file) {
     return new Promise((resolve, reject) => {
@@ -183,6 +199,7 @@ export function sendOrder(){
                 StatusAndamento: StatusAndamento,
                 Concluido: false,
                 DataPedido: dataAtual,
+                NumeroPedido: numPedidos + 1,
                 
                 }
 

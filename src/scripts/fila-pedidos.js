@@ -17,6 +17,8 @@ function lerPedidos(){
 
     pedidosRef.orderByChild("DataEntregaInversa").on("value", (snapshot) => {
       console.log("Dados lidos com sucesso.")
+
+
         
       fila.innerHTML = ""
   
@@ -46,7 +48,7 @@ function lerPedidos(){
           fila.innerHTML += `
             <div class="box-pedido" id="boxPedido" data-pedido-id="${childSnapshot.key}">
             
-              <h2>${pedido.Pedido[0].slice(0, 30)}</h2>
+              <h2>${pedido.NumeroPedido} - ${pedido.NomeCliente}</h2>
               <div id="boxPreview">
               <h4 style="margin-bottom: 10px;">${pedido.DataEntrega}</h4>
               <p class="descricao">${descricao}</p>
