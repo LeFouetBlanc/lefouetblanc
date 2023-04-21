@@ -507,38 +507,73 @@ let filtroData = document.getElementById('select-filtro')
 
 //Exportando para excel
 function exportarParaExcel() {
-    // Selecionando a tabela
-    const tabela = document.querySelector('#tabela-pedidos');
-  
-    // Criando uma nova planilha do Excel
-    const workbook = XLSX.utils.book_new();
-  
-    // Definindo o nome da planilha
-    const sheetName = 'Pedidos';
-  
-    // Selecionando os dados da tabela
-    const tableData = XLSX.utils.table_to_sheet(tabela);
-  
-    // Adicionando a planilha ao livro de trabalho
-    XLSX.utils.book_append_sheet(workbook, tableData, sheetName);
-  
-    // Salvando o arquivo de acordo com o filtro de data
-    let filename = 'Pedidos';
-  
-    const filtro = document.querySelector('#select-filtro').value;
-    if (filtro == 'pedidosHoje') {
-      filename += '_hoje.xlsx';
-    } else if (filtro == 'pedidosSemana') {
-      filename += '_semana.xlsx';
-    } else if (filtro == 'pedidosMes') {
-      filename += '_mes.xlsx';
-    } else if(filtro == 'pedidosTodos') {
-        filename += '_todosPedidos.xlsx'
-    }
-  
-    // Salvando o arquivo
-    XLSX.writeFile(workbook, filename);
-  }
+  // Selecionando a tabela
+  const tabela = document.querySelector('#tabela-pedidos');
+
+  // Selecionando os dados da tabela
+  const tableData = XLSX.utils.table_to_sheet(tabela);
+
+  // Cria um elemento input de tipo file
+  const input = document.createElement('input');
+  input.type = 'file';
+
+  // Adiciona um listener de mudança para o input
+  input.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+
+    // Cria um novo objeto FileReader
+    const reader = new FileReader();
+
+    // Adiciona um listener de load para o reader
+    reader.addEventListener('load', () => {
+      // Converte o conteúdo do arquivo para uma planilha do Excel
+      const workbook = XLSX.read(reader.result, { type: 'binary' });
+
+      // Gera um nome de planilha exclusivo
+      const sheetNameBase = 'Pedidos';
+      let sheetName = sheetNameBase;
+      let sheetIndex = 1;
+      while (workbook.Sheets[sheetName]) {
+        sheetIndex++;
+        sheetName = `${sheetNameBase} (${sheetIndex})`;
+      }
+
+      // Adiciona a planilha atual à planilha do arquivo
+      XLSX.utils.book_append_sheet(workbook, tableData, sheetName);
+
+      // Escreve o arquivo de volta para o buffer
+      const wbout = XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
+
+      // Cria um objeto Blob com o conteúdo do arquivo
+      const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
+
+      // Cria um link para download e clica nele para iniciar o download
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = file.name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    // Lê o conteúdo do arquivo como um binário
+    reader.readAsBinaryString(file);
+  });
+
+  // Clica no botão de seleção de arquivo
+  input.click();
+}
+
+// Converte uma string para um ArrayBuffer
+function s2ab(s) {
+  const buf = new ArrayBuffer(s.length);
+  const view = new Uint8Array(buf);
+  for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+  return buf;
+}
+
   
 
 document.getElementById('btExportar').addEventListener('click', exportarParaExcel)
