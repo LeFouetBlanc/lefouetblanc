@@ -48,24 +48,29 @@ function filtroHoje(){
               if (key < pedido) {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                  <td>${pedido.ContatoCliente}</td>
-                  <td>${pedido.NomeCliente}</td>
-                  <td>${pedido.Pedido}</td>
-                  <td>${pedido.ValorTotal}</td>
-                  <td>${pedido.DataEntrega}</td>
-                  <td>${pedido.DataAniversario}</td>
-                  <td>${pedido.StatusPagamento}</td>
-                  <td>
-                    <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
-                    <datalist id="presetColors" disabled>
-                      <option id="novoPedido">#ffa500</option>
-                      <option id="preparando">#ffff00</option>
-                      <option id="aguardandoEnvio">#000000</option>
-                      <option id="concluido">#008000</option>
-                    </datalist>
-                  </td>
-                  <td><span id="btApagarPedido">X</span></td>
-                `; 
+            <td>${pedido.NumeroPedido}</td>
+            <td>${pedido.ContatoCliente}</td>
+            <td>${pedido.NomeCliente}</td>
+            <td>${pedido.Pedido}</td>
+            <td>${pedido.Descricao}</td>
+            <td>${pedido.DataEntrega}</td>
+            <td>${pedido.EnderecoEntrega}</td>
+            <td>${pedido.DataAniversario}</td>
+            <td>${pedido.StatusPagamento}</td>
+            <td>${pedido.TaxaEntrega}</td>
+            <td>${pedido.ValorTotal}</td>
+
+            <td>
+              <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
+              <datalist id="presetColors" disabled>
+                <option id="novoPedido">#ffa500</option>
+                <option id="preparando">#ffff00</option>
+                <option id="aguardandoEnvio">#000000</option>
+                <option id="concluido">#008000</option>
+              </datalist>
+            </td>
+            <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
+          `; 
       
                
                // document.querySelectorAll('#btApagarPedido')[key].addEventListener('click', ()=>{
@@ -157,24 +162,29 @@ function parseData(dataString) {
               if (key < pedido) {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                  <td>${pedido.ContatoCliente}</td>
-                  <td>${pedido.NomeCliente}</td>
-                  <td>${pedido.Pedido}</td>
-                  <td>${pedido.ValorTotal}</td>
-                  <td>${pedido.DataEntrega}</td>
-                  <td>${pedido.DataAniversario}</td>
-                  <td>${pedido.StatusPagamento}</td>
-                  <td>
-                    <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
-                    <datalist id="presetColors" disabled>
-                      <option id="novoPedido">#ffa500</option>
-                      <option id="preparando">#ffff00</option>
-                      <option id="aguardandoEnvio">#000000</option>
-                      <option id="concluido">#008000</option>
-                    </datalist>
-                  </td>
-                  <td><span id="btApagarPedido">X</span></td>
-                `; 
+            <td>${pedido.NumeroPedido}</td>
+            <td>${pedido.ContatoCliente}</td>
+            <td>${pedido.NomeCliente}</td>
+            <td>${pedido.Pedido}</td>
+            <td>${pedido.Descricao}</td>
+            <td>${pedido.DataEntrega}</td>
+            <td>${pedido.EnderecoEntrega}</td>
+            <td>${pedido.DataAniversario}</td>
+            <td>${pedido.StatusPagamento}</td>
+            <td>${pedido.TaxaEntrega}</td>
+            <td>${pedido.ValorTotal}</td>
+
+            <td>
+              <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
+              <datalist id="presetColors" disabled>
+                <option id="novoPedido">#ffa500</option>
+                <option id="preparando">#ffff00</option>
+                <option id="aguardandoEnvio">#000000</option>
+                <option id="concluido">#008000</option>
+              </datalist>
+            </td>
+            <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
+          `; 
       
       
                 const inputColor = tr.querySelector('#inputColor');
@@ -258,13 +268,18 @@ function filtroMes() {
         if (key < pedido) {
           const tr = document.createElement('tr');
           tr.innerHTML = `
+            <td>${pedido.NumeroPedido}</td>
             <td>${pedido.ContatoCliente}</td>
             <td>${pedido.NomeCliente}</td>
             <td>${pedido.Pedido}</td>
-            <td>${pedido.ValorTotal}</td>
+            <td>${pedido.Descricao}</td>
             <td>${pedido.DataEntrega}</td>
+            <td>${pedido.EnderecoEntrega}</td>
             <td>${pedido.DataAniversario}</td>
             <td>${pedido.StatusPagamento}</td>
+            <td>${pedido.TaxaEntrega}</td>
+            <td>${pedido.ValorTotal}</td>
+
             <td>
               <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
               <datalist id="presetColors" disabled>
@@ -274,11 +289,9 @@ function filtroMes() {
                 <option id="concluido">#008000</option>
               </datalist>
             </td>
-            <td><span id="btApagarPedido">X</span></td>
+            <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
           `; 
-
-        
-
+  
           const inputColor = tr.querySelector('#inputColor');
           const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
 
@@ -349,13 +362,18 @@ function filtroTodos() {
 
           const tr = document.createElement('tr');
           tr.innerHTML = `
+            <td>${pedido.NumeroPedido}</td>
             <td>${pedido.ContatoCliente}</td>
             <td>${pedido.NomeCliente}</td>
             <td>${pedido.Pedido}</td>
-            <td>${pedido.ValorTotal}</td>
+            <td>${pedido.Descricao}</td>
             <td>${pedido.DataEntrega}</td>
+            <td>${pedido.EnderecoEntrega}</td>
             <td>${pedido.DataAniversario}</td>
             <td>${pedido.StatusPagamento}</td>
+            <td>${pedido.TaxaEntrega}</td>
+            <td>${pedido.ValorTotal}</td>
+
             <td>
               <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
               <datalist id="presetColors" disabled>
