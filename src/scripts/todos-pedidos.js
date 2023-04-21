@@ -574,6 +574,7 @@ function s2ab(s) {
   return buf;
 }
 
+
   
 
 document.getElementById('btExportar').addEventListener('click', exportarParaExcel)
