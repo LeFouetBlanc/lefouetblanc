@@ -13,10 +13,6 @@ let userId = localStorage.getItem('UserId')
 let pedidosRef = firebase.database().ref('formulario-np/' + userId + '/')
 let listaStatusAndamento = ["Novo Pedido", "Preparando", "Aguardando Envio", "Concluido"];
 
-
-
-
-
 function filtroHoje(){
     //select pedidosHoje
     pedidosRef.on('value', (snapshot) => {
@@ -72,16 +68,8 @@ function filtroHoje(){
             <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
           `; 
       
-               
-               // document.querySelectorAll('#btApagarPedido')[key].addEventListener('click', ()=>{
-                 // apagarPedido(key)
-               // })
-      
                 const inputColor = tr.querySelector('#inputColor');
                 const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
-      
-               
-                
       
                 const selectedColor = inputColor;
 
@@ -89,24 +77,21 @@ function filtroHoje(){
             
              
             if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({Concluido: true, StatusAndamento: listaStatusAndamento[3]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true,})
               console.log(listaStatusAndamento[3])
 
             } else if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[2]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false,})
               console.log(listaStatusAndamento[2])
 
             } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[1]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false,})
               console.log(listaStatusAndamento[1])
             } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[0]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false,})
               console.log(listaStatusAndamento[0])
             }
-
-            
-            
-                         
+               
           });
         
                 tbody.appendChild(tr);
@@ -116,7 +101,6 @@ function filtroHoje(){
       });
     }
         
-
 function parseData(dataString) {
     if (!dataString) {
       return null;
@@ -196,27 +180,22 @@ function parseData(dataString) {
             
              
             if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({Concluido: true, StatusAndamento: listaStatusAndamento[3]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true,})
               console.log(listaStatusAndamento[3])
 
             } else if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[2]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false,})
               console.log(listaStatusAndamento[2])
 
             } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[1]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false,})
               console.log(listaStatusAndamento[1])
             } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[0]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false,})
               console.log(listaStatusAndamento[0])
-            }
-
-            
-            
-                         
+            }                 
           });            
-              
-        
+                     
                 tbody.appendChild(tr);
               }
             }
@@ -301,18 +280,18 @@ function filtroMes() {
             
              
             if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({Concluido: true, StatusAndamento: listaStatusAndamento[3]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true,})
               console.log(listaStatusAndamento[3])
 
             } else if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[2]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false,})
               console.log(listaStatusAndamento[2])
 
             } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[1]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false,})
               console.log(listaStatusAndamento[1])
             } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({Concluido: false, StatusAndamento: listaStatusAndamento[0]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false,})
               console.log(listaStatusAndamento[0])
             }
              
@@ -341,8 +320,7 @@ function filtroTodos() {
   
         const andamentoPedido = pedido.StatusAndamento;
         let aux_andamentoPedido = '#aaaaaa';
-    
-  
+
         if (andamentoPedido == 'Novo Pedido') {
           aux_andamentoPedido = '#ffa500';
         } else if (andamentoPedido == 'Preparando') {
@@ -355,11 +333,7 @@ function filtroTodos() {
           aux_andamentoPedido = '#008000';
         }
         
-        
-
         if (key < pedido) { 
-          
-
           const tr = document.createElement('tr');
           tr.innerHTML = `
             <td>${pedido.NumeroPedido}</td>
@@ -396,9 +370,6 @@ function filtroTodos() {
           const inputColor = tr.querySelector('#inputColor');
           const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
 
-          
-          
-
           btApagar.addEventListener('click', function(){
             let resultado;
 
@@ -413,44 +384,36 @@ function filtroTodos() {
                         console.log('Erro ao remover pedido: ', error);
                   });
             }
-
-                
+           
           })
 
-          
           const selectedColor = inputColor;
 
           inputColor.addEventListener('change', function () {
-            
-             
+          
             if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true,})
               console.log(listaStatusAndamento[3])
 
             } else if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false,})
               console.log(listaStatusAndamento[2])
 
             } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false,})
               console.log(listaStatusAndamento[1])
             } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false,})
               console.log(listaStatusAndamento[0])
             }
-
-            
-            
                          
           });
           
-
           tbody.appendChild(tr);
         }
       }
     });
-  }
-  
+  }  
 
 document.getElementById('select-filtro').addEventListener('change', ()=>{
     if(document.getElementById('select-filtro').value == 'pedidosHoje'){
@@ -464,7 +427,6 @@ document.getElementById('select-filtro').addEventListener('change', ()=>{
     }
 })
 
-
 //Apagar pedido unico
 function apagarPedido(key) {
   const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
@@ -476,8 +438,6 @@ function apagarPedido(key) {
       console.log('Erro ao remover pedido: ', error);
     });
 } 
-
-
 
 //FILTRO POR TELEFONE
 $(document).ready(function(){
@@ -493,8 +453,6 @@ $(document).ready(function(){
         });
     });
 });
-
-
 
 //redirect to fila de pedidos
 function goToFilaPedidos(){
@@ -573,9 +531,6 @@ function s2ab(s) {
   for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
   return buf;
 }
-
-
-  
 
 document.getElementById('btExportar').addEventListener('click', exportarParaExcel)
 
