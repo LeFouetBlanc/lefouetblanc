@@ -77,25 +77,25 @@ function filtroHoje(){
             
              
             if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3]})
               console.log(listaStatusAndamento[3])
 
             } else if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2]})
               console.log(listaStatusAndamento[2])
 
             } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1]})
               console.log(listaStatusAndamento[1])
             } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0]})
               console.log(listaStatusAndamento[0])
             }
                
           });
         
                 tbody.appendChild(tr);
-              }
+        }
             }
           }
       });
@@ -360,10 +360,6 @@ function filtroTodos() {
             <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
           `; 
 
-          if(pedido.Concluido == true){
-            document.getElementById('concluido') //to aqui
-            
-          }
 
           const btApagar = tr.querySelector('#btApagarPedido')
 
@@ -392,18 +388,18 @@ function filtroTodos() {
           inputColor.addEventListener('change', function () {
           
             if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3]})
               console.log(listaStatusAndamento[3])
 
             } else if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2]})
               console.log(listaStatusAndamento[2])
 
             } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1]})
               console.log(listaStatusAndamento[1])
             } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0]})
               console.log(listaStatusAndamento[0])
             }
                          

@@ -39,11 +39,7 @@ function lerPedidos(){
           if (pedido.Descricao[0].length > maxDescricaoSize) {
             descricao += '...';
           }
-            if(document.querySelector(`.boxStatusAndamento`)){
-              if(document.getElementById(`boxStatusAndamento`).value == "Novo Pedido"){
-                document.querySelector('.boxStatusAndamento').style.backgroundColor = '#ffa500'
-              } 
-            }
+            
 
           fila.innerHTML += `
             <div class="box-pedido" id="boxPedido" data-pedido-id="${childSnapshot.key}">
@@ -67,10 +63,6 @@ function lerPedidos(){
         }
       })
       console.log(pedidos)
-
-      
-
-
 
       for(let i = 0; i < pedidos.length; i++){
         if(document.querySelectorAll('.boxStatusAndamento')[i]){
