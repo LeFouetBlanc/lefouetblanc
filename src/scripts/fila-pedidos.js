@@ -12,7 +12,7 @@ document.getElementById('btLogout').addEventListener('click', logOut)
 function lerPedidos(){
     let userId = localStorage.getItem('UserId')
     let pedidosRef = firebase.database().ref('formulario-np/' + userId)
-
+    
     let pedidos = []
 
     pedidosRef.orderByChild("DataEntregaInversa").on("value", (snapshot) => {
@@ -64,17 +64,27 @@ function lerPedidos(){
       })
       console.log(pedidos)
 
-      for(let i = 0; i < pedidos.length; i++){
+      for(let i = 0; i < pedidos.length; i++){ 
         if(document.querySelectorAll('.boxStatusAndamento')[i]){
-          if(pedidos[i].StatusAndamento == "Novo Pedido"){
-            document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#ffa500'
-          }else if(pedidos[i].StatusAndamento == "Preparando"){
-            document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#ffff00'
-          }else if(pedidos[i].StatusAndamento == "Aguardando Envio"){
-            document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#000000'
-          }else if(pedidos[i].StatusAndamento == "Concluido"){
-            document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#008000'
-        }
+         
+          switch(pedidos[i].StatusAndamento){
+            case "Novo Pedido":
+              document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#ffa500';
+              break;
+            
+              case "Preparando":
+                document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#ffff00';
+                break;
+  
+              case "Aguardando Envio":
+                document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#000000';
+                break;
+  
+              case "Concluido":
+                document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#008000';
+                break;
+            
+          }
         }
       }
        
