@@ -20,8 +20,7 @@ function register(){
         const usuario = firebase.auth().onAuthStateChanged((user) => {
             // const usuario = firebase.auth().currentUser;
             var uid = user.uid
-            localStorage.setItem("UserId", uid)
-            
+            localStorage.setItem("UserId", uid)    
         });
         
         window.location.href = "/src/pages/fila-pedidos.html"

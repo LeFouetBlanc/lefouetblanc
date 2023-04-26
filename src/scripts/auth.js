@@ -23,7 +23,7 @@ export function login(){
         window.location.href = "./src/pages/fila-pedidos.html"
 
         verifyUidUser()
-
+        
     }).catch(error => {
         alert(getErrorMessage(error))
     })

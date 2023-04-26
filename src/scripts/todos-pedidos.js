@@ -335,7 +335,7 @@ function filtroTodos() {
         
         if (key < pedido) { 
           const tr = document.createElement('tr');
-          if(pedido.Concluido == true){
+         
             tr.innerHTML = `
             <td>${pedido.NumeroPedido}</td>
             <td>${pedido.ContatoCliente}</td>
@@ -348,32 +348,6 @@ function filtroTodos() {
             <td>${pedido.StatusPagamento}</td>
             <td>${pedido.TaxaEntrega}</td>
             <td>${pedido.ValorTotal}</td>
-
-            <td>
-              <input type="color" list="presetColors" id="inputColor" value="#008000">
-              <datalist id="presetColors" disabled>
-                <option id="novoPedido">#ffa500</option>
-                <option id="preparando">#ffff00</option>
-                <option id="aguardandoEnvio">#000000</option>
-                <option id="concluido" selected>#008000</option>
-              </datalist>
-            </td>
-            <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
-          `; 
-          } else {
-            tr.innerHTML = `
-            <td>${pedido.NumeroPedido}</td>
-            <td>${pedido.ContatoCliente}</td>
-            <td>${pedido.NomeCliente}</td>
-            <td>${pedido.Pedido}</td>
-            <td>${pedido.Descricao}</td>
-            <td>${pedido.DataEntrega}</td>
-            <td>${pedido.EnderecoEntrega}</td>
-            <td>${pedido.DataAniversario}</td>
-            <td>${pedido.StatusPagamento}</td>
-            <td>${pedido.TaxaEntrega}</td>
-            <td>${pedido.ValorTotal}</td>
-
             <td>
               <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
               <datalist id="presetColors" disabled>
@@ -384,12 +358,10 @@ function filtroTodos() {
               </datalist>
             </td>
             <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
-          `; 
-          }
+            `;
           
           
-
-
+          
           const btApagar = tr.querySelector('#btApagarPedido')
 
           const inputColor = tr.querySelector('#inputColor');

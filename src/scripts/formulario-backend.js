@@ -5,6 +5,11 @@ function toFilaPedidos(){
 let userId = localStorage.getItem('UserId')
 const storageRef = firebase.storage().ref();
 const databaseRef = firebase.database().ref('formulario-np/' + userId);
+let contadorPedidosRef = databaseRef.child('contadorPedidos')
+if(!(contadorPedidosRef)){
+    contadorPedidosRef.set(1);
+}
+     
 
 
 let imgs = []
@@ -18,19 +23,7 @@ var ano = data.getFullYear();
 let dataAtual = dia + '/' + mes + '/' + ano;
 console.log(dataAtual)
 
-let numPedidos = 0;
-
-function obterNumeroDePedidos(userId){
-    databaseRef.once("value").then(snapshot => {
-        numPedidos = snapshot.numChildren();
-        
-        return numPedidos;
-    }).catch(error => {
-        onsole.error(`Erro ao obter pedidos do usuário ${userId}: ${error}`);
-    })
-}
-
-obterNumeroDePedidos(userId)
+let numPedidos;
 
 setTimeout(() => {
     console.log("NUM PEDIDOS: ", numPedidos)
@@ -107,6 +100,12 @@ export function sendOrder(){
     //endereço do banco de dados
     let formDataRef = firebase.database().ref('formulario-np/' + userId)
     
+    
+    
+
+    
+
+    
 
     //Cliente
     let nomeCliente = document.getElementById('nomeCliente').value
@@ -178,6 +177,8 @@ export function sendOrder(){
     } else if(statusPgto != "pago" && statusPgto != "naoPago"){
         alert("Selecione uma opção para o status do pedido.")
     } else {
+
+       
         //caso as verificações sejam validadas
             let formPedido = {
                 NomeCliente: nomeCliente,
@@ -198,11 +199,11 @@ export function sendOrder(){
                 StatusPagamento: statusPgto,
                 StatusAndamento: StatusAndamento,
                 Concluido: false,
-                DataPedido: dataAtual,
-                NumeroPedido: numPedidos + 1,
-                
+                DataPedido: dataAtual,   
+                NumeroPedido:  numPedidos,            
                 }
 
+                
                 formDataRef.push(formPedido)
                 alert("Pedido enviado com sucesso!")
                window.location.href = '../pages/fila-pedidos.html';
@@ -213,4 +214,24 @@ export function sendOrder(){
 
 
 
-document.getElementById('btEnviarPedido').addEventListener('click', sendOrder)
+document.getElementById('btEnviarPedido').addEventListener('click', ()=>{
+    contadorPedidosRef.transaction(function (contadorAtual){
+        if(!contadorAtual){
+            contadorAtual = 1
+        } else {
+            contadorAtual ++;
+        }
+       
+        return contadorAtual;
+    }, (error, committed, snapshot) => {
+        if(error){
+            console.log(error)
+        } else if(committed){
+            numPedidos = snapshot.val()
+            console.log(numPedidos)
+            
+        }
+    })
+    alert("Enviando Pedido...")
+    setTimeout(sendOrder,2000)
+})
