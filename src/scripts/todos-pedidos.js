@@ -388,18 +388,18 @@ function filtroTodos() {
           inputColor.addEventListener('change', function () {
           
             if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true})
               console.log(listaStatusAndamento[3])
 
             } else if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false})
               console.log(listaStatusAndamento[2])
 
             } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false})
               console.log(listaStatusAndamento[1])
             } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false})
               console.log(listaStatusAndamento[0])
             }
                          

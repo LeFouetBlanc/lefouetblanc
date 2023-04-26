@@ -19,7 +19,6 @@ function lerPedidos(){
       console.log("Dados lidos com sucesso.")
 
 
-        
       fila.innerHTML = ""
   
       snapshot.forEach((childSnapshot) => {
@@ -31,7 +30,7 @@ function lerPedidos(){
           const maxDescricaoLength = 200;
         
           // Obter o tamanho disponível para a descrição com base no tamanho do título
-          const tituloLength = pedido.Pedido[0].length;
+          const tituloLength = pedido.NomeCliente.length;
           const maxDescricaoSize = 80 - tituloLength;
         
           // Limitar o número de caracteres da descrição com base no espaço disponível
@@ -56,15 +55,13 @@ function lerPedidos(){
               
             </div>
           `;
-          
-          
 
           
         }
       })
       console.log(pedidos)
 
-      for(let i = 0; i < pedidos.length; i++){ 
+      for(let i = 0; i <= pedidos.length; i++){ 
         if(document.querySelectorAll('.boxStatusAndamento')[i]){
          
           switch(pedidos[i].StatusAndamento){
@@ -87,21 +84,27 @@ function lerPedidos(){
           }
         }
       }
-       
       
-            
                 // adiciona evento de clique para o botão "btConcluido"
+                
                 const btConcluido = document.querySelectorAll("#btConcluido");
                 btConcluido.forEach((button) => {
-                button.addEventListener("click", function() {
-                  let confirmar  = confirm("Deseja concluir esse pedido?")
+                  button.addEventListener("click", function() {
+                    let confirmar = confirm("Deseja concluir esse pedido?")
+                    if (confirmar == true) {
+                      const pedidoId = this.getAttribute("data-pedido-id");
+                      concluirPedido(pedidoId);
 
-                if(confirmar == true){
-                  const pedidoId = this.getAttribute("data-pedido-id");
-                  concluirPedido(pedidoId);
-                }
-              })
-            })
+                      // atualiza o índice do for para i-1
+                      for (let i = 0; i < pedidos.length; i++) {
+                        if (pedidos[i].Id == pedidoId) {
+                          i--;
+                          break;
+                        }
+                      }           
+                    }
+                  })
+                })
 
       
                 const boxPedido = document.querySelectorAll("#boxPedido");
