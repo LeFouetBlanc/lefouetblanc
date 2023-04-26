@@ -25,7 +25,7 @@ function lerPedidos(){
         var pedido = childSnapshot.val()
         pedidos.push(pedido)
         
-        if (pedido.Concluido == false) {
+        if (pedido.Concluido == false || pedido.Concluido == true) {
           // Definir o tamanho máximo de caracteres permitidos para a descrição
           const maxDescricaoLength = 200;
         
@@ -55,6 +55,12 @@ function lerPedidos(){
               
             </div>
           `;
+
+          if(pedido.Concluido){
+            document.getElementById('boxPedido').style.display = "none";
+          }
+
+          
 
           
         }

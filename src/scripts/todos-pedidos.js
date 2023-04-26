@@ -77,21 +77,21 @@ function filtroHoje(){
             
              
             if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true})
               console.log(listaStatusAndamento[3])
 
             } else if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false})
               console.log(listaStatusAndamento[2])
 
             } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false})
               console.log(listaStatusAndamento[1])
             } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0]})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false})
               console.log(listaStatusAndamento[0])
             }
-               
+
           });
         
                 tbody.appendChild(tr);
@@ -180,20 +180,20 @@ function parseData(dataString) {
             
              
             if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true})
               console.log(listaStatusAndamento[3])
 
             } else if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false})
               console.log(listaStatusAndamento[2])
 
             } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false})
               console.log(listaStatusAndamento[1])
             } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false})
               console.log(listaStatusAndamento[0])
-            }                 
+            }                
           });            
                      
                 tbody.appendChild(tr);
@@ -280,18 +280,18 @@ function filtroMes() {
             
              
             if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true})
               console.log(listaStatusAndamento[3])
 
             } else if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false})
               console.log(listaStatusAndamento[2])
 
             } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false})
               console.log(listaStatusAndamento[1])
             } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false,})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false})
               console.log(listaStatusAndamento[0])
             }
              
@@ -335,7 +335,33 @@ function filtroTodos() {
         
         if (key < pedido) { 
           const tr = document.createElement('tr');
-          tr.innerHTML = `
+          if(pedido.Concluido == true){
+            tr.innerHTML = `
+            <td>${pedido.NumeroPedido}</td>
+            <td>${pedido.ContatoCliente}</td>
+            <td>${pedido.NomeCliente}</td>
+            <td>${pedido.Pedido}</td>
+            <td>${pedido.Descricao}</td>
+            <td>${pedido.DataEntrega}</td>
+            <td>${pedido.EnderecoEntrega}</td>
+            <td>${pedido.DataAniversario}</td>
+            <td>${pedido.StatusPagamento}</td>
+            <td>${pedido.TaxaEntrega}</td>
+            <td>${pedido.ValorTotal}</td>
+
+            <td>
+              <input type="color" list="presetColors" id="inputColor" value="#008000">
+              <datalist id="presetColors" disabled>
+                <option id="novoPedido">#ffa500</option>
+                <option id="preparando">#ffff00</option>
+                <option id="aguardandoEnvio">#000000</option>
+                <option id="concluido" selected>#008000</option>
+              </datalist>
+            </td>
+            <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
+          `; 
+          } else {
+            tr.innerHTML = `
             <td>${pedido.NumeroPedido}</td>
             <td>${pedido.ContatoCliente}</td>
             <td>${pedido.NomeCliente}</td>
@@ -354,11 +380,14 @@ function filtroTodos() {
                 <option id="novoPedido">#ffa500</option>
                 <option id="preparando">#ffff00</option>
                 <option id="aguardandoEnvio">#000000</option>
-                <option id="concluido">#008000</option>
+                <option id="concluido" disabled>#008000</option>
               </datalist>
             </td>
             <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
           `; 
+          }
+          
+          
 
 
           const btApagar = tr.querySelector('#btApagarPedido')
@@ -388,7 +417,7 @@ function filtroTodos() {
           inputColor.addEventListener('change', function () {
           
             if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true})
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3]})
               console.log(listaStatusAndamento[3])
 
             } else if(selectedColor.value == '#000000'){
