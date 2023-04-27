@@ -354,7 +354,7 @@ function filtroTodos() {
                 <option id="novoPedido">#ffa500</option>
                 <option id="preparando">#ffff00</option>
                 <option id="aguardandoEnvio">#000000</option>
-                <option id="concluido" disabled>#008000</option>
+                <option id="concluido">#008000</option>
               </datalist>
             </td>
             <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>

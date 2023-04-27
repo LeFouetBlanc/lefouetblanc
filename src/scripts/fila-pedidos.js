@@ -26,6 +26,7 @@ function lerPedidos(){
         pedidos.push(pedido)
         
         if (pedido.Concluido == false || pedido.Concluido == true) {
+          
           // Definir o tamanho máximo de caracteres permitidos para a descrição
           const maxDescricaoLength = 200;
         
@@ -39,9 +40,12 @@ function lerPedidos(){
             descricao += '...';
           }
             
+          // if(pedidos[length].Concluido){
+          //   document.querySelectorAll(`[data-pedido-id=${childSnapshot.key}]`)[pedidos.length].style.display = "none";
+          // }
 
           fila.innerHTML += `
-            <div class="box-pedido" id="boxPedido" data-pedido-id="${childSnapshot.key}">
+            <div class="box-pedido" id="boxPedido${pedidos.length}" data-pedido-id="${childSnapshot.key}" name="${pedidos.length}">
             
               <h2>${pedido.NumeroPedido} - ${pedido.NomeCliente}</h2>
               <div id="boxPreview">
@@ -55,13 +59,9 @@ function lerPedidos(){
               
             </div>
           `;
-
-          if(pedido.Concluido){
-            document.getElementById('boxPedido').style.display = "none";
+          if(pedido.Concluido == true){
+            document.getElementById(`boxPedido${pedidos.length}`).style.display = "none"
           }
-
-          
-
           
         }
       })
@@ -103,6 +103,7 @@ function lerPedidos(){
 
                       // atualiza o índice do for para i-1
                       for (let i = 0; i < pedidos.length; i++) {
+                        
                         if (pedidos[i].Id == pedidoId) {
                           i--;
                           break;
