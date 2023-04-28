@@ -11,7 +11,7 @@ console.log(dataAtual)
 
 let userId = localStorage.getItem('UserId')
 let pedidosRef = firebase.database().ref('formulario-np/' + userId + '/')
-let listaStatusAndamento = ["Novo Pedido", "Preparando", "Aguardando Envio", "Concluido"];
+let listaStatusAndamento = ["Novo Pedido", "Preparando", "Aguardando Envio", "Concluido", "Desabilitado"];
 
 function filtroHoje(){
     //select pedidosHoje
@@ -141,6 +141,8 @@ function parseData(dataString) {
                 aux_andamentoPedido = '#000000';
               } else if (andamentoPedido == 'Concluido') {
                 aux_andamentoPedido = '#008000';
+              } else {
+                aux_andamentoPedido = '#123123'
               }
         
               if (key < pedido) {
@@ -178,8 +180,10 @@ function parseData(dataString) {
 
           inputColor.addEventListener('change', function () {
             
-             
-            if(selectedColor.value == '#008000'){
+            if(selectedColor.value == '#123123'){
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[4], Concluido: true})
+
+            } else if(selectedColor.value == '#008000'){
               pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true})
               console.log(listaStatusAndamento[3])
 
@@ -331,11 +335,14 @@ function filtroTodos() {
      
         } else if (andamentoPedido == 'Concluido') {
           aux_andamentoPedido = '#008000';
+        } else {
+          aux_andamentoPedido = '#123123'
         }
         
         if (key < pedido) { 
           const tr = document.createElement('tr');
-         
+          
+
             tr.innerHTML = `
             <td>${pedido.NumeroPedido}</td>
             <td>${pedido.ContatoCliente}</td>
@@ -350,18 +357,17 @@ function filtroTodos() {
             <td>${pedido.ValorTotal}</td>
             <td>
               <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
-              <datalist id="presetColors" disabled>
+              <datalist id="presetColors">
                 <option id="novoPedido">#ffa500</option>
                 <option id="preparando">#ffff00</option>
                 <option id="aguardandoEnvio">#000000</option>
                 <option id="concluido">#008000</option>
+                <option id="desabilitado" disabled>#123123</option>
               </datalist>
             </td>
             <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
             `;
-          
-          
-          
+
           const btApagar = tr.querySelector('#btApagarPedido')
 
           const inputColor = tr.querySelector('#inputColor');
@@ -388,7 +394,10 @@ function filtroTodos() {
 
           inputColor.addEventListener('change', function () {
           
-            if(selectedColor.value == '#008000'){
+            if(selectedColor.value == '#123123'){
+              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[4]})
+              
+            } else if(selectedColor.value == '#008000'){
               pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3]})
               console.log(listaStatusAndamento[3])
 

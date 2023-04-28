@@ -45,7 +45,7 @@ function lerPedidos(){
           // }
 
           fila.innerHTML += `
-            <div class="box-pedido" id="boxPedido${pedidos.length}" data-pedido-id="${childSnapshot.key}" name="${pedidos.length}">
+            <div class="box-pedido" id="boxPedido" data-pedido-id="${childSnapshot.key}" name="boxPedido${pedidos.length}">
             
               <h2>${pedido.NumeroPedido} - ${pedido.NomeCliente}</h2>
               <div id="boxPreview">
@@ -60,7 +60,7 @@ function lerPedidos(){
             </div>
           `;
           if(pedido.Concluido == true){
-            document.getElementById(`boxPedido${pedidos.length}`).style.display = "none"
+            document.getElementsByName(`boxPedido${pedidos.length}`).style.display = "none"
           }
           
         }
