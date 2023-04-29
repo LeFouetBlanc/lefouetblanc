@@ -259,9 +259,13 @@ function filtroHoje(dataSelecionada){
 document.getElementById('select-filtro').addEventListener('change', ()=>{
     if(document.getElementById('select-filtro').value == 'pedidosHoje'){
         filtroHoje(dataAtual)
-    } else {
+    } else if(document.getElementById('select-filtro').value == 'pedidosSemana') {
+      //filtroSemana()
+    }else{
       filtroTodos()
     }
+      
+    
 })
 
 //Apagar pedido unico
