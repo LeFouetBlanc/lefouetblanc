@@ -23,6 +23,10 @@ function filtroTodos() {
 
       for (let key in pedidos){
         const pedido = pedidos[key];
+        console.log(pedido.StatusPagamento)
+
+        
+
         console.log(pedido.StatusAndamento)
 
         const andamentoPedido = pedido.StatusAndamento;
@@ -45,6 +49,27 @@ function filtroTodos() {
             aux_andamentoPedido = '#123123';
             break;
         }
+
+        const pagamentoPedido = pedido.StatusPagamento
+        let aux_pagamentoPedido;
+
+        switch(pagamentoPedido){
+          case 'pago':
+            aux_pagamentoPedido = 'pago'
+          break;
+          case 'naoPago':
+            //
+            aux_pagamentoPedido = 'naoPago'
+          break;
+          case 'pagoMetade':
+            //
+            aux_pagamentoPedido = 'pagoMetade'
+          break;
+        }
+
+        
+
+        
         
         const tr = document.createElement('tr');
 
@@ -58,9 +83,16 @@ function filtroTodos() {
                   <td>${pedido.DataEntrega}</td>
                   <td>${pedido.EnderecoEntrega}</td>
                   <td>${pedido.DataAniversario}</td>
-                  <td>${pedido.StatusPagamento}</td>
+                  
                   <td>${pedido.TaxaEntrega}</td>
                   <td>${pedido.ValorTotal}</td>
+                  <td>
+                  <select id="selectPagamento">
+                    <option value="naoPago">A Pagar</option>
+                    <option value="pagoMetade">Pago Metade</option>
+                    <option value="pago">Pago</option>
+                  </select>
+                  </td>
                   <td>
                     <input type='color' list='presetColors' id='inputColor' value='${aux_andamentoPedido}'>
                     <datalist id='presetColors'>
@@ -73,9 +105,46 @@ function filtroTodos() {
                   <td><span id='btApagarPedido' data-pedido-id='${key}'>X</td>
         `;
 
+        
         if(key < pedido){
           tbody.appendChild(tr)
+
+          
         }
+
+        let selectPagamento = tr.querySelector('#selectPagamento');
+        let options = selectPagamento.options;
+        //options.selected = aux_pagamentoPedido
+
+          for (var i = 0; i < options.length; i++) {
+            if (options[i].value == aux_pagamentoPedido) {
+              options[i].selected = true;
+              break;
+            }
+          }
+
+         
+
+          let statusPagamentoAuxiliar;
+
+          selectPagamento.addEventListener('change', ()=> {
+            switch(selectPagamento.value){
+            case 'pago':
+              statusPagamentoAuxiliar = 'pago'
+                break;
+                case 'naoPago':
+                  //
+                  statusPagamentoAuxiliar = 'naoPago'
+                  
+                break;
+                case 'pagoMetade':
+                  //
+                  statusPagamentoAuxiliar = 'pagoMetade'
+                break;
+            }
+            pedidosRefIn.update({StatusPagamento: statusPagamentoAuxiliar})
+          })
+       
 
         const btApagar = tr.querySelector('#btApagarPedido')
 
@@ -98,10 +167,12 @@ function filtroTodos() {
                 }
            
           })
+
+          
           
           const inputColor = tr.querySelector('#inputColor');
           let statusAndamentoAuxiliar;
-          let concluido;
+     
 
           inputColor.addEventListener('change', () => {
             switch (inputColor.value){

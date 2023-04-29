@@ -174,7 +174,7 @@ export function sendOrder(){
         alert("Preencha as informações do cliente.")
     } else if(!(pedidos != "" && quantidades != "" && valorPedidos != "")){
         alert("Preencha as informações do pedido.")
-    } else if(statusPgto != "pago" && statusPgto != "naoPago"){
+    } else if(statusPgto != "pago" && statusPgto != "naoPago" && statusPgto != "pagoMetade"){
         alert("Selecione uma opção para o status do pedido.")
     } else {
 
