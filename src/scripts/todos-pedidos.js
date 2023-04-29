@@ -11,302 +11,7 @@ console.log(dataAtual)
 
 let userId = localStorage.getItem('UserId')
 let pedidosRef = firebase.database().ref('formulario-np/' + userId + '/')
-let listaStatusAndamento = ["Novo Pedido", "Preparando", "Aguardando Envio", "Concluido", "Desabilitado"];
-
-function filtroHoje(){
-    //select pedidosHoje
-    pedidosRef.on('value', (snapshot) => {
-        const pedidos = snapshot.val();
-        const tbody = document.querySelector('#tabela-pedidos tbody');
-    
-    
-        // Limpando o corpo da tabela antes de preencher com novos dados
-        tbody.innerHTML = '';
-    
-        // Iterando sobre os pedidos e adicionando na tabela
-        for (let key in pedidos) {
-            const pedido = pedidos[key];
-
-            if(pedido.DataPedido == dataAtual){
-              const andamentoPedido = pedido.StatusAndamento;
-              let aux_andamentoPedido = '';
-        
-              if (andamentoPedido == 'Novo Pedido') {
-                aux_andamentoPedido = '#ffa500';
-              } else if (andamentoPedido == 'Preparando') {
-                aux_andamentoPedido = '#ffff00';
-              } else if (andamentoPedido == 'Aguardando Envio') {
-                aux_andamentoPedido = '#000000';
-              } else if (andamentoPedido == 'Concluido') {
-                aux_andamentoPedido = '#008000';
-              }
-        
-              if (key < pedido) {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-            <td>${pedido.NumeroPedido}</td>
-            <td>${pedido.ContatoCliente}</td>
-            <td>${pedido.NomeCliente}</td>
-            <td>${pedido.Pedido}</td>
-            <td>${pedido.Descricao}</td>
-            <td>${pedido.DataEntrega}</td>
-            <td>${pedido.EnderecoEntrega}</td>
-            <td>${pedido.DataAniversario}</td>
-            <td>${pedido.StatusPagamento}</td>
-            <td>${pedido.TaxaEntrega}</td>
-            <td>${pedido.ValorTotal}</td>
-
-            <td>
-              <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
-              <datalist id="presetColors" disabled>
-                <option id="novoPedido">#ffa500</option>
-                <option id="preparando">#ffff00</option>
-                <option id="aguardandoEnvio">#000000</option>
-                <option id="concluido">#008000</option>
-              </datalist>
-            </td>
-            <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
-          `; 
-      
-                const inputColor = tr.querySelector('#inputColor');
-                const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
-      
-                const selectedColor = inputColor;
-
-          inputColor.addEventListener('change', function () {
-            
-             
-            if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true})
-              console.log(listaStatusAndamento[3])
-
-            } else if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false})
-              console.log(listaStatusAndamento[2])
-
-            } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false})
-              console.log(listaStatusAndamento[1])
-            } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false})
-              console.log(listaStatusAndamento[0])
-            }
-
-          });
-        
-                tbody.appendChild(tr);
-        }
-            }
-          }
-      });
-    }
-        
-function parseData(dataString) {
-    if (!dataString) {
-      return null;
-    }
-    const [dia, mes, ano] = dataString.split('/');
-    const data = new Date(`${ano}-${mes}-${dia}T00:00:00.000Z`);
-    return data;
-  }
-
-  function filtroSemana(){
-    //select pedidosSemana
-    pedidosRef.on('value', (snapshot) => {
-        const pedidos = snapshot.val();
-        const tbody = document.querySelector('#tabela-pedidos tbody');
-
-        // Limpando o corpo da tabela antes de preencher com novos dados
-        tbody.innerHTML = '';
-
-        // Data atual e data de 7 dias atrás
-        const dataAtual = new Date();
-        const dataAnterior = new Date();
-        dataAnterior.setDate(dataAnterior.getDate() - 7);
-
-        // Iterando sobre os pedidos e adicionando na tabela
-        for (let key in pedidos) {
-            const pedido = pedidos[key];
-
-            const dataPedido = parseData(pedido.DataPedido);
-            if(dataPedido >= dataAnterior && dataPedido <= dataAtual){
-              const andamentoPedido = pedido.StatusAndamento;
-              let aux_andamentoPedido = '';
-        
-              if (andamentoPedido == 'Novo Pedido') {
-                aux_andamentoPedido = '#ffa500';
-              } else if (andamentoPedido == 'Preparando') {
-                aux_andamentoPedido = '#ffff00';
-              } else if (andamentoPedido == 'Aguardando Envio') {
-                aux_andamentoPedido = '#000000';
-              } else if (andamentoPedido == 'Concluido') {
-                aux_andamentoPedido = '#008000';
-              } else {
-                aux_andamentoPedido = '#123123'
-              }
-        
-              if (key < pedido) {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-            <td>${pedido.NumeroPedido}</td>
-            <td>${pedido.ContatoCliente}</td>
-            <td>${pedido.NomeCliente}</td>
-            <td>${pedido.Pedido}</td>
-            <td>${pedido.Descricao}</td>
-            <td>${pedido.DataEntrega}</td>
-            <td>${pedido.EnderecoEntrega}</td>
-            <td>${pedido.DataAniversario}</td>
-            <td>${pedido.StatusPagamento}</td>
-            <td>${pedido.TaxaEntrega}</td>
-            <td>${pedido.ValorTotal}</td>
-
-            <td>
-              <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
-              <datalist id="presetColors" disabled>
-                <option id="novoPedido">#ffa500</option>
-                <option id="preparando">#ffff00</option>
-                <option id="aguardandoEnvio">#000000</option>
-                <option id="concluido">#008000</option>
-              </datalist>
-            </td>
-            <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
-          `; 
-      
-      
-                const inputColor = tr.querySelector('#inputColor');
-                const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
-      
-                const selectedColor = inputColor;
-
-          inputColor.addEventListener('change', function () {
-            
-            if(selectedColor.value == '#123123'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[4], Concluido: true})
-
-            } else if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true})
-              console.log(listaStatusAndamento[3])
-
-            } else if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false})
-              console.log(listaStatusAndamento[2])
-
-            } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false})
-              console.log(listaStatusAndamento[1])
-            } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false})
-              console.log(listaStatusAndamento[0])
-            }                
-          });            
-                     
-                tbody.appendChild(tr);
-              }
-            }
-          }
-      });
-  }
-        
-
-function filtroMes() {
-    //select pedidosHoje
-    pedidosRef.on('value', (snapshot) => {
-      const pedidos = snapshot.val();
-      const tbody = document.querySelector('#tabela-pedidos tbody');
-  
-      // Limpando o corpo da tabela antes de preencher com novos dados
-      tbody.innerHTML = '';
-  
-      // Iterando sobre os pedidos e adicionando na tabela
-      for (let key in pedidos) {
-        const pedido = pedidos[key];
-  
-        // Verificando se o pedido está dentro do mês atual
-        const dataPedido = parseData(pedido.DataPedido);
-        if (dataPedido === null) {
-          continue; // pulando para o próximo pedido
-        }
-        const mesAtual = new Date().getMonth() + 1;
-        const anoAtual = new Date().getFullYear();
-  
-        if (
-          dataPedido.getMonth() + 1 === mesAtual &&
-          dataPedido.getFullYear() === anoAtual &&
-          dataPedido.getDate() >= 1 &&
-          dataPedido.getDate() <= 30
-        ) {
-          const andamentoPedido = pedido.StatusAndamento;
-        let aux_andamentoPedido = '';
-  
-        if (andamentoPedido == 'Novo Pedido') {
-          aux_andamentoPedido = '#ffa500';
-        } else if (andamentoPedido == 'Preparando') {
-          aux_andamentoPedido = '#ffff00';
-        } else if (andamentoPedido == 'Aguardando Envio') {
-          aux_andamentoPedido = '#000000';
-        } else if (andamentoPedido == 'Concluido') {
-          aux_andamentoPedido = '#008000';
-        }
-  
-        if (key < pedido) {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${pedido.NumeroPedido}</td>
-            <td>${pedido.ContatoCliente}</td>
-            <td>${pedido.NomeCliente}</td>
-            <td>${pedido.Pedido}</td>
-            <td>${pedido.Descricao}</td>
-            <td>${pedido.DataEntrega}</td>
-            <td>${pedido.EnderecoEntrega}</td>
-            <td>${pedido.DataAniversario}</td>
-            <td>${pedido.StatusPagamento}</td>
-            <td>${pedido.TaxaEntrega}</td>
-            <td>${pedido.ValorTotal}</td>
-
-            <td>
-              <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
-              <datalist id="presetColors" disabled>
-                <option id="novoPedido">#ffa500</option>
-                <option id="preparando">#ffff00</option>
-                <option id="aguardandoEnvio">#000000</option>
-                <option id="concluido">#008000</option>
-              </datalist>
-            </td>
-            <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
-          `; 
-  
-          const inputColor = tr.querySelector('#inputColor');
-          const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
-
-          const selectedColor = inputColor;
-
-          inputColor.addEventListener('change', function () {
-            
-             
-            if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3], Concluido: true})
-              console.log(listaStatusAndamento[3])
-
-            } else if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false})
-              console.log(listaStatusAndamento[2])
-
-            } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false})
-              console.log(listaStatusAndamento[1])
-            } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false})
-              console.log(listaStatusAndamento[0])
-            }
-             
-          });
-  
-          tbody.appendChild(tr);
-        }
-      }
-    }    
-  });
-  }
+let listaStatusAndamento = ["Novo Pedido", "Preparando", "Aguardando Envio", "Concluido"];
 
 
 function filtroTodos() {
@@ -314,63 +19,67 @@ function filtroTodos() {
     pedidosRef.on('value', (snapshot) => {
       const pedidos = snapshot.val();
       const tbody = document.querySelector('#tabela-pedidos tbody');
-  
-      // Limpando o corpo da tabela antes de preencher com novos dados
       tbody.innerHTML = '';
-  
-      // Iterando sobre os pedidos e adicionando na tabela
-      for (let key in pedidos) {
+
+      for (let key in pedidos){
         const pedido = pedidos[key];
-  
+        console.log(pedido.StatusAndamento)
+
         const andamentoPedido = pedido.StatusAndamento;
-        let aux_andamentoPedido = '#aaaaaa';
+        let aux_andamentoPedido;
 
-        if (andamentoPedido == 'Novo Pedido') {
-          aux_andamentoPedido = '#ffa500';
-        } else if (andamentoPedido == 'Preparando') {
-          aux_andamentoPedido = '#ffff00';
-
-        } else if (andamentoPedido == 'Aguardando Envio') {
-          aux_andamentoPedido = '#000000';
-     
-        } else if (andamentoPedido == 'Concluido') {
-          aux_andamentoPedido = '#008000';
-        } else {
-          aux_andamentoPedido = '#123123'
+        switch (andamentoPedido) {
+          case 'Novo Pedido':
+            aux_andamentoPedido = '#ffa500';
+            break;
+          case 'Preparando':
+            aux_andamentoPedido = '#ffff00';
+            break;
+          case 'Aguardando Envio':
+            aux_andamentoPedido = '#000000';
+            break;
+          case 'Concluido':
+            aux_andamentoPedido = '#008000';
+            break;
+          default:
+            aux_andamentoPedido = '#123123';
+            break;
         }
         
-        if (key < pedido) { 
-          const tr = document.createElement('tr');
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+                  <td>${pedido.NumeroPedido}</td>
+                  <td>${pedido.ContatoCliente}</td>
+                  <td>${pedido.NomeCliente}</td>
+                  <td>${pedido.Pedido}</td>
+                  <td>${pedido.Descricao}</td>
+                  <td>${pedido.Personalizacoes}</td>
+                  <td>${pedido.DataEntrega}</td>
+                  <td>${pedido.EnderecoEntrega}</td>
+                  <td>${pedido.DataAniversario}</td>
+                  <td>${pedido.StatusPagamento}</td>
+                  <td>${pedido.TaxaEntrega}</td>
+                  <td>${pedido.ValorTotal}</td>
+                  <td>
+                    <input type='color' list='presetColors' id='inputColor' value='${aux_andamentoPedido}'>
+                    <datalist id='presetColors'>
+                      <option id='novoPedido'>#ffa500</option>
+                      <option id='preparando'>#ffff00</option>
+                      <option id='aguardandoEnvio'>#000000</option>
+                      <option id='concluido'>#008000</option>
+                    </datalist>
+                  </td>
+                  <td><span id='btApagarPedido' data-pedido-id='${key}'>X</td>
+        `;
+
+        if(key < pedido){
+          tbody.appendChild(tr)
+        }
+
+        const btApagar = tr.querySelector('#btApagarPedido')
+
           
-
-            tr.innerHTML = `
-            <td>${pedido.NumeroPedido}</td>
-            <td>${pedido.ContatoCliente}</td>
-            <td>${pedido.NomeCliente}</td>
-            <td>${pedido.Pedido}</td>
-            <td>${pedido.Descricao}</td>
-            <td>${pedido.DataEntrega}</td>
-            <td>${pedido.EnderecoEntrega}</td>
-            <td>${pedido.DataAniversario}</td>
-            <td>${pedido.StatusPagamento}</td>
-            <td>${pedido.TaxaEntrega}</td>
-            <td>${pedido.ValorTotal}</td>
-            <td>
-              <input type="color" list="presetColors" id="inputColor" value="${aux_andamentoPedido}">
-              <datalist id="presetColors">
-                <option id="novoPedido">#ffa500</option>
-                <option id="preparando">#ffff00</option>
-                <option id="aguardandoEnvio">#000000</option>
-                <option id="concluido">#008000</option>
-                <option id="desabilitado" disabled>#123123</option>
-              </datalist>
-            </td>
-            <td><span id="btApagarPedido" data-pedido-id="${key}">X</span></td>
-            `;
-
-          const btApagar = tr.querySelector('#btApagarPedido')
-
-          const inputColor = tr.querySelector('#inputColor');
           const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
 
           btApagar.addEventListener('click', function(){
@@ -386,50 +95,48 @@ function filtroTodos() {
                             .catch((error) => {
                         console.log('Erro ao remover pedido: ', error);
                   });
-            }
+                }
            
           })
-
-          const selectedColor = inputColor;
-
-          inputColor.addEventListener('change', function () {
           
-            if(selectedColor.value == '#123123'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[4]})
-              
-            } else if(selectedColor.value == '#008000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[3]})
-              console.log(listaStatusAndamento[3])
+          const inputColor = tr.querySelector('#inputColor');
+          let statusAndamentoAuxiliar;
+          let concluido;
 
-            } else if(selectedColor.value == '#000000'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[2], Concluido: false})
-              console.log(listaStatusAndamento[2])
+          inputColor.addEventListener('change', () => {
+            switch (inputColor.value){
+                case '#008000':
+                  statusAndamentoAuxiliar = listaStatusAndamento[3];
+                break;
 
-            } else if(selectedColor.value == '#ffff00'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[1], Concluido: false})
-              console.log(listaStatusAndamento[1])
-            } else if(selectedColor.value == '#ffa500'){
-              pedidosRefIn.update({StatusAndamento: listaStatusAndamento[0], Concluido: false})
-              console.log(listaStatusAndamento[0])
+                case '#000000':
+                  statusAndamentoAuxiliar = listaStatusAndamento[2];
+                break;
+
+                case '#ffff00':
+                  statusAndamentoAuxiliar = listaStatusAndamento[1];
+                  
+                break;
+
+                case '#ffa500':
+                  statusAndamentoAuxiliar = listaStatusAndamento[0];
+                  
+                break;
             }
-                         
-          });
-          
-          tbody.appendChild(tr);
+
+            pedidosRefIn.update({StatusAndamento: statusAndamentoAuxiliar})
+          })
+
         }
-      }
-    });
+          
+        }
+      
+    );
   }  
 
 document.getElementById('select-filtro').addEventListener('change', ()=>{
     if(document.getElementById('select-filtro').value == 'pedidosHoje'){
         filtroHoje()
-    } else if(document.getElementById('select-filtro').value == 'pedidosSemana'){
-        filtroSemana()
-    } else if(document.getElementById('select-filtro').value == 'pedidosMes'){
-        filtroMes()
-    } else {
-        filtroTodos()
     }
 })
 
@@ -452,7 +159,7 @@ $(document).ready(function(){
         var filtro = $(this).val().replace(/[^\d]/g, ''); // remove os caracteres que não são dígitos
         $('#tabela-pedidos tbody tr').hide(); // esconde todas as linhas da tabela
         $('#tabela-pedidos tbody tr').each(function() { // percorre todas as linhas da tabela
-            var telefone = $(this).find('td:first-child').text().replace(/[^\d]/g, ''); // extrai apenas os dígitos do primeiro TD de cada linha
+            var telefone = $(this).find('td:nth-child(2)').text().replace(/[^\d]/g, ''); // extrai apenas os dígitos do primeiro TD de cada linha
             if (telefone.indexOf(filtro) !== -1) { // se o filtro corresponder ao número de telefone
                 $(this).show(); // mostra a linha correspondente
             }

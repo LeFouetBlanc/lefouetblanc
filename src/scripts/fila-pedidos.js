@@ -15,7 +15,7 @@ function lerPedidos(){
     
     let pedidos = []
 
-    pedidosRef.orderByChild("DataEntregaInversa").on("value", (snapshot) => {
+    pedidosRef.on("value", (snapshot) => {
       console.log("Dados lidos com sucesso.")
 
 
@@ -39,28 +39,22 @@ function lerPedidos(){
           if (pedido.Descricao[0].length > maxDescricaoSize) {
             descricao += '...';
           }
-            
-          // if(pedidos[length].Concluido){
-          //   document.querySelectorAll(`[data-pedido-id=${childSnapshot.key}]`)[pedidos.length].style.display = "none";
-          // }
 
           fila.innerHTML += `
             <div class="box-pedido" id="boxPedido" data-pedido-id="${childSnapshot.key}" name="boxPedido${pedidos.length}">
             
               <h2>${pedido.NumeroPedido} - ${pedido.NomeCliente}</h2>
-              <div id="boxPreview">
               <h4 style="margin-bottom: 10px;">${pedido.DataEntrega}</h4>
               <p class="descricao">${descricao}</p>
+        
               
-             
-            </div>
               <div id="boxStatusAndamento" class="boxStatusAndamento" value='${pedido.StatusAndamento}'></div>
               <button class="btGrey2 btSobre" id="btConcluido" data-pedido-id="${childSnapshot.key}">Concluir</button>
               
             </div>
           `;
-          if(pedido.Concluido == true){
-            document.getElementsByName(`boxPedido${pedidos.length}`).style.display = "none"
+          if(pedido.StatusAndamento == 'Concluido'){
+            document.querySelector(`[data-pedido-id='${childSnapshot.key}']`).style.display = "none"
           }
           
         }
@@ -90,8 +84,6 @@ function lerPedidos(){
           }
         }
       }
-      
-                // adiciona evento de clique para o botão "btConcluido"
                 
                 const btConcluido = document.querySelectorAll("#btConcluido");
                 btConcluido.forEach((button) => {
@@ -113,7 +105,6 @@ function lerPedidos(){
                   })
                 })
 
-      
                 const boxPedido = document.querySelectorAll("#boxPedido");
                 boxPedido.forEach((button) => {
                 button.addEventListener("click", function() {
@@ -130,7 +121,7 @@ function lerPedidos(){
 
 
     // atualiza o valor de "Concluido" para true
-    pedidosRef.update({Concluido: true}).then(() => {
+    pedidosRef.update({StatusAndamento: 'Concluido'}).then(() => {
       console.log("Pedido concluído com sucesso.")
     }).catch((error) => {
       console.log("Erro ao concluir pedido: ", error)
