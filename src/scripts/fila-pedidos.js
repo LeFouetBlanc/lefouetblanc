@@ -32,7 +32,9 @@ function lerPedidos(){
         
           // Obter o tamanho disponível para a descrição com base no tamanho do título
           const tituloLength = pedido.NomeCliente.length;
-          const maxDescricaoSize = 80 - tituloLength;
+          const maxDescricaoSize = 50;
+
+          let nomePedido = pedido.NomeCliente.substring(0, 20)
         
           // Limitar o número de caracteres da descrição com base no espaço disponível
           let descricao = pedido.Descricao[0].substring(0, maxDescricaoSize);
@@ -43,7 +45,7 @@ function lerPedidos(){
           fila.innerHTML += `
             <div class="box-pedido" id="boxPedido" data-pedido-id="${childSnapshot.key}" name="boxPedido${pedidos.length}">
             
-              <h2>${pedido.NumeroPedido} - ${pedido.NomeCliente}</h2>
+              <h2>${pedido.NumeroPedido} - ${nomePedido}</h2>
               <h4 style="margin-bottom: 10px;">${pedido.DataEntrega}</h4>
               <p class="descricao">${descricao}</p>
         

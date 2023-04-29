@@ -134,9 +134,133 @@ function filtroTodos() {
     );
   }  
 
+
+function filtroHoje(dataSelecionada){
+  pedidosRef.orderByChild('DataPedido').equalTo(dataSelecionada).on('value', (snapshot) => {
+    const pedidos = snapshot.val();
+    const tbody = document.querySelector('#tabela-pedidos tbody');
+    tbody.innerHTML = '';
+
+    for (let key in pedidos) {
+      const pedido = pedidos[key];
+      console.log(pedido.StatusAndamento)
+
+      const andamentoPedido = pedido.StatusAndamento;
+      let aux_andamentoPedido;
+
+      switch (andamentoPedido) {
+        case 'Novo Pedido':
+          aux_andamentoPedido = '#ffa500';
+          break;
+        case 'Preparando':
+          aux_andamentoPedido = '#ffff00';
+          break;
+        case 'Aguardando Envio':
+          aux_andamentoPedido = '#000000';
+          break;
+        case 'Concluido':
+          aux_andamentoPedido = '#008000';
+          break;
+        default:
+          aux_andamentoPedido = '#123123';
+          break;
+      }
+
+      const tr = document.createElement('tr');
+
+      tr.innerHTML = `
+                  <td>${pedido.NumeroPedido}</td>
+                  <td>${pedido.ContatoCliente}</td>
+                  <td>${pedido.NomeCliente}</td>
+                  <td>${pedido.Pedido}</td>
+                  <td>${pedido.Descricao}</td>
+                  <td>${pedido.Personalizacoes}</td>
+                  <td>${pedido.DataEntrega}</td>
+                  <td>${pedido.EnderecoEntrega}</td>
+                  <td>${pedido.DataAniversario}</td>
+                  <td>${pedido.StatusPagamento}</td>
+                  <td>${pedido.TaxaEntrega}</td>
+                  <td>${pedido.ValorTotal}</td>
+                  <td>
+                    <input type='color' list='presetColors' id='inputColor' value='${aux_andamentoPedido}'>
+                    <datalist id='presetColors'>
+                      <option id='novoPedido'>#ffa500</option>
+                      <option id='preparando'>#ffff00</option>
+                      <option id='aguardandoEnvio'>#000000</option>
+                      <option id='concluido'>#008000</option>
+                    </datalist>
+                  </td>
+                  <td><span id='btApagarPedido' data-pedido-id='${key}'>X</td>
+        `;
+
+        if(key < pedido){
+          tbody.appendChild(tr)
+        }
+
+        const btApagar = tr.querySelector('#btApagarPedido')
+
+          
+          const pedidosRefIn = firebase.database().ref('formulario-np/' + userId + '/' + key);
+
+          btApagar.addEventListener('click', function(){
+            let resultado;
+
+            resultado = window.confirm("Deseja apagar esse pedido?")
+
+            if(resultado == true){
+              pedidosRefIn.remove()
+                            .then(() => {
+                        console.log('Pedido: ' + pedido.Pedido + ' removido com sucesso.');
+                    })
+                            .catch((error) => {
+                        console.log('Erro ao remover pedido: ', error);
+                  });
+                }
+           
+          })
+          
+          const inputColor = tr.querySelector('#inputColor');
+          let statusAndamentoAuxiliar;
+          let concluido;
+
+          inputColor.addEventListener('change', () => {
+            switch (inputColor.value){
+                case '#008000':
+                  statusAndamentoAuxiliar = listaStatusAndamento[3];
+                break;
+
+                case '#000000':
+                  statusAndamentoAuxiliar = listaStatusAndamento[2];
+                break;
+
+                case '#ffff00':
+                  statusAndamentoAuxiliar = listaStatusAndamento[1];
+                  
+                break;
+
+                case '#ffa500':
+                  statusAndamentoAuxiliar = listaStatusAndamento[0];
+                  
+                break;
+            }
+
+            pedidosRefIn.update({StatusAndamento: statusAndamentoAuxiliar})
+          })
+
+        }
+          
+        }
+      
+    );
+  }  
+
+
+
 document.getElementById('select-filtro').addEventListener('change', ()=>{
     if(document.getElementById('select-filtro').value == 'pedidosHoje'){
-        filtroHoje()
+        filtroHoje(dataAtual)
+    } else {
+      filtroTodos()
     }
 })
 

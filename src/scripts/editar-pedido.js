@@ -86,7 +86,7 @@ function carregarPedido() {
                 //completo
 
                 boxDetalhes.innerHTML += `
-    <img class="img-pedido" id="img-pedido" src=${pedido.Imagens[pedido.Imagens.length - 1][i]}>
+    
             <br>
     <h3>Pedido ${i+1}</h3>
     <input type="text" id="editarPedido" value="${pedido.Pedido[i]}">
