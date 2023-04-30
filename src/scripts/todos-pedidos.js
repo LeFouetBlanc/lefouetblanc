@@ -11,7 +11,7 @@ console.log(dataAtual)
 
 let userId = localStorage.getItem('UserId')
 let pedidosRef = firebase.database().ref('formulario-np/' + userId + '/')
-let listaStatusAndamento = ["Novo Pedido", "Preparando", "Aguardando Envio", "Concluido"];
+let listaStatusAndamento = ["NovoPedido", "Preparando", "AguardandoEnvio", "Concluido"];
 
 
 function filtroTodos() {
@@ -23,19 +23,19 @@ function filtroTodos() {
 
       for (let key in pedidos){
         const pedido = pedidos[key];
-        console.log(pedido.StatusPagamento)
+       
 
         const andamentoPedido = pedido.StatusAndamento;
         let aux_andamentoPedido;
 
         switch (andamentoPedido) {
-          case 'Novo Pedido':
+          case 'NovoPedido':
             aux_andamentoPedido = '#ffa500';
             break;
           case 'Preparando':
             aux_andamentoPedido = '#ffff00';
             break;
-          case 'Aguardando Envio':
+          case 'AguardandoEnvio':
             aux_andamentoPedido = '#000000';
             break;
           case 'Concluido':
@@ -210,13 +210,13 @@ function filtroHoje(dataSelecionada){
       let aux_andamentoPedido;
 
       switch (andamentoPedido) {
-        case 'Novo Pedido':
+        case 'NovoPedido':
           aux_andamentoPedido = '#ffa500';
           break;
         case 'Preparando':
           aux_andamentoPedido = '#ffff00';
           break;
-        case 'Aguardando Envio':
+        case 'AguardandoEnvio':
           aux_andamentoPedido = '#000000';
           break;
         case 'Concluido':

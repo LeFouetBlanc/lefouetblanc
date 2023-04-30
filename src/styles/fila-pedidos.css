@@ -64,6 +64,36 @@ header img{
     border: solid 1px white;
   }
 
+#NovoPedido{
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    border: solid 1px white;
+    background-color: #ffa500;
+}
+#Preparando{
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    border: solid 1px white;
+    background-color: #ffff00;
+}
+#AguardandoEnvio{
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    border: solid 1px white;
+    background-color: #000000;
+}
+#Concluido{
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    border: solid 1px white;
+    background-color: #008000;
+}
+
+
 .box-pedido #btConcluido{
     position: absolute;
     margin-top: 235px;
@@ -229,7 +259,7 @@ header img{
  
 
 
-  .box-pedido #boxStatusAndamento {
+  .box-pedido #NovoPedido, #Preparando, #AguardandoEnvio, #Concluido {
     position: absolute;
     top: 180px;
     /* adicionado */

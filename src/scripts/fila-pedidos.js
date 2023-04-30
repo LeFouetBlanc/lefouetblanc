@@ -45,13 +45,15 @@ function lerPedidos(){
       
         fila.innerHTML += `
           <div class="box-pedido" id="boxPedido" data-pedido-id="${childSnapshot.key}" name="boxPedido${pedidos.length}" data-dataentrega="${pedido.DataEntregaInversa}">
-
+              
             <h2>${pedido.NumeroPedido} - ${nomePedido}</h2>
+            
             <h4 style="margin-bottom: 10px;">${pedido.DataEntrega}</h4>
             <p class="descricao">${descricao}</p>
 
 
-            <div id="boxStatusAndamento" class="boxStatusAndamento" value='${pedido.StatusAndamento}'></div>
+            <div id="${pedido.StatusAndamento}" class="boxStatusAndamento" value='${pedido.StatusAndamento}'></div>
+            
             <button class="btGrey2 btSobre" id="btConcluido" data-pedido-id="${childSnapshot.key}">Concluir</button>
 
           </div>
@@ -74,14 +76,14 @@ function lerPedidos(){
         let pedidoId = pedido.getAttribute("data-pedido-id");
         pedidosObj[pedidoId] = {
           element: pedido,
-          dataEntregaInversa: pedido.getAttribute("data-dataentrega"),
-          statusAndamento: pedido.querySelector(".boxStatusAndamento").getAttribute("value")
+          DataEntregaInversa: pedido.getAttribute("data-dataentrega"),
+          StatusAndamento: pedido.querySelector(".boxStatusAndamento").getAttribute("value")
         };
       });
     
       let pedidosOrdenados = Object.values(pedidosObj).sort((a, b) => {
-        let dataA = a.dataEntregaInversa;
-        let dataB = b.dataEntregaInversa;
+        let dataA = a.DataEntregaInversa;
+        let dataB = b.DataEntregaInversa;
         return dataA.localeCompare(dataB);
       });
     
@@ -99,29 +101,29 @@ function lerPedidos(){
 
    
 
-      for(let i = 0; i <= pedidos.length; i++){ 
-        if(document.querySelectorAll('.boxStatusAndamento')[i]){
+      // for(let i = 0; i <= pedidos.length; i++){ 
+      //   if(document.querySelectorAll('.boxStatusAndamento')[i]){
          
-          switch(pedidos[i].StatusAndamento){
-            case "Novo Pedido":
-              document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#ffa500';
-              break;
+      //     switch(pedidos[i].StatusAndamento){
+      //       case "Novo Pedido":
+      //         document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#ffa500';
+      //         break;
             
-              case "Preparando":
-                document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#ffff00';
-                break;
+      //         case "Preparando":
+      //           document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#ffff00';
+      //           break;
   
-              case "Aguardando Envio":
-                document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#000000';
-                break;
+      //         case "Aguardando Envio":
+      //           document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#000000';
+      //           break;
   
-              case "Concluido":
-                document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#008000';
-                break;
+      //         case "Concluido":
+      //           document.querySelectorAll('.boxStatusAndamento')[i].style.backgroundColor = '#008000';
+      //           break;
             
-          }
-        }
-      }
+      //     }
+      //   }
+      // }
                 
                 const btConcluido = document.querySelectorAll("#btConcluido");
                 btConcluido.forEach((button) => {
