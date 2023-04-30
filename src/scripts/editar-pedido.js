@@ -114,16 +114,18 @@ function carregarPedido() {
             
         boxDetalhes.innerHTML += `
            
-            <h3>Valor Total: </h3>
-            <input type="text" id="EditarValorTotal" value="${pedido.ValorTotal}">
-            <hr class="hr-divisoria">
-            <h2>Informações do Cliente</h2>
+            
+            <br>
+            <h1>Informações do Cliente</h1>
             <br>
             <h5>Nome: </h5>
             <input type="text" class="inputCliente" id="EditarNomeCliente" value="${pedido.NomeCliente}">
             <br>
             <h5>Contato: </h5>
             <input type="text"  class="inputCliente" id="EditarContatoCliente" value="${pedido.ContatoCliente}">
+            <br>
+            <h5>Data de aniversário: </h5>
+            <input type="text" class="inputCliente" id="DataAniversario" value="${pedido.DataAniversario}">
       
             <br>
             <h5>Data de entrega</h5>
@@ -132,6 +134,16 @@ function carregarPedido() {
             <br>
             <h5>Endereço de Entrega: </h5>
             <input type="text" id="EditarEnderecoEntrega" class="inputCliente" value="${pedido.EnderecoEntrega}">
+            
+            <br>
+            <h3>Taxa de Entrega: </h3>
+            <input type="text" id="TaxaEntrega" value="${pedido.TaxaEntrega}">
+            <hr class="hr-divisoria">
+            
+            <br>
+            <h3>Valor Total: </h3>
+            <input type="text" id="EditarValorTotal" value="${pedido.ValorTotal}">
+            <hr class="hr-divisoria">
             
 
 
@@ -161,6 +173,12 @@ function carregarPedido() {
                 thousands:',', decimal:'.',
                 affixesStay: true
             });
+            $('#TaxaEntrega').maskMoney({
+                prefix:'R$ ',
+                allowNegative: true,
+                thousands:',', decimal:'.',
+                affixesStay: true
+            });
             
         })
         
@@ -177,6 +195,10 @@ function carregarPedido() {
         let valorTotal = document.querySelector(`#EditarValorTotal`)
 
         let dataEntrega = document.querySelector(`#editarDataEntrega`)
+
+        let dataAniversario = document.querySelector(`#DataAniversario`)
+
+        let TaxaEntrega = document.querySelector(`#TaxaEntrega`)
 
         //objetos que sao em listas
 
@@ -221,7 +243,10 @@ function carregarPedido() {
                 ValorTotal: valorTotal.value,
                 NomeCliente: nomeCliente.value,
                 ContatoCliente: contatoCliente.value,
-                EnderecoEntrega: enderecoEntrega.value
+                EnderecoEntrega: enderecoEntrega.value,
+                DataAniversario: dataAniversario.value,
+                TaxaEntrega: TaxaEntrega.value
+
         
             }).then(()=>{
                 console.log("Pedido atualizado com sucesso!")
