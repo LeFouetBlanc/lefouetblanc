@@ -2,7 +2,7 @@ import {logOut} from './auth.js';
 
 let fila = document.getElementById('fila')
 
-lerPedidos()
+
 
 
 
@@ -10,58 +10,94 @@ document.getElementById('btLogout').addEventListener('click', logOut)
  
 //Lendo pedidos na tela de fila
 function lerPedidos(){
-    let userId = localStorage.getItem('UserId')
-    let pedidosRef = firebase.database().ref('formulario-np/' + userId)
-    
-    let pedidos = []
+  let userId = localStorage.getItem('UserId')
+  let pedidosRef = firebase.database().ref('formulario-np/' + userId)
 
-    pedidosRef.on("value", (snapshot) => {
-      console.log("Dados lidos com sucesso.")
+  let pedidos = []
 
+  pedidosRef.on("value", (snapshot) => {
+    console.log("Dados lidos com sucesso.")
 
-      fila.innerHTML = ""
-  
-      snapshot.forEach((childSnapshot) => {
-        var pedido = childSnapshot.val()
-        pedidos.push(pedido)
-        
-        if (pedido.Concluido == false || pedido.Concluido == true) {
-          
-          // Definir o tamanho máximo de caracteres permitidos para a descrição
-          const maxDescricaoLength = 200;
-        
-          // Obter o tamanho disponível para a descrição com base no tamanho do título
-          const tituloLength = pedido.NomeCliente.length;
-          const maxDescricaoSize = 50;
+    fila.innerHTML = ""
 
-          let nomePedido = pedido.NomeCliente.substring(0, 20)
-        
-          // Limitar o número de caracteres da descrição com base no espaço disponível
-          let descricao = pedido.Descricao[0].substring(0, maxDescricaoSize);
-          if (pedido.Descricao[0].length > maxDescricaoSize) {
-            descricao += '...';
-          }
+    snapshot.forEach((childSnapshot) => {
+      var pedido = childSnapshot.val()
+      pedidos.push(pedido)
 
-          fila.innerHTML += `
-            <div class="box-pedido" id="boxPedido" data-pedido-id="${childSnapshot.key}" name="boxPedido${pedidos.length}">
-            
-              <h2>${pedido.NumeroPedido} - ${nomePedido}</h2>
-              <h4 style="margin-bottom: 10px;">${pedido.DataEntrega}</h4>
-              <p class="descricao">${descricao}</p>
-        
-              
-              <div id="boxStatusAndamento" class="boxStatusAndamento" value='${pedido.StatusAndamento}'></div>
-              <button class="btGrey2 btSobre" id="btConcluido" data-pedido-id="${childSnapshot.key}">Concluir</button>
-              
-            </div>
-          `;
-          if(pedido.StatusAndamento == 'Concluido'){
-            document.querySelector(`[data-pedido-id='${childSnapshot.key}']`).style.display = "none"
-          }
-          
+     
+      if (pedido.Concluido == false || pedido.Concluido == true) {
+
+        // Definir o tamanho máximo de caracteres permitidos para a descrição
+        const maxDescricaoLength = 200;
+
+        // Obter o tamanho disponível para a descrição com base no tamanho do título
+        const tituloLength = pedido.NomeCliente.length;
+        const maxDescricaoSize = 50;
+
+        let nomePedido = pedido.NomeCliente.substring(0, 20)
+
+        // Limitar o número de caracteres da descrição com base no espaço disponível
+        let descricao = pedido.Descricao[0].substring(0, maxDescricaoSize);
+        if (pedido.Descricao[0].length > maxDescricaoSize) {
+          descricao += '...';
         }
-      })
-      console.log(pedidos)
+
+      
+        fila.innerHTML += `
+          <div class="box-pedido" id="boxPedido" data-pedido-id="${childSnapshot.key}" name="boxPedido${pedidos.length}" data-dataentrega="${pedido.DataEntregaInversa}">
+
+            <h2>${pedido.NumeroPedido} - ${nomePedido}</h2>
+            <h4 style="margin-bottom: 10px;">${pedido.DataEntrega}</h4>
+            <p class="descricao">${descricao}</p>
+
+
+            <div id="boxStatusAndamento" class="boxStatusAndamento" value='${pedido.StatusAndamento}'></div>
+            <button class="btGrey2 btSobre" id="btConcluido" data-pedido-id="${childSnapshot.key}">Concluir</button>
+
+          </div>
+        `;
+        if(pedido.StatusAndamento == 'Concluido'){
+          document.querySelector(`[data-pedido-id='${childSnapshot.key}']`).style.display = "none"
+        }
+
+        
+      }
+      
+      ordenarPedidosPorDataEntregaInversa();
+    });
+
+    function ordenarPedidosPorDataEntregaInversa() {
+      let pedidosObj = {};
+      let pedidos = Array.from(document.querySelectorAll(".box-pedido"));
+    
+      pedidos.forEach((pedido) => {
+        let pedidoId = pedido.getAttribute("data-pedido-id");
+        pedidosObj[pedidoId] = {
+          element: pedido,
+          dataEntregaInversa: pedido.getAttribute("data-dataentrega"),
+          statusAndamento: pedido.querySelector(".boxStatusAndamento").getAttribute("value")
+        };
+      });
+    
+      let pedidosOrdenados = Object.values(pedidosObj).sort((a, b) => {
+        let dataA = a.dataEntregaInversa;
+        let dataB = b.dataEntregaInversa;
+        return dataA.localeCompare(dataB);
+      });
+    
+      fila.innerHTML = "";
+    
+      pedidosOrdenados.forEach((pedido) => {
+        let pedidoId = pedido.element.getAttribute("data-pedido-id");
+        fila.appendChild(pedido.element);
+    
+        if (pedido.statusAndamento == 'Concluido') {
+          document.querySelector(`[data-pedido-id='${pedidoId}']`).style.display = "none";
+        }
+      });
+    }
+
+   
 
       for(let i = 0; i <= pedidos.length; i++){ 
         if(document.querySelectorAll('.boxStatusAndamento')[i]){
@@ -149,6 +185,9 @@ window.onload = () => {
   if(localStorage.getItem('pedidoId')){
     localStorage.removeItem('pedidoId')
   }
+  lerPedidos()
+  //fila.style.flexDirection = 'row-reverse'
+
 }
 
 function goToTodosPedidos(){

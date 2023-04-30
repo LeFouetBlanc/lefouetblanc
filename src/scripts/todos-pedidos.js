@@ -25,10 +25,6 @@ function filtroTodos() {
         const pedido = pedidos[key];
         console.log(pedido.StatusPagamento)
 
-        
-
-        console.log(pedido.StatusAndamento)
-
         const andamentoPedido = pedido.StatusAndamento;
         let aux_andamentoPedido;
 
@@ -67,10 +63,6 @@ function filtroTodos() {
           break;
         }
 
-        
-
-        
-        
         const tr = document.createElement('tr');
 
         tr.innerHTML = `
@@ -108,8 +100,6 @@ function filtroTodos() {
         
         if(key < pedido){
           tbody.appendChild(tr)
-
-          
         }
 
         let selectPagamento = tr.querySelector('#selectPagamento');
