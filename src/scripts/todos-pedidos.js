@@ -7,7 +7,32 @@ var dia = String(data.getDate()).padStart(2, '0');
 var mes = String(data.getMonth() + 1).padStart(2, '0');
 var ano = data.getFullYear();
 let dataAtual = dia + '/' + mes + '/' + ano;
-console.log(dataAtual)
+
+//Semana
+var data7 = new Date();
+data.setDate(data.getDate() - 7); // subtrai 7 dias
+var dia7 = String(data.getDate()).padStart(2, '0');
+var mes7 = String(data.getMonth() + 1).padStart(2, '0');
+var ano7 = data.getFullYear();
+var dataSeteDiasAtras = dia7 + '/' + mes7 + '/' + ano7;
+console.log(dataSeteDiasAtras);
+
+//Mes
+var data30 = new Date();
+data.setDate(data.getDate()); // subtrai 7 dias
+var dia30 = String(data.getDate()).padStart(2, '0');
+var mes30 = String(data.getMonth()).padStart(2, '0');
+var ano30 = data.getFullYear();
+var dataTrintaDiasAtras = dia30 + '/' + mes30 + '/' + ano30;
+console.log(dataTrintaDiasAtras);
+
+
+
+function getWeek(date) {
+  const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+  const pastDaysOfYear = (date - firstDayOfYear) / 86400000;
+  return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay()-7) / 1);
+}
 
 let userId = localStorage.getItem('UserId')
 let pedidosRef = firebase.database().ref('formulario-np/' + userId + '/')
@@ -196,8 +221,8 @@ function filtroTodos() {
   }  
 
 
-function filtroHoje(dataSelecionada){
-  pedidosRef.orderByChild('DataPedido').equalTo(dataSelecionada).on('value', (snapshot) => {
+function filtroPorData(dataSelecionada, dataSelecionada2){
+  pedidosRef.orderByChild('DataPedido').startAt(dataSelecionada).endAt(dataSelecionada2).on('value', (snapshot) => {
     const pedidos = snapshot.val();
     const tbody = document.querySelector('#tabela-pedidos tbody');
     tbody.innerHTML = '';
@@ -317,13 +342,20 @@ function filtroHoje(dataSelecionada){
 
 
 
+    
+  
+
+
 document.getElementById('select-filtro').addEventListener('change', ()=>{
     if(document.getElementById('select-filtro').value == 'pedidosHoje'){
-        filtroHoje(dataAtual)
+      filtroPorData(dataAtual, dataAtual)
     } else if(document.getElementById('select-filtro').value == 'pedidosSemana') {
-      //filtroSemana()
+      filtroPorData(dataSeteDiasAtras, dataAtual)
+
+    }else if(document.getElementById('select-filtro').value == 'pedidosMes') {
+      filtroPorData(dataTrintaDiasAtras, dataAtual)
     }else{
-      filtroTodos()
+        filtroTodos()
     }
       
     

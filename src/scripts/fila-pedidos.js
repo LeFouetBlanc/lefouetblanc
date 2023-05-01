@@ -52,7 +52,7 @@ function lerPedidos(){
             <p class="descricao">${descricao}</p>
 
 
-            <div id="${pedido.StatusAndamento}" class="boxStatusAndamento" value='${pedido.StatusAndamento}'></div>
+            <div id="${pedido.StatusAndamento}" class="boxStatusAndamento"></div>
             
             <button class="btGrey2 btSobre" id="btConcluido" data-pedido-id="${childSnapshot.key}">Concluir</button>
 
