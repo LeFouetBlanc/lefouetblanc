@@ -233,6 +233,10 @@ function carregarPedido() {
 
             }
 
+            let partes = dataEntrega.value.split('/')
+
+            let dataEntregaInversa = partes[2] + "/" + partes[1] + "/" + partes[0];
+
             pedidoRef.update({
                 Pedido: pedidos,
                 DataEntrega: dataEntrega.value,
@@ -245,7 +249,8 @@ function carregarPedido() {
                 ContatoCliente: contatoCliente.value,
                 EnderecoEntrega: enderecoEntrega.value,
                 DataAniversario: dataAniversario.value,
-                TaxaEntrega: TaxaEntrega.value
+                TaxaEntrega: TaxaEntrega.value,
+                DataEntregaInversa: dataEntregaInversa
 
         
             }).then(()=>{
