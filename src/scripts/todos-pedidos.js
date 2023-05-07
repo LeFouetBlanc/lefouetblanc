@@ -7,6 +7,8 @@ var dia = String(data.getDate()).padStart(2, '0');
 var mes = String(data.getMonth() + 1).padStart(2, '0');
 var ano = data.getFullYear();
 let dataAtual = dia + '/' + mes + '/' + ano;
+let dataSemana = dia - 7 + '/' + mes + '/' + ano;
+let dataMes = dia + '/' + mes - 1 + '/' + ano;
 
 //Semana
 var data7 = new Date();
@@ -222,7 +224,7 @@ function filtroTodos() {
 
 
 function filtroPorData(dataSelecionada, dataSelecionada2){
-  pedidosRef.orderByChild('DataPedido').startAt(dataSelecionada).endAt(dataSelecionada2).on('value', (snapshot) => {
+  pedidosRef.orderByChild('DataEntrega').startAt(dataSelecionada).endAt(dataSelecionada2).on('value', (snapshot) => {
     const pedidos = snapshot.val();
     const tbody = document.querySelector('#tabela-pedidos tbody');
     tbody.innerHTML = '';
@@ -350,10 +352,10 @@ document.getElementById('select-filtro').addEventListener('change', ()=>{
     if(document.getElementById('select-filtro').value == 'pedidosHoje'){
       filtroPorData(dataAtual, dataAtual)
     } else if(document.getElementById('select-filtro').value == 'pedidosSemana') {
-      filtroPorData(dataSeteDiasAtras, dataAtual)
+      filtroPorData(dataSemana, dataAtual)
 
     }else if(document.getElementById('select-filtro').value == 'pedidosMes') {
-      filtroPorData(dataTrintaDiasAtras, dataAtual)
+      filtroPorData(dataMes, dataAtual)
     }else{
         filtroTodos()
     }

@@ -31,7 +31,7 @@ function carregarPedido() {
     <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">${pedido.Descricao[i]}</textarea>
                     <br>
     <h5>Valor do pedido</h5>
-    <input type="text" id="editarValorPedido" value="${pedido.ValorPedido[i]}">
+    <input type="text" id="editarValorPedido" class="editarValorPedido" value="${pedido.ValorPedido[i]}" onkeyup="calcValorTotal()" >
  
                     <br>                
                     <hr class="hr-divisoria"> 
@@ -49,14 +49,14 @@ function carregarPedido() {
     <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">${pedido.Descricao[i]}</textarea>
                     <br>
     <h5>Valor do pedido</h5>
-    <input type="text" id="editarValorPedido" value="${pedido.ValorPedido[i]}">
+    <input type="text" id="editarValorPedido" class="editarValorPedido" value="${pedido.ValorPedido[i]}" onkeyup="calcValorTotal()" >
 
                     <hr class="hr-divisoria"> 
 
                     <h3>Personalização ${[i+1]}</h3>
                     <br>
     <textarea id="editarPersonalizacao" value="${pedido.Personalizacoes[i]}" rows="7">${pedido.Personalizacoes[i]}</textarea>
-    <input type="text" id="editarValorExtra" value="${pedido.ValorExtra[i]}">
+    <input type="text" id="editarValorExtra" value="${pedido.ValorExtra[i]}" onkeyup="calcValorTotal()" >
                 
                     <hr class="hr-divisoria"> 
                     <!--FIM PEDIDO-->
@@ -75,7 +75,7 @@ function carregarPedido() {
     <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">${pedido.Descricao[i]}</textarea>
                     <br>
     <h5>Valor do pedido</h5>
-    <input type="text" id="editarValorPedido" value="${pedido.ValorPedido[i]}">
+    <input type="text" id="editarValorPedido" id="editarValorPedido" value="${pedido.ValorPedido[i]}" onkeyup="calcValorTotal()" >
 
                     <br>                
                     <hr class="hr-divisoria"> 
@@ -89,7 +89,7 @@ function carregarPedido() {
     
             <br>
     <h3>Pedido ${i+1}</h3>
-    <input type="text" id="editarPedido" value="${pedido.Pedido[i]}">
+    <input type="text" id="editarPedido" value="${pedido.Pedido[i]}" onkeyup="calcValorTotal()" >
 
     
                     <br>
@@ -97,14 +97,14 @@ function carregarPedido() {
     <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">${pedido.Descricao[i]}</textarea>
                     <br>
     <h5>Valor do pedido</h5>
-    <input type="text" id="editarValorPedido" value="${pedido.ValorPedido[i]}">
+    <input type="text" id="editarValorPedido" id="editarValorPedido" value="${pedido.ValorPedido[i]}" onkeyup="calcValorTotal()" >
 
                     <hr class="hr-divisoria"> 
 
                     <h3>Personalização ${[i+1]}</h3>
                     <br>
     <textarea id="editarPersonalizacao" value="${pedido.Personalizacoes[i]}" rows="7">${pedido.Personalizacoes[i]}</textarea>
-    <input type="text" id="editarValorExtra" value="${pedido.ValorExtra[i]}">
+    <input type="text" id="editarValorExtra" value="${pedido.ValorExtra[i]}" onkeyup="calcValorTotal()" >
                 
                     <hr class="hr-divisoria"> 
                     <!--FIM PEDIDO-->
@@ -137,12 +137,12 @@ function carregarPedido() {
             
             <br>
             <h3>Taxa de Entrega: </h3>
-            <input type="text" id="TaxaEntrega" value="${pedido.TaxaEntrega}">
+            <input type="text" id="TaxaEntrega" value="${pedido.TaxaEntrega}" onkeyup="calcValorTotal()" >
             <hr class="hr-divisoria">
             
             <br>
             <h3>Valor Total: </h3>
-            <input type="text" id="EditarValorTotal" value="${pedido.ValorTotal}">
+            <input type="text" id="EditarValorTotal" value="${pedido.ValorTotal}" disabled>
             <hr class="hr-divisoria">
             
 
@@ -262,8 +262,12 @@ function carregarPedido() {
             window.location.href = "../pages/sobre-pedido.html"
 
         })
+
         
-    })       
+        
+        
+    })    
+       
 }      
 
 function btVoltar(){
@@ -279,12 +283,81 @@ let personalizacoes = []
 let valorPedidos = []
 let valorExtras = []
 
+let taxaDeEntregaAux;
 
+
+
+//pedidoValor editarValorPedido
+//valorExtra editarValorExtra
+//TaxaEntrega TaxaEntrega
+//document.querySelector('#editarValorPedido').addEventListener('keyup', calcValorTotal)
+//document.querySelector('#editarValorExtra').addEventListener('keyup', calcValorTotal)
+//document.querySelector('#TaxaEntrega').addEventListener('keyup', calcValorTotal)
+
+
+// function calcValorTotal(){
+//     let somaTotal = 0;
+//     let auxPedidos;
+//     let aux_auxPedidos;
+//     let somaPedidos;
+
+//     let elementos = document.querySelectorAll('#editarValorPedido');
+
+//     for(let i = 0; i <= 10; i ++){
+//         auxPedidos = elementos.value
+        
+//         aux_auxPedidos = auxPedidos.replace(/R\$\s?|,/g, "");
+//       if (aux_auxPedidos == "") {
+//         aux_auxPedidos = 0;
+//       }
+//       if(aux_auxPedidos == ""){
+//         aux_auxPedidos = 0;
+//       }
+
+//       somaPedidos = somaPedidos + parseFloat(aux_auxPedidos)
+//     }
+
+//     let auxPersonalizacao;
+//     let aux_auxPersonalizacao = 0;
+//     let somaPersonalizacao = 0;
+
+//     for(let i = 0; i < 10; i++){
+//         auxPersonalizacao = document.querySelectorAll("#editarValorExtra")[i].value;
+//       aux_auxPersonalizacao = auxPersonalizacao.replace(/R\$\s?|,/g, "");
+//       if (aux_auxPersonalizacao == "") {
+//         aux_auxPersonalizacao = 0;
+//       }
   
+//       somaPersonalizacao = somaPersonalizacao + parseFloat(aux_auxPersonalizacao);
+//     }
+
+//     if(document.getElementById('TaxaEntrega').value){
+//         taxaDeEntregaAux = document.getElementById('TaxaEntrega').value
+      
+//       } else {
+//         taxaDeEntregaAux = "0"
+      
+//       }
+
+//       let taxaEntregaTratada = taxaDeEntregaAux.replace(/R\$\s?|,/g, "");
+
+//       somaTotal = parseFloat(taxaEntregaTratada) + somaPersonalizacao + somaPedidos;
+
+//       let somaTotalTratada = somaTotal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+//       document.getElementById("EditarValorTotal").value = somaTotalTratada;
+
+//       if (j == 0 && document.querySelectorAll("#editarValorExtra").length == 0) {
+//         somaTotal = 0;
+//       }
+    
+//       return somaTotalTratada; 
+// }
+
+
+
 window.onload = () => {
      carregarPedido();
-
-     
 }
 
 
