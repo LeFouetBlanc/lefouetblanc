@@ -7,8 +7,33 @@ var dia = String(data.getDate()).padStart(2, '0');
 var mes = String(data.getMonth() + 1).padStart(2, '0');
 var ano = data.getFullYear();
 let dataAtual = dia + '/' + mes + '/' + ano;
-let dataSemana = dia - 7 + '/' + mes + '/' + ano;
-let dataMes = dia + '/' + mes - 1 + '/' + ano;
+
+
+
+const startOfWeek = new Date();
+const diaSemana = startOfWeek.getDay();
+const diff = startOfWeek.getDate() - diaSemana + (diaSemana === 0 ? -6 : 1);
+startOfWeek.setDate(diff);
+const dia2 = startOfWeek.getDate().toString().padStart(2, '0');
+const mes2 = (startOfWeek.getMonth() + 1).toString().padStart(2, '0');
+const ano2 = startOfWeek.getFullYear().toString();
+const dataSelecionadaSemana = `${dia2}/${mes2}/${ano2}`;
+console.log(dataSelecionadaSemana + ": Semana")
+
+
+const hoje3 = new Date();
+const diaMes3 = hoje3.getDate();
+const diff3 = diaMes3 - 1;
+const inicioMes3 = new Date(hoje3.setDate(diff3));
+const dia3 = inicioMes3.getDate().toString().padStart(2, '0');
+const mes3 = (inicioMes3.getMonth()).toString().padStart(2, '0');
+const ano3 = inicioMes3.getFullYear().toString();
+const dataSelecionadaMes = `${dia3}/${mes3}/${ano3}`;
+console.log(dataSelecionadaMes + ": Mês");
+
+
+
+
 
 //Semana
 var data7 = new Date();
@@ -352,10 +377,12 @@ document.getElementById('select-filtro').addEventListener('change', ()=>{
     if(document.getElementById('select-filtro').value == 'pedidosHoje'){
       filtroPorData(dataAtual, dataAtual)
     } else if(document.getElementById('select-filtro').value == 'pedidosSemana') {
-      filtroPorData(dataAtual - 7, dataAtual)
+      filtroPorData(dataSelecionadaSemana , dataAtual)
+
 
     }else if(document.getElementById('select-filtro').value == 'pedidosMes') {
-      filtroPorData(dataMes, dataAtual)
+      filtroPorData(dataSelecionadaMes, dataAtual)
+      console.log(dataSelecionadaMes + ": Mes")
     }else{
         filtroTodos()
     }
