@@ -352,7 +352,7 @@ document.getElementById('select-filtro').addEventListener('change', ()=>{
     if(document.getElementById('select-filtro').value == 'pedidosHoje'){
       filtroPorData(dataAtual, dataAtual)
     } else if(document.getElementById('select-filtro').value == 'pedidosSemana') {
-      filtroPorData(dataSemana, dataAtual)
+      filtroPorData(dataAtual - 7, dataAtual)
 
     }else if(document.getElementById('select-filtro').value == 'pedidosMes') {
       filtroPorData(dataMes, dataAtual)
