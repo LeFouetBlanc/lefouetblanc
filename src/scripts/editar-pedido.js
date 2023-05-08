@@ -3,6 +3,77 @@ let boxDetalhes = document.getElementById('box-detalhes')
 console.log(localStorage.getItem('pedidoId'))
 
 
+function calcValorTotal(){
+    let somaTotal = 0;
+  
+    // Calculo dos pedidos
+    let auxPedidos = document.querySelectorAll(`#editarValorPedido`)
+    let aux_auxPedidos;
+    let somaPedidos = 0;
+
+    let tamanho = document.querySelectorAll(`#editarValorPedido`).length
+  
+    for (let i = 0; i < tamanho; i++) {
+
+     aux_auxPedidos = auxPedidos[i].value.replace(/R\$\s?|,/g, "")
+    
+     if (aux_auxPedidos == "") {
+        aux_auxPedidos = 0;
+    }
+
+    somaPedidos = somaPedidos + parseFloat(aux_auxPedidos);
+    }
+    
+    // Calculo das personalizacoes
+    let auxPersonalizacao;
+    let aux_auxPersonalizacao = 0;
+    let somaPersonalizacao = 0;
+  
+    for (let v = 0; v < tamanho; v++) {
+      auxPersonalizacao = document.querySelectorAll("#editarValorExtra")[v].value;
+
+      aux_auxPersonalizacao = auxPersonalizacao.replace(/R\$\s?|,/g, "");
+
+      if (aux_auxPersonalizacao == "") {
+        aux_auxPersonalizacao = 0;
+      }
+  
+      somaPersonalizacao = somaPersonalizacao + parseFloat(aux_auxPersonalizacao);
+    }
+
+    if(document.getElementById('TaxaEntrega').value){
+        taxaEntrega = document.getElementById('TaxaEntrega').value
+      
+      } else {
+        taxaEntrega = "0"
+      
+      }
+    
+      let taxaEntregaTratada = taxaEntrega.replace(/R\$\s?|,/g, "");
+    
+      // Calculo total
+      somaTotal = parseFloat(taxaEntregaTratada) + somaPersonalizacao + somaPedidos;
+      let somaTotalTratada = somaTotal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    
+      // Mostrar valor no final
+      document.getElementById("EditarValorTotal").value = somaTotalTratada;
+    
+      // se não houver pedidos ou personalizações, definir o valor total como zero
+      if (tamanho == 0 && document.querySelectorAll(".editarValorExtra").length == 0) {
+        somaTotal = 0;
+      }
+    
+      console.log(somaTotalTratada);
+      document.getElementById(`EditarValorTotal`).value = somaTotalTratada
+  }
+    
+     
+    
+
+   
+   
+
+    
 
 
 
@@ -31,7 +102,7 @@ function carregarPedido() {
     <textarea id="editarDescricao" value='${pedido.Descricao[i]}'rows="7">${pedido.Descricao[i]}</textarea>
                     <br>
     <h5>Valor do pedido</h5>
-    <input type="text" id="editarValorPedido" class="editarValorPedido" value="${pedido.ValorPedido[i]}" onkeyup="calcValorTotal()" >
+    <input type="text" id="editarValorPedido" class="editarValorPedido" value="${pedido.ValorPedido[i]}onkeyup="calcValorTotal()">
  
                     <br>                
                     <hr class="hr-divisoria"> 
@@ -142,7 +213,7 @@ function carregarPedido() {
             
             <br>
             <h3>Valor Total: </h3>
-            <input type="text" id="EditarValorTotal" value="${pedido.ValorTotal}" disabled>
+            <input type="text" id="EditarValorTotal" placeholder="${pedido.ValorTotal}" disabled>
             <hr class="hr-divisoria">
             
 
@@ -233,6 +304,8 @@ function carregarPedido() {
 
             }
 
+            
+
             let partes = dataEntrega.value.split('/')
 
             let dataEntregaInversa = partes[2] + "/" + partes[1] + "/" + partes[0];
@@ -261,11 +334,7 @@ function carregarPedido() {
 
             window.location.href = "../pages/sobre-pedido.html"
 
-        })
-
-        
-        
-        
+        }) 
     })    
        
 }      
@@ -284,6 +353,8 @@ let valorPedidos = []
 let valorExtras = []
 
 let taxaDeEntregaAux;
+
+
 
 
 
@@ -354,10 +425,22 @@ let taxaDeEntregaAux;
 //       return somaTotalTratada; 
 // }
 
+const inputEditarValorTotal = document.querySelector('#EditarValorTotal');
+
 
 
 window.onload = () => {
+    
      carregarPedido();
+   
+     
+
+     setTimeout(() => {
+        // console.log(calcValorTotal());
+        // document.querySelector('#EditarValorTotal').value = calcValorTotal();
+   
+     }, 2000)
+     
 }
 
 
