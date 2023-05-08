@@ -89,7 +89,7 @@ function carregarPedido() {
         </div><!--BOX PEDIDO-->
                 
             `;
-        } else if(pedido.Personalizacoes[i] != "" && pedido.Imagens[pedido.Imagens.length - 1][i] == ""){
+        } else if(pedido.Personalizacoes[i] != "" && pedido.Imagens[pedido.Imagens.length - 1][i] == "" || pedido.Imagens[pedido.Imagens.length-1][i] == undefined){
             //Com personalizacao e sem imagem
             boxMaior.innerHTML += `
             <div class="boxPedido">

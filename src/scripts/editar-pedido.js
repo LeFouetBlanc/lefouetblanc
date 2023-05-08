@@ -5,7 +5,7 @@ console.log(localStorage.getItem('pedidoId'))
 
 function calcValorTotal(){
     let somaTotal = 0;
-  
+    
     // Calculo dos pedidos
     let auxPedidos = document.querySelectorAll(`#editarValorPedido`)
     let aux_auxPedidos;
@@ -25,21 +25,24 @@ function calcValorTotal(){
     }
     
     // Calculo das personalizacoes
-    let auxPersonalizacao;
+    let auxPersonalizacao = document.querySelectorAll("#editarValorExtra");
     let aux_auxPersonalizacao = 0;
     let somaPersonalizacao = 0;
   
-    for (let v = 0; v < tamanho; v++) {
-      auxPersonalizacao = document.querySelectorAll("#editarValorExtra")[v].value;
+    let tamanhoPerson = document.querySelectorAll(`#editarValorExtra`).length
+    console.log(tamanhoPerson)
 
-      aux_auxPersonalizacao = auxPersonalizacao.replace(/R\$\s?|,/g, "");
+        for (let v = 0; v < tamanhoPerson; v++) {
+            
+            aux_auxPersonalizacao = auxPersonalizacao[v].value.replace(/R\$\s?|,/g, "");
+      
+            if (aux_auxPersonalizacao == "") {
+              aux_auxPersonalizacao = 0;
+            }
+        
+            somaPersonalizacao = somaPersonalizacao + parseFloat(aux_auxPersonalizacao);
+          }
 
-      if (aux_auxPersonalizacao == "") {
-        aux_auxPersonalizacao = 0;
-      }
-  
-      somaPersonalizacao = somaPersonalizacao + parseFloat(aux_auxPersonalizacao);
-    }
 
     if(document.getElementById('TaxaEntrega').value){
         taxaEntrega = document.getElementById('TaxaEntrega').value
@@ -137,7 +140,6 @@ function carregarPedido() {
                 //sem personalizacao e com imagem
 
                 boxDetalhes.innerHTML += `
-    <img class="img-pedido" id="img-pedido" src=${pedido.Imagens[pedido.Imagens.length - 1][i]}>
             <br>
     <h3>Pedido ${i+1}</h3>
     <input type="text" id="editarPedido" value="${pedido.Pedido[i]}">
