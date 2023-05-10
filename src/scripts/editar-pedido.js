@@ -267,7 +267,7 @@ function carregarPedido() {
 
         let valorTotal = document.querySelector(`#EditarValorTotal`)
 
-        let dataEntrega = document.querySelector(`#editarDataEntrega`)
+        let dataEntrega = document.getElementById(`editarDataEntrega`)
 
         let dataAniversario = document.querySelector(`#DataAniversario`)
 

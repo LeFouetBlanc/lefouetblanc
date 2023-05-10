@@ -7,7 +7,7 @@ var dia = String(data.getDate()).padStart(2, '0');
 var mes = String(data.getMonth() + 1).padStart(2, '0');
 var ano = data.getFullYear();
 let dataAtual = dia + '/' + mes + '/' + ano;
-
+console.log(dataAtual)
 
 
 const startOfWeek = new Date();
@@ -23,36 +23,13 @@ console.log(dataSelecionadaSemana + ": Semana")
 
 const hoje3 = new Date();
 const diaMes3 = hoje3.getDate();
-const diff3 = diaMes3 - 1;
+const diff3 = diaMes3;
 const inicioMes3 = new Date(hoje3.setDate(diff3));
 const dia3 = inicioMes3.getDate().toString().padStart(2, '0');
-const mes3 = (inicioMes3.getMonth()).toString().padStart(2, '0');
+const mes3 = (inicioMes3.getMonth() + 1).toString().padStart(2, '0');
 const ano3 = inicioMes3.getFullYear().toString();
 const dataSelecionadaMes = `${dia3}/${mes3}/${ano3}`;
 console.log(dataSelecionadaMes + ": Mês");
-
-
-
-
-
-//Semana
-var data7 = new Date();
-data.setDate(data.getDate() - 7); // subtrai 7 dias
-var dia7 = String(data.getDate()).padStart(2, '0');
-var mes7 = String(data.getMonth() + 1).padStart(2, '0');
-var ano7 = data.getFullYear();
-var dataSeteDiasAtras = dia7 + '/' + mes7 + '/' + ano7;
-console.log(dataSeteDiasAtras);
-
-//Mes
-var data30 = new Date();
-data.setDate(data.getDate()); // subtrai 7 dias
-var dia30 = String(data.getDate()).padStart(2, '0');
-var mes30 = String(data.getMonth()).padStart(2, '0');
-var ano30 = data.getFullYear();
-var dataTrintaDiasAtras = dia30 + '/' + mes30 + '/' + ano30;
-console.log(dataTrintaDiasAtras);
-
 
 
 function getWeek(date) {
@@ -117,6 +94,25 @@ function filtroTodos() {
 
         const tr = document.createElement('tr');
 
+        let DataEntregaAuxiliar = pedido.DataEntrega;
+        let partes;
+
+        if(pedido.DataEntrega != undefined){
+        partes = pedido.DataEntrega.split('/')
+       
+
+        let mesFormatado = parseInt(partes[1]) + 1
+
+        let DataEntregaExcel = partes[2] + '/' + partes[1] + '/' + partes[0]
+     
+        DataEntregaAuxiliar = DataEntregaExcel
+        }
+       
+
+        
+
+       //let dataEntregaInversa = partes[2] + "/" + partes[1] + "/" + partes[0];
+        
         tr.innerHTML = `
                   <td>${pedido.NumeroPedido}</td>
                   <td>${pedido.ContatoCliente}</td>
@@ -124,7 +120,7 @@ function filtroTodos() {
                   <td>${pedido.Pedido}</td>
                   <td>${pedido.Descricao}</td>
                   <td>${pedido.Personalizacoes}</td>
-                  <td>${pedido.DataEntrega}</td>
+                  <td>${DataEntregaAuxiliar}</td>
                   <td>${pedido.EnderecoEntrega}</td>
                   <td>${pedido.DataAniversario}</td>
                   
@@ -148,10 +144,15 @@ function filtroTodos() {
                   </td>
                   <td><span id='btApagarPedido' data-pedido-id='${key}'>X</td>
         `;
-
         
         if(key < pedido){
           tbody.appendChild(tr)
+          if(pedido.DataEntrega != undefined){
+          
+          let mesFormatado = parseInt(partes[1]) + 1
+
+          let DataEntregaExcel = partes[2] + '/' + mesFormatado + '/' + partes[0]
+          }
         }
 
         let selectPagamento = tr.querySelector('#selectPagamento');
@@ -164,9 +165,7 @@ function filtroTodos() {
               break;
             }
           }
-
-         
-
+ 
           let statusPagamentoAuxiliar;
 
           selectPagamento.addEventListener('change', ()=> {
@@ -280,6 +279,22 @@ function filtroPorData(dataSelecionada, dataSelecionada2){
       }
 
       const tr = document.createElement('tr');
+      
+      
+      let DataEntregaAuxiliar = pedido.DataEntrega;
+      let partes;
+
+      if(pedido.DataEntrega != undefined){
+      partes = pedido.DataEntrega.split('/')
+     
+
+      let mesFormatado = parseInt(partes[1]) + 1
+
+      let DataEntregaExcel = partes[2] + '/' + partes[1] + '/' + partes[0]
+   
+      DataEntregaAuxiliar = DataEntregaExcel
+      }
+     
 
       tr.innerHTML = `
                   <td>${pedido.NumeroPedido}</td>
@@ -288,7 +303,7 @@ function filtroPorData(dataSelecionada, dataSelecionada2){
                   <td>${pedido.Pedido}</td>
                   <td>${pedido.Descricao}</td>
                   <td>${pedido.Personalizacoes}</td>
-                  <td>${pedido.DataEntrega}</td>
+                  <td value="${pedido.DataEntrega}">${pedido.DataEntrega}</td>
                   <td>${pedido.EnderecoEntrega}</td>
                   <td>${pedido.DataAniversario}</td>
                   <td>${pedido.StatusPagamento}</td>
@@ -308,6 +323,12 @@ function filtroPorData(dataSelecionada, dataSelecionada2){
 
         if(key < pedido){
           tbody.appendChild(tr)
+          if(pedido.DataEntrega != undefined){
+          
+            let mesFormatado = parseInt(partes[1]) + 1
+  
+            let DataEntregaExcel = partes[2] + '/' + mesFormatado + '/' + partes[0]
+            }
         }
 
         const btApagar = tr.querySelector('#btApagarPedido')
@@ -383,7 +404,8 @@ document.getElementById('select-filtro').addEventListener('change', ()=>{
     }else if(document.getElementById('select-filtro').value == 'pedidosMes') {
       filtroPorData(dataSelecionadaMes, dataAtual)
       console.log(dataSelecionadaMes + ": Mes")
-    }else{
+
+    }else if(document.getElementById('select-filtro').value == 'pedidosTodos'){
         filtroTodos()
     }
       
@@ -425,14 +447,27 @@ function goToFilaPedidos(){
 document.getElementById('goToFila').addEventListener('click', goToFilaPedidos)
 
 let filtroData = document.getElementById('select-filtro')
+ 
+// console.log('tabela: ', tabela)
 
+// const tableData = XLSX.utils.table_to_sheet(tabela);
+// console.log(tableData)
 //Exportando para excel
+
+
+const dateColumns = ['G'];
+
 function exportarParaExcel() {
   // Selecionando a tabela
   const tabela = document.querySelector('#tabela-pedidos');
 
   // Selecionando os dados da tabela
   const tableData = XLSX.utils.table_to_sheet(tabela);
+  console.log(tableData)
+
+
+
+  console.log(tableData);
 
   // Cria um elemento input de tipo file
   const input = document.createElement('input');
@@ -486,14 +521,15 @@ function exportarParaExcel() {
   // Clica no botão de seleção de arquivo
   input.click();
 }
-
-// Converte uma string para um ArrayBuffer
-function s2ab(s) {
-  const buf = new ArrayBuffer(s.length);
-  const view = new Uint8Array(buf);
-  for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
-  return buf;
-}
+ 
+ // Converte uma string para um ArrayBuffer
+ function s2ab(s) {
+   const buf = new ArrayBuffer(s.length);
+   const view = new Uint8Array(buf);
+   for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+   return buf;
+ }
+ 
 
 document.getElementById('btExportar').addEventListener('click', exportarParaExcel)
 
