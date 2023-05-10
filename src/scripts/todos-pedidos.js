@@ -463,11 +463,17 @@ function exportarParaExcel() {
 
   // Selecionando os dados da tabela
   const tableData = XLSX.utils.table_to_sheet(tabela);
+
   console.log(tableData)
 
+  for (let i = 3; true; i++) {
+    if(tableData[`G${i}`] == undefined){
+      break;
+    }
+    tableData[`G${i}`].z = 'd/m/yy';
+  }
 
-
-  console.log(tableData);
+  console.log(tableData)
 
   // Cria um elemento input de tipo file
   const input = document.createElement('input');
