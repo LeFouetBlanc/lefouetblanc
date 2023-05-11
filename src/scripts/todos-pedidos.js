@@ -43,7 +43,11 @@ let pedidosRef = firebase.database().ref('formulario-np/' + userId + '/')
 let listaStatusAndamento = ["NovoPedido", "Preparando", "AguardandoEnvio", "Concluido"];
 
 
+let listaDatasEntrega = []
+
+
 function filtroTodos() {
+   listaDatasEntrega = []
     //select pedidosTodos
     pedidosRef.on('value', (snapshot) => {
       const pedidos = snapshot.val();
@@ -112,7 +116,7 @@ function filtroTodos() {
         
 
        //let dataEntregaInversa = partes[2] + "/" + partes[1] + "/" + partes[0];
-        
+       listaDatasEntrega.push(pedido.DataEntrega)
         tr.innerHTML = `
                   <td>${pedido.NumeroPedido}</td>
                   <td>${pedido.ContatoCliente}</td>
@@ -120,7 +124,7 @@ function filtroTodos() {
                   <td>${pedido.Pedido}</td>
                   <td>${pedido.Descricao}</td>
                   <td>${pedido.Personalizacoes}</td>
-                  <td>${DataEntregaAuxiliar}</td>
+                  <td>${pedido.DataEntrega}</td>
                   <td>${pedido.EnderecoEntrega}</td>
                   <td>${pedido.DataAniversario}</td>
                   
@@ -248,6 +252,7 @@ function filtroTodos() {
 
 
 function filtroPorData(dataSelecionada, dataSelecionada2){
+  listaDatasEntrega = []
   pedidosRef.orderByChild('DataEntrega').startAt(dataSelecionada).endAt(dataSelecionada2).on('value', (snapshot) => {
     const pedidos = snapshot.val();
     const tbody = document.querySelector('#tabela-pedidos tbody');
@@ -295,7 +300,7 @@ function filtroPorData(dataSelecionada, dataSelecionada2){
         DataEntregaAuxiliar = DataEntregaExcel
       
      
-
+      listaDatasEntrega.push(pedido.DataEntrega)
       tr.innerHTML = `
                   <td>${pedido.NumeroPedido}</td>
                   <td>${pedido.ContatoCliente}</td>
@@ -303,7 +308,7 @@ function filtroPorData(dataSelecionada, dataSelecionada2){
                   <td>${pedido.Pedido}</td>
                   <td>${pedido.Descricao}</td>
                   <td>${pedido.Personalizacoes}</td>
-                  <td>${DataEntregaAuxiliar}</td>
+                  <td>${pedido.DataEntrega}</td>
                   <td>${pedido.EnderecoEntrega}</td>
                   <td>${pedido.DataAniversario}</td>
                   <td>${pedido.StatusPagamento}</td>
@@ -396,16 +401,20 @@ function filtroPorData(dataSelecionada, dataSelecionada2){
 
 document.getElementById('select-filtro').addEventListener('change', ()=>{
     if(document.getElementById('select-filtro').value == 'pedidosHoje'){
+
       filtroPorData(dataAtual, dataAtual)
     } else if(document.getElementById('select-filtro').value == 'pedidosSemana') {
-      filtroPorData(dataSelecionadaSemana , dataAtual)
+   
+      filtroPorData(dataAtual , dataSelecionadaSemana)
 
 
     }else if(document.getElementById('select-filtro').value == 'pedidosMes') {
+ 
       filtroPorData(dataSelecionadaMes, dataAtual)
       console.log(dataSelecionadaMes + ": Mes")
 
     }else if(document.getElementById('select-filtro').value == 'pedidosTodos'){
+    
         filtroTodos()
     }
       
@@ -463,18 +472,20 @@ function exportarParaExcel() {
 
   // Selecionando os dados da tabela
   const tableData = XLSX.utils.table_to_sheet(tabela);
-
+  console.log(listaDatasEntrega)
   // console.log(tableData)
 
-  for (let i = 1; true; i++) {
+  for (let i = 2; true; i++) {
     if(tableData[`G${i}`] == undefined){
       break;
     }
-    if(tableData[`G${i}`].z == 'm/d/yy'){
-      tableData[`G${i}`].z = 'd/m/yy';
-    }
+    // if(tableData[`G${i}`].z == 'm/d/yy'){
+    //   tableData[`G${i}`].v = listaDatasEntrega[i-1]
+    //   // tableData[`G${i}`].t = 's'
+    // }
 
-    tableData[`G${i}`].z = 'd/m/yy';
+    tableData[`G${i}`].v = `${listaDatasEntrega[i-2]}`
+    tableData[`G${i}`].t = 's'
   }
 
   console.log(tableData)
