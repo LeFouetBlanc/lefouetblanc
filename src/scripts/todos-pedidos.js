@@ -98,14 +98,14 @@ function filtroTodos() {
         let partes;
 
         if(pedido.DataEntrega != undefined){
-        partes = pedido.DataEntrega.split('/')
-       
+          partes = pedido.DataEntrega.split('/')
+        
 
-        let mesFormatado = parseInt(partes[1]) + 1
+          let mesFormatado = parseInt(partes[1]) + 1
 
-        let DataEntregaExcel = partes[2] + '/' + partes[1] + '/' + partes[0]
-     
-        DataEntregaAuxiliar = DataEntregaExcel
+          let DataEntregaExcel = partes[2] + '/' + partes[1] + '/' + partes[0]
+      
+          DataEntregaAuxiliar = DataEntregaExcel
         }
        
 
@@ -284,16 +284,16 @@ function filtroPorData(dataSelecionada, dataSelecionada2){
       let DataEntregaAuxiliar = pedido.DataEntrega;
       let partes;
 
-      if(pedido.DataEntrega != undefined){
-      partes = pedido.DataEntrega.split('/')
      
+        partes = pedido.DataEntrega.split('/')
+      
 
-      let mesFormatado = parseInt(partes[1]) + 1
+        let mesFormatado = parseInt(partes[1]) + 1
 
-      let DataEntregaExcel = partes[2] + '/' + partes[1] + '/' + partes[0]
-   
-      DataEntregaAuxiliar = DataEntregaExcel
-      }
+        let DataEntregaExcel = partes[2] + '/' + partes[1] + '/' + partes[0]
+    
+        DataEntregaAuxiliar = DataEntregaExcel
+      
      
 
       tr.innerHTML = `
@@ -303,7 +303,7 @@ function filtroPorData(dataSelecionada, dataSelecionada2){
                   <td>${pedido.Pedido}</td>
                   <td>${pedido.Descricao}</td>
                   <td>${pedido.Personalizacoes}</td>
-                  <td value="${pedido.DataEntrega}">${pedido.DataEntrega}</td>
+                  <td>${DataEntregaAuxiliar}</td>
                   <td>${pedido.EnderecoEntrega}</td>
                   <td>${pedido.DataAniversario}</td>
                   <td>${pedido.StatusPagamento}</td>
@@ -323,12 +323,12 @@ function filtroPorData(dataSelecionada, dataSelecionada2){
 
         if(key < pedido){
           tbody.appendChild(tr)
-          if(pedido.DataEntrega != undefined){
+         
           
             let mesFormatado = parseInt(partes[1]) + 1
   
             let DataEntregaExcel = partes[2] + '/' + mesFormatado + '/' + partes[0]
-            }
+            
         }
 
         const btApagar = tr.querySelector('#btApagarPedido')
@@ -464,12 +464,16 @@ function exportarParaExcel() {
   // Selecionando os dados da tabela
   const tableData = XLSX.utils.table_to_sheet(tabela);
 
-  console.log(tableData)
+  // console.log(tableData)
 
-  for (let i = 3; true; i++) {
+  for (let i = 1; true; i++) {
     if(tableData[`G${i}`] == undefined){
       break;
     }
+    if(tableData[`G${i}`].z == 'm/d/yy'){
+      tableData[`G${i}`].z = 'd/m/yy';
+    }
+
     tableData[`G${i}`].z = 'd/m/yy';
   }
 
