@@ -11,6 +11,7 @@ function carregarPedido() {
         console.log(pedido)
 
         for(let i = 0; i < pedido.Pedido.length; i++){
+            console.log(pedido.Imagens)
 
             if(!(pedido.Personalizacoes) && !(pedido.Imagens)){
 
@@ -38,14 +39,23 @@ function carregarPedido() {
                 
             `;
         
-        } else if(pedido.Personalizacoes[i] != "" && (!(pedido.Imagens) || pedido.Imagens[pedido.Imagens.length - 1][i] == "" || pedido.Imagens[pedido.Imagens.length-1][i] == undefined)){
+        } else if((pedido.Personalizacoes && pedido.Personalizacoes[i] != "") && 
+        (
+            !(pedido.Imagens) || 
+            pedido.Imagens[pedido.Imagens.length - 1][i] == "" || 
+            pedido.Imagens[pedido.Imagens.length-1][i] == undefined || 
+            pedido.Imagens === undefined
+            )
+            ){
             boxMaior.innerHTML += `
+            <div class="boxPedido">
             <div class="boxPedido">
             <div class="col1" id="boxImg">
             <img src="../../assets/2.png" class="imgPedido">
 
             </div>
 
+           
             <div class="col2" id="boxInfos">
                 <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
                 <h4 id="quantidadePedido">Quantidade: ${pedido.Quantidades[i]}</h4>
@@ -56,16 +66,12 @@ function carregarPedido() {
                 </p>
                 <br>
                 
-                <p id="personalizacaoPedido">
-                    ${pedido.Personalizacoes[i]}
-                </p>
-
             </div><!--INFORMACOES DO PEDIDO-->
-        </div><!--BOX PEDIDO--></div>
+        </div><!--BOX PEDIDO-->
                 
             `;
 
-        }else if(pedido.Personalizacoes[i] == "" && (!(pedido.Imagens) || pedido.Imagens[pedido.Imagens.length - 1][i] == "" || pedido.Imagens[pedido.Imagens.length-1][i] == undefined)){
+        }else if((!(pedido.Personalizacoes) || pedido.Personalizacoes[i] == "") && (!(pedido.Imagens) || pedido.Imagens[pedido.Imagens.length - 1][i] == "" || pedido.Imagens[pedido.Imagens.length-1][i] == undefined)){
             //Sem personalizacao e sem imagem
 
             boxMaior.innerHTML += `
@@ -91,7 +97,7 @@ function carregarPedido() {
         </div><!--BOX PEDIDO-->
                 
             `;
-        } else if(pedido.Personalizacoes[i] != "" && (!(pedido.Imagens) || pedido.Imagens[pedido.Imagens.length - 1][i] == "" || pedido.Imagens[pedido.Imagens.length-1][i] == undefined)){
+        } else if((pedido.Personalizacoes && pedido.Personalizacoes[i] != "") && (!(pedido.Imagens) || pedido.Imagens[pedido.Imagens.length - 1][i] == "" || pedido.Imagens[pedido.Imagens.length-1][i] == undefined)){
             //Com personalizacao e sem imagem
             boxMaior.innerHTML += `
             <div class="boxPedido">
@@ -117,7 +123,7 @@ function carregarPedido() {
             </div><!--INFORMACOES DO PEDIDO-->
         </div><!--BOX PEDIDO--></div>
             `;
-        } else if(pedido.Personalizacoes[i] == "" && pedido.Imagens[pedido.Imagens.length - 1][i] != ""){
+        } else if(!(pedido.Personalizacoes) || pedido.Personalizacoes[i] == "" && pedido.Imagens[pedido.Imagens.length - 1][i] != ""){
             //Sem personalizacao e com imagem
             boxMaior.innerHTML += `
 
