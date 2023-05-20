@@ -41,13 +41,11 @@ function carregarPedido() {
         } else if(pedido.Personalizacoes[i] != "" && (!(pedido.Imagens) || pedido.Imagens[pedido.Imagens.length - 1][i] == "" || pedido.Imagens[pedido.Imagens.length-1][i] == undefined)){
             boxMaior.innerHTML += `
             <div class="boxPedido">
-            <div class="boxPedido">
             <div class="col1" id="boxImg">
             <img src="../../assets/2.png" class="imgPedido">
 
             </div>
 
-           
             <div class="col2" id="boxInfos">
                 <h2 id="tituloPedido">${pedido.Pedido[i]}</h2>
                 <h4 id="quantidadePedido">Quantidade: ${pedido.Quantidades[i]}</h4>
@@ -58,8 +56,12 @@ function carregarPedido() {
                 </p>
                 <br>
                 
+                <p id="personalizacaoPedido">
+                    ${pedido.Personalizacoes[i]}
+                </p>
+
             </div><!--INFORMACOES DO PEDIDO-->
-        </div><!--BOX PEDIDO-->
+        </div><!--BOX PEDIDO--></div>
                 
             `;
 
