@@ -48,7 +48,7 @@ function calcValorTotal(){
         taxaEntrega = document.getElementById('TaxaEntrega').value
       
       } else {
-        taxaEntrega = "0"
+        taxaEntrega = 0
       
       }
     
@@ -215,7 +215,7 @@ function carregarPedido() {
             
             <br>
             <h3>Valor Total: </h3>
-            <input type="text" id="EditarValorTotal" placeholder="${pedido.ValorTotal}" disabled>
+            <input type="text" id="EditarValorTotal" value="${pedido.ValorTotal}" placeholder="${pedido.ValorTotal}" disabled>
             <hr class="hr-divisoria">
             
 

@@ -38,7 +38,7 @@ function carregarPedido() {
                 
             `;
         
-        } else if(pedido.Personalizacoes[i] != "" && !(pedido.Imagens)){
+        } else if(pedido.Personalizacoes[i] != "" && (!(pedido.Imagens) || pedido.Imagens[pedido.Imagens.length - 1][i] == "" || pedido.Imagens[pedido.Imagens.length-1][i] == undefined)){
             boxMaior.innerHTML += `
             <div class="boxPedido">
             <div class="boxPedido">
@@ -63,7 +63,7 @@ function carregarPedido() {
                 
             `;
 
-        }else if(pedido.Personalizacoes[i] == "" && !(pedido.Imagens)){
+        }else if(pedido.Personalizacoes[i] == "" && (!(pedido.Imagens) || pedido.Imagens[pedido.Imagens.length - 1][i] == "" || pedido.Imagens[pedido.Imagens.length-1][i] == undefined)){
             //Sem personalizacao e sem imagem
 
             boxMaior.innerHTML += `
@@ -89,7 +89,7 @@ function carregarPedido() {
         </div><!--BOX PEDIDO-->
                 
             `;
-        } else if(pedido.Personalizacoes[i] != "" && pedido.Imagens[pedido.Imagens.length - 1][i] == "" || pedido.Imagens[pedido.Imagens.length-1][i] == undefined){
+        } else if(pedido.Personalizacoes[i] != "" && (!(pedido.Imagens) || pedido.Imagens[pedido.Imagens.length - 1][i] == "" || pedido.Imagens[pedido.Imagens.length-1][i] == undefined)){
             //Com personalizacao e sem imagem
             boxMaior.innerHTML += `
             <div class="boxPedido">

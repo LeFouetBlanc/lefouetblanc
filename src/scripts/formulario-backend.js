@@ -176,8 +176,9 @@ export function sendOrder(){
         alert("Preencha as informações do pedido.")
     } else if(statusPgto != "pago" && statusPgto != "naoPago" && statusPgto != "pagoMetade"){
         alert("Selecione uma opção para o status do pedido.")
+    } else if (taxaEntrega == "" || taxaEntrega == null || !taxaEntrega || taxaEntrega == "Taxa de Entrega") {
+        alert("Preencha a taxa de entrega.")
     } else {
-
        
         //caso as verificações sejam validadas
             let formPedido = {
@@ -232,6 +233,6 @@ document.getElementById('btEnviarPedido').addEventListener('click', ()=>{
             
         }
     })
-    alert("Enviando Pedido...")
+    alert("Revisando Pedido...")
     setTimeout(sendOrder,2000)
 })
