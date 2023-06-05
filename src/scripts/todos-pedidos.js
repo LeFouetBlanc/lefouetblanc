@@ -479,14 +479,14 @@ function exportarParaExcel() {
     if(tableData[`G${i}`] == undefined){
       break;
     }
-    // if(tableData[`G${i}`].z == 'm/d/yy'){
-    //   tableData[`G${i}`].v = listaDatasEntrega[i-1]
-    //   // tableData[`G${i}`].t = 's'
-    // }
-
-    tableData[`G${i}`].v = `${listaDatasEntrega[i-2]}`
-    tableData[`G${i}`].t = 's'
-    tableData[`G${i}`].z = 'd/m/yyyy'
+  
+    const dataString = listaDatasEntrega[i - 2]
+    const partesData = dataString.split('/')
+    const dataEntrega = new Date(partesData[2], partesData[1] - 1, partesData[0])
+    tableData[`G${i}`].v = dataEntrega
+    tableData[`G${i}`].t = 'd'
+    tableData[`G${i}`].z = 'dd/mm/yyyy'
+    console.log(tableData[`G${i}`])
   }
 
    for(let i = 2; true; i++){
@@ -541,7 +541,7 @@ function exportarParaExcel() {
       tableData[`J${i}`].v = valorTotalFloat
       tableData[`J${i}`].t = 'n'
       tableData[`J${i}`].z = '#,##0.00'
-      console.log(tableData[`J${i}`])
+      //console.log(tableData[`J${i}`])
 
  }
 
