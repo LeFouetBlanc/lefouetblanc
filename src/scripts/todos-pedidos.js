@@ -472,8 +472,8 @@ function exportarParaExcel() {
 
   // Selecionando os dados da tabela
   const tableData = XLSX.utils.table_to_sheet(tabela);
-  console.log(listaDatasEntrega)
-  // console.log(tableData)
+  //console.log(listaDatasEntrega)
+  //console.log(tableData)
 
   for (let i = 2; true; i++) {
     if(tableData[`G${i}`] == undefined){
@@ -486,9 +486,66 @@ function exportarParaExcel() {
 
     tableData[`G${i}`].v = `${listaDatasEntrega[i-2]}`
     tableData[`G${i}`].t = 's'
+    tableData[`G${i}`].z = 'd/m/yyyy'
   }
 
-  console.log(tableData)
+   for(let i = 2; true; i++){
+     if(tableData[`K${i}`] == undefined){
+      break;
+      }
+
+      let valorString = tableData[`K${i}`].v;
+      valorString = valorString.replace("R$", "");
+      valorString = valorString.replace(/\s/g, "");
+      valorString = valorString.replace(",", ".");
+      const valorFloat = parseFloat(valorString);
+      let valorTotalFloat;
+      if(valorFloat == NaN || valorFloat == null || !valorFloat){
+        valorTotalFloat = 0
+      } else {
+        valorTotalFloat = valorFloat
+      }
+
+
+      tableData[`K${i}`].v = valorTotalFloat
+      tableData[`K${i}`].t = 'n'
+      tableData[`K${i}`].z = '#,##0.00'
+      //console.log(tableData[`K${i}`])
+ }
+
+ for(let i = 2; true; i++){
+  if(tableData[`J${i}`] == undefined){
+    break
+  }
+
+      let valorString = tableData[`J${i}`].v;
+      let valorFloat; 
+      if(valorString == ''){
+        valorFloat = 0
+      } else {
+        valorString = valorString.replace("R$", "");
+        valorString = valorString.replace(/\s/g, "");
+        valorString = valorString.replace(",", ".");
+        valorFloat = parseFloat(valorString);
+      }
+      
+      
+      let valorTotalFloat;
+      if(valorFloat == NaN || valorFloat == null || !valorFloat){
+        valorTotalFloat = 0
+      } else {
+        valorTotalFloat = valorFloat
+      }
+
+
+      tableData[`J${i}`].v = valorTotalFloat
+      tableData[`J${i}`].t = 'n'
+      tableData[`J${i}`].z = '#,##0.00'
+      console.log(tableData[`J${i}`])
+
+ }
+
+  //console.log(tableData)
 
   // Cria um elemento input de tipo file
   const input = document.createElement('input');
@@ -503,7 +560,7 @@ function exportarParaExcel() {
 
     // Adiciona um listener de load para o reader
     reader.addEventListener('load', () => {
-      // Converte o conteúdo do arquivo para uma planilha do Excel
+      //Converte o conteúdo do arquivo para uma planilha do Excel
       const workbook = XLSX.read(reader.result, { type: 'binary' });
 
       // Gera um nome de planilha exclusivo
@@ -515,7 +572,7 @@ function exportarParaExcel() {
         sheetName = `${sheetNameBase} (${sheetIndex})`;
       }
 
-      // Adiciona a planilha atual à planilha do arquivo
+      //Adiciona a planilha atual à planilha do arquivo
       XLSX.utils.book_append_sheet(workbook, tableData, sheetName);
 
       // Escreve o arquivo de volta para o buffer
@@ -524,7 +581,7 @@ function exportarParaExcel() {
       // Cria um objeto Blob com o conteúdo do arquivo
       const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
 
-      // Cria um link para download e clica nele para iniciar o download
+      //Cria um link para download e clica nele para iniciar o download
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
