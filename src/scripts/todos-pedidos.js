@@ -500,17 +500,20 @@ function exportarParaExcel() {
   for (let i = 2; true; i++) {
     if(tableData[`I${i}`] == undefined){
       break;
+    } else if(tableData[`I${i}`].v == null || tableData[`I${i}`].v == "" || tableData[`I${i}`].v == undefined ){
+      break
     }
-  
+    
     const dataString = listaDatasAniversario[i - 2]
     const partesData = dataString.split('/')
     
     const DataAniversario = new Date(partesData[2], partesData[1] - 1, partesData[0])
     DataAniversario.setHours(DataAniversario.getHours() + 2);
     
-    tableData[`G${i}`].v = DataAniversario
-    tableData[`G${i}`].t = 'd'
-    tableData[`G${i}`].z = 'dd/mm/yyyy'
+    
+    tableData[`I${i}`].v = DataAniversario
+    tableData[`I${i}`].t = 'd'
+    tableData[`I${i}`].z = 'dd/mm/yyyy'
     console.log(tableData[`G${i}`])
   }
 
