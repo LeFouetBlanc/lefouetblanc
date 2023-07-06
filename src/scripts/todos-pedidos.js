@@ -44,10 +44,12 @@ let listaStatusAndamento = ["NovoPedido", "Preparando", "AguardandoEnvio", "Conc
 
 
 let listaDatasEntrega = []
+let listaDatasAniversario = []
 
 
 function filtroTodos() {
    listaDatasEntrega = []
+   listaDatasAniversario = []
     //select pedidosTodos
     pedidosRef.on('value', (snapshot) => {
       const pedidos = snapshot.val();
@@ -117,6 +119,7 @@ function filtroTodos() {
 
        //let dataEntregaInversa = partes[2] + "/" + partes[1] + "/" + partes[0];
        listaDatasEntrega.push(pedido.DataEntrega)
+       listaDatasAniversario.push(pedido.DataAniversario)
         tr.innerHTML = `
                   <td>${pedido.NumeroPedido}</td>
                   <td>${pedido.ContatoCliente}</td>
@@ -253,6 +256,7 @@ function filtroTodos() {
 
 function filtroPorData(dataSelecionada, dataSelecionada2){
   listaDatasEntrega = []
+  listaDatasAniversario = []
   pedidosRef.orderByChild('DataEntrega').startAt(dataSelecionada).endAt(dataSelecionada2).on('value', (snapshot) => {
     const pedidos = snapshot.val();
     const tbody = document.querySelector('#tabela-pedidos tbody');
@@ -301,6 +305,7 @@ function filtroPorData(dataSelecionada, dataSelecionada2){
       
      
       listaDatasEntrega.push(pedido.DataEntrega)
+      listaDatasAniversario.push(pedido.DataAniversario)
       tr.innerHTML = `
                   <td>${pedido.NumeroPedido}</td>
                   <td>${pedido.ContatoCliente}</td>
@@ -482,8 +487,28 @@ function exportarParaExcel() {
   
     const dataString = listaDatasEntrega[i - 2]
     const partesData = dataString.split('/')
+    
     const dataEntrega = new Date(partesData[2], partesData[1] - 1, partesData[0])
+    dataEntrega.setHours(dataEntrega.getHours() + 2);
+    
     tableData[`G${i}`].v = dataEntrega
+    tableData[`G${i}`].t = 'd'
+    tableData[`G${i}`].z = 'dd/mm/yyyy'
+    console.log(tableData[`G${i}`])
+  }
+
+  for (let i = 2; true; i++) {
+    if(tableData[`I${i}`] == undefined){
+      break;
+    }
+  
+    const dataString = listaDatasAniversario[i - 2]
+    const partesData = dataString.split('/')
+    
+    const DataAniversario = new Date(partesData[2], partesData[1] - 1, partesData[0])
+    DataAniversario.setHours(DataAniversario.getHours() + 2);
+    
+    tableData[`G${i}`].v = DataAniversario
     tableData[`G${i}`].t = 'd'
     tableData[`G${i}`].z = 'dd/mm/yyyy'
     console.log(tableData[`G${i}`])
@@ -545,7 +570,7 @@ function exportarParaExcel() {
 
  }
 
-  //console.log(tableData)
+  console.log(tableData)
 
   // Cria um elemento input de tipo file
   const input = document.createElement('input');
