@@ -494,16 +494,13 @@ function exportarParaExcel() {
     tableData[`G${i}`].v = dataEntrega
     tableData[`G${i}`].t = 'd'
     tableData[`G${i}`].z = 'dd/mm/yyyy'
-    console.log(tableData[`G${i}`])
+    //console.log(tableData[`G${i}`])
   }
 
   for (let i = 2; true; i++) {
     if(tableData[`I${i}`] == undefined){
       break;
-    } else if(tableData[`I${i}`].v == null || tableData[`I${i}`].v == "" || tableData[`I${i}`].v == undefined ){
-      break
-    }
-    
+    } 
     const dataString = listaDatasAniversario[i - 2]
     const partesData = dataString.split('/')
     
@@ -514,12 +511,15 @@ function exportarParaExcel() {
     tableData[`I${i}`].v = DataAniversario
     tableData[`I${i}`].t = 'd'
     tableData[`I${i}`].z = 'dd/mm/yyyy'
-    console.log(tableData[`G${i}`])
+    if(tableData[`I${i}`].v == "Invalid Date"){
+      tableData[`I${i}`].v = '' //mexer aqui
+    }
+    console.log(tableData[`I${i}`])
   }
 
    for(let i = 2; true; i++){
-     if(tableData[`K${i}`] == undefined){
-      break;
+      if(tableData[`K${i}`] == undefined){
+        break;
       }
 
       let valorString = tableData[`K${i}`].v;
