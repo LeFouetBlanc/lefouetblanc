@@ -512,7 +512,10 @@ function exportarParaExcel() {
     tableData[`I${i}`].t = 'd'
     tableData[`I${i}`].z = 'dd/mm/yyyy'
     if(tableData[`I${i}`].v == "Invalid Date"){
-      tableData[`I${i}`].v = '' //mexer aqui
+      tableData[`I${i}`].z = ''
+      tableData[`I${i}`].v = ''
+      tableData[`I${i}`].t = 'n' //mexer aqui
+
     }
     console.log(tableData[`I${i}`])
   }
